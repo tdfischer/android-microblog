@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Microblog</string>
+<color name="altcolor">#333</color>
+
+
+
+
+<color name="status_bg">#fff</color>
+<color name="status_fg">#000</color>
+<color name="status_alt_fg">#77f</color>
+
+
+
+</resources>

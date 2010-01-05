@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical">
+
+<ViewStub android:layout="@layout/user_item" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/user_area" android:inflatedId="@+id/user_area"></ViewStub><ViewStub android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/load_stub" android:inflatedId="@android:id/empty" android:layout="@layout/loading" android:layout_gravity="center"></ViewStub><LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone" android:id="@+id/dent_area"><ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/status_arrow_up" android:layout_gravity="top|left"></ImageView><ListView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@color/status_bg" android:id="@android:id/list">
+</ListView>
+</LinearLayout>
+
+
+
+</LinearLayout>

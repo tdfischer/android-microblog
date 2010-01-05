@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_height="wrap_content" android:layout_width="fill_parent" android:padding="3sp" android:orientation="horizontal" android:descendantFocusability="blocksDescendants">
+<LinearLayout android:layout_height="wrap_content" android:layout_gravity="top|center_horizontal" android:orientation="horizontal" android:layout_width="wrap_content" android:id="@+id/user">
+
+<LinearLayout android:layout_height="wrap_content" android:orientation="vertical" android:layout_gravity="top|center_horizontal" android:layout_width="110sp"><ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/avatar" android:src="@drawable/avatar"></ImageView><TextView android:text="TextView01" android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/name" android:layout_width="wrap_content" android:textSize="12sp"></TextView></LinearLayout>
+
+
+<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/status_arrow_left"></ImageView>
+</LinearLayout>
+
+
+
+<LinearLayout android:layout_height="wrap_content" android:orientation="vertical" android:layout_width="fill_parent" android:background="@color/status_bg"><TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget justo ac ante posuere blandit. Proin viverra leo eu orci laoreet vel sed. " android:id="@+id/text" android:layout_gravity="center" android:textColor="@color/status_fg" android:padding="4sp"></TextView><TextView android:text="TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/timestamp" android:textColor="@color/status_fg" android:layout_gravity="right" android:textSize="10sp"></TextView></LinearLayout>
+</LinearLayout>
