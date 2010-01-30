@@ -1,7 +1,7 @@
 package net.wm161.microblog;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 
@@ -142,6 +142,7 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 			m_statuses.add(status);
 			if (status.id() > m_last)
 				m_last = status.id();
+			Collections.sort(m_statuses);
 			notifyDataSetChanged();
 		}
 	}

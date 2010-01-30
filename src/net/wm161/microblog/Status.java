@@ -6,13 +6,27 @@ import java.util.Date;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Status implements Comparable<Status>, Serializable {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Status implements Comparable<Status>, Serializable, Parcelable {
 	private static final long serialVersionUID = 1772677324524066760L;
 	private User m_user;
 	private String m_text;
 	private long m_id;
 	private Date m_date;
 	private boolean m_favorited;
+	
+
+    public static final Parcelable.Creator<Status> CREATOR = new Parcelable.Creator<Status>() {
+        public Status createFromParcel(Parcel in) {
+            return new Status(in);
+        }
+
+        public Status[] newArray(int size) {
+            return new Status[size];
+        }
+    };
 	
 	public Status(JSONObject status) throws JSONException {
 		m_user = new User(status.getJSONObject("user"));
@@ -58,6 +72,41 @@ public class Status implements Comparable<Status>, Serializable {
 				return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+	
+	public Status(Parcel in) {
+		m_id = in.readLong();
+		m_date = new Date(in.readLong());
+		if (in.readByte() == (byte)1)
+			m_favorited = true;
+		else
+			m_favorited = false;
+		m_text = in.readString();
+		//m_user = in.readLong();
+	}
+	
+	/*private User m_user;
+	private String m_text;
+	private long m_id;
+	private Date m_date;
+	private boolean m_favorited;*/
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		dest.writeLong(m_id);
+		dest.writeLong(m_date.getTime());
+		if (m_favorited)
+			dest.writeByte((byte)1);
+		else
+			dest.writeByte((byte)0);
+		dest.writeString(m_text);
+		dest.writeLong(m_user.getId());
 	}
 	
 }
