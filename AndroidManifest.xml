@@ -22,7 +22,7 @@
 
 
 <activity android:name="EditAccount"></activity>
-<activity android:name="HomeView"><intent-filter><data android:mimeType="text/plain"></data>
+<activity android:name="HomeView" android:launchMode="singleTop"><intent-filter><data android:mimeType="text/plain"></data>
 
 <action android:name="android.intent.action.SEND"></action>
 
