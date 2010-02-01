@@ -60,7 +60,7 @@ public class Status implements Comparable<Status>, Serializable, Parcelable {
 	public int compareTo(Status another) {
 		if (id() == another.id())
 			return 0;
-		if (id() > another.id())
+		if (id() < another.id())
 			return 1;
 		return -1;
 	}

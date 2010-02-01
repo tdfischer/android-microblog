@@ -3,19 +3,16 @@ package net.wm161.microblog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
-
 public class StatusRequest extends APIRequest {
 
 	private long m_id;
 	private net.wm161.microblog.Status m_status;
 	private DataCache<Long, net.wm161.microblog.Status> m_cache;
 	
-	public StatusRequest(Account account, Activity activity, long id) {
-		super(account, activity);
-		MicroblogApp app = (MicroblogApp) activity.getApplication();
+	public StatusRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.Status> cache, long id) {
+		super(account, progress);
 		m_id = id;
-		m_cache = app.getStatusCache(account);
+		m_cache = cache;
 	}
 
 	@Override

@@ -6,23 +6,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class Preferences {
-		private static Preferences m_instance;
 		SharedPreferences m_prefs;
-		
-		private Preferences(Context cxt) {
+		MicroblogApp m_app;
+
+		public Preferences(Context cxt) {
 			m_prefs = cxt.getSharedPreferences("Microblogging.Main", Context.MODE_PRIVATE);
+			m_app = (MicroblogApp)cxt.getApplicationContext();
 		}
-		
-		public static Preferences getPreferences(Context cxt) {
-			if (m_instance == null)
-				m_instance = new Preferences(cxt);
-			return m_instance;
-		}
-		
+
 		public void setDefaultAccount(String guid) {
 			m_prefs.edit().putString("defaultAccount", guid);
 		}
-		
+
 		public Account getDefaultAccount() {
 			String defaultAccount = m_prefs.getString("defaultAccount", null);
 			if (defaultAccount == null) {
@@ -43,7 +38,7 @@ public class Preferences {
 			String[] guids = accountGUIDs.split(",");
 			Account[] accounts = new Account[guids.length];
 			for(int i = 0;i<guids.length;i++) {
-				accounts[i] = new Account(this, guids[i]);
+				accounts[i] = new Account(m_app, guids[i]);
 			}
 			return accounts;
 		}

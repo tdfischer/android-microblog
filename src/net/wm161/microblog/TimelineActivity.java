@@ -14,10 +14,9 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public abstract class TimelineActivity extends ListActivity {
-	
+
 	private StatusListAdapter m_statusList;
 	private Account m_account;
 	
@@ -46,7 +45,8 @@ public abstract class TimelineActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         requestWindowFeature(Window.FEATURE_PROGRESS);
-		Preferences prefs = Preferences.getPreferences(this);
+        MicroblogApp app = (MicroblogApp) getApplication();
+		Preferences prefs = app.getPreferences();
         m_account = prefs.getAccount(getIntent().getStringExtra("account"));
         setTitle(m_account.getName());
         m_events = new StatusEventListener(this, m_account);

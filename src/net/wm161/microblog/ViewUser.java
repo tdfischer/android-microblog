@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class ViewUser extends TimelineActivity {
@@ -25,8 +24,9 @@ public class ViewUser extends TimelineActivity {
 		ViewStub stub = (ViewStub) findViewById(R.id.load_stub);
 		stub.inflate();
     	
-		UserRequest req = new UserRequest(getAccount(), this, m_user) {
+		UserRequest req = new UserRequest(getAccount(), new ActivityProgressHandler(this), m_user) {
 
+			@Override
 			protected void onPostExecute(Boolean success) {
 				super.onPostExecute(success);
 				if (success) {
@@ -75,7 +75,14 @@ public class ViewUser extends TimelineActivity {
 	}
 	@Override
 	public void refresh() {
-		APIRequest timelineReq = new UserTimelineRequest(getAccount(), this, getStatusList(), m_user);
+		APIRequest timelineReq = new UserTimelineRequest(getAccount(), new ActivityProgressHandler(this), getAccount().getStatusCache(), m_user) {
+
+			@Override
+			public void onNewStatus(net.wm161.microblog.Status s) {
+				getStatusList().addStatus(s);
+			}
+
+		};
     	timelineReq.execute();
 	}
 }

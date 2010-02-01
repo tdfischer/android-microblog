@@ -3,14 +3,12 @@ package net.wm161.microblog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
-
 public class UserRequest extends APIRequest {
 	private String m_user;
 	private User m_result;
 
-	public UserRequest(Account account, Activity activity, String user) {
-		super(account, activity);
+	public UserRequest(Account account, ProgressHandler progress, String user) {
+		super(account, progress);
 		m_user = user;
 	}
 

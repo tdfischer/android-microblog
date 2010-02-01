@@ -26,7 +26,7 @@ public class HomeView extends TabActivity implements OnClickListener {
 		setContentView(R.layout.home);
 		TabHost tabs = getTabHost();
 		//Intent i = getIntent();
-		Preferences preferences = Preferences.getPreferences(this);
+		Preferences preferences = ((MicroblogApp)getApplication()).getPreferences();
 		//m_account = preferences.getAccount(i.getStringExtra("account"));
 		m_account = preferences.getDefaultAccount();
 		
@@ -64,7 +64,7 @@ public class HomeView extends TabActivity implements OnClickListener {
 	public void onClick(View v) {
 		EditText statusEdit = (EditText) findViewById(R.id.input);
 		String status = statusEdit.getText().toString();
-		UpdateRequest req = new UpdateRequest(m_account, this, status) {
+		UpdateRequest req = new UpdateRequest(m_account, new ActivityProgressHandler(this), status) {
 
 			@Override
 			protected void onPostExecute(Boolean result) {

@@ -22,7 +22,7 @@ public class AccountList extends ListActivity implements OnItemClickListener, On
 		setTitle("Microblog - Accounts");
 		setContentView(R.layout.accounts);
 		getListView().setEmptyView(findViewById(R.id.empty));
-		Account[] accounts = Preferences.getPreferences(this).getAccounts();
+		Account[] accounts = ((MicroblogApp)getApplication()).getPreferences().getAccounts();
 		if (accounts.length == 1) {
 			HomeView.show(this, accounts[0]);
 		}
@@ -33,7 +33,7 @@ public class AccountList extends ListActivity implements OnItemClickListener, On
 	}
 	
 	public void refresh() {
-		Account[] accounts = Preferences.getPreferences(this).getAccounts();
+		Account[] accounts = ((MicroblogApp)getApplication()).getPreferences().getAccounts();
 		m_accounts = new ArrayAdapter<Account>(this, R.layout.account,R.id.name, accounts);
 		setListAdapter(m_accounts);
 	}

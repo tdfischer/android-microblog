@@ -1,12 +1,11 @@
 package net.wm161.microblog;
 
-import android.app.Activity;
 
 public class UpdateRequest extends APIRequest {
 
 	private String m_status;
-	public UpdateRequest(Account account, Activity activity, String status) {
-		super(account, activity);
+	public UpdateRequest(Account account, ProgressHandler progress, String status) {
+		super(account, progress);
 		m_status = status;
 	}
 

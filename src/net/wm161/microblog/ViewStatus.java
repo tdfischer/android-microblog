@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,13 +24,13 @@ public class ViewStatus extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Preferences prefs = Preferences.getPreferences(this);
+		Preferences prefs = ((MicroblogApp)getApplication()).getPreferences();
         m_account = prefs.getAccount(getIntent().getStringExtra("account"));
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         requestWindowFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.loading);
         
-        StatusRequest req = new StatusRequest(m_account, this, getIntent().getLongExtra("status", 0)) {
+        StatusRequest req = new StatusRequest(m_account, new ActivityProgressHandler(this), m_account.getStatusCache(), getIntent().getLongExtra("status", 0)) {
 
 			@Override
 			protected void onPostExecute(Boolean result) {
@@ -96,7 +95,7 @@ public class ViewStatus extends Activity {
 				if (m_status != null) {
 					APIRequest req;
 					if (m_status.isFavorited()) {
-						req = new DestroyFavoriteRequest(m_account, ViewStatus.this, m_status.id()) {
+						req = new DestroyFavoriteRequest(m_account, new ActivityProgressHandler(ViewStatus.this), m_status.id()) {
 							@Override
 							protected void onPostExecute(Boolean result) {
 								super.onPostExecute(result);
@@ -106,7 +105,7 @@ public class ViewStatus extends Activity {
 							}
 						};
 					} else {
-						req = new CreateFavoriteRequest(m_account,ViewStatus.this, m_status.id()) {
+						req = new CreateFavoriteRequest(m_account, new ActivityProgressHandler(ViewStatus.this), m_status.id()) {
 							@Override
 							protected void onPostExecute(Boolean result) {
 								super.onPostExecute(result);

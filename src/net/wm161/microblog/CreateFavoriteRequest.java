@@ -1,13 +1,12 @@
 package net.wm161.microblog;
 
-import android.app.Activity;
 
 public class CreateFavoriteRequest extends APIRequest {
 
 	private Object m_id;
 
-	public CreateFavoriteRequest(Account account, Activity activity, long id) {
-		super(account, activity);
+	public CreateFavoriteRequest(Account account, ProgressHandler progress, long id) {
+		super(account, progress);
 		m_id = id;
 	}
 

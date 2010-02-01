@@ -7,13 +7,23 @@ import java.util.regex.Pattern;
 import android.text.util.Linkify;
 import android.widget.TextView;
 
+
+/**
+ * Accounts manage authentication, identify 'sources' of data, and manage account-specific caches. 
+ */
 public class Account extends Authenticator {
 	private Preferences m_prefs;
 	private String m_guid; 
 	
-	public Account(Preferences prefs, String guid) {
+	public Account(MicroblogApp app, String guid) {
 		m_guid = guid;
-		m_prefs = prefs;
+		m_prefs = app.getPreferences();
+		m_statusCache = app.getCache().getStatusCache(this);
+	}
+	
+	private DataCache<Long, Status> m_statusCache;
+	public DataCache<Long, Status> getStatusCache() {
+		return m_statusCache;
 	}
 	
 	public String getUser() {

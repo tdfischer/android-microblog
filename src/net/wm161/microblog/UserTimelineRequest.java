@@ -2,20 +2,19 @@ package net.wm161.microblog;
 
 import java.net.MalformedURLException;
 
-import android.app.Activity;
 import android.util.Log;
 
-public class UserTimelineRequest extends StatusListRequest {
+public abstract class UserTimelineRequest extends StatusListRequest {
 	
 	private String m_user;
 		
-	public UserTimelineRequest(Account account, Activity activity, StatusListAdapter statusListAdapter, String user) {
-		super(account, activity, statusListAdapter);
+	public UserTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.Status> cache, String user) {
+		super(account, progress, cache);
 		m_user = user;
 	}
 	
-	public UserTimelineRequest(Account account, Activity activity, StatusListAdapter statusListAdapter, User user) {
-		super(account, activity, statusListAdapter);
+	public UserTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.Status> cache, User user) {
+		super(account, progress, cache);
 		m_user = String.valueOf(user.getId());
 	}
 	

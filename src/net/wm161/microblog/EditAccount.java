@@ -16,7 +16,7 @@ public class EditAccount extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_account);
 		Intent i = getIntent();
-		Preferences preferences = Preferences.getPreferences(this);
+		Preferences preferences = ((MicroblogApp)getApplication()).getPreferences();
 		m_account = preferences.getAccount(i.getStringExtra("account"));
 		if (m_account != null) {
 			EditText input = (EditText) findViewById(R.id.baseurl);
@@ -34,7 +34,7 @@ public class EditAccount extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		Preferences prefs = Preferences.getPreferences(this);
+		Preferences prefs = ((MicroblogApp)getApplication()).getPreferences();
 		if (m_account == null)
 			m_account = prefs.getNewAccount();
 		EditText input = (EditText) findViewById(R.id.baseurl);

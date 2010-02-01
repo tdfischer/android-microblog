@@ -17,7 +17,7 @@ import java.util.LinkedHashMap;
 import android.content.Context;
 import android.util.Log;
 
-public class DataCache<K, T extends Serializable> {
+public class DataCache<K extends Comparable<K>, T extends Serializable> {
 	private Account m_account;
 	private Context m_cxt;
 	private LinkedHashMap<K, T> m_cache;
@@ -32,7 +32,7 @@ public class DataCache<K, T extends Serializable> {
 	}
 	
 	public void shrink() {
-		Log.w("StatusCache", "Shrinking down because of memory. We've got "+m_cache.size()+" items.");
+		Log.w("DataCache", "Shrinking down because of memory. We've got "+m_cache.size()+" items.");
 		for (Iterator<T> it = m_cache.values().iterator();it.hasNext();) {
 			if (m_cache.size() > CACHE_MIN_SIZE)
 				it.remove();
@@ -61,13 +61,13 @@ public class DataCache<K, T extends Serializable> {
 			now = new Date();
 			if (now.getTime()-cacheFile.lastModified() > CACHE_LIMIT) {
 				cacheFile.delete();
-				Log.d("StatusCache", "Expired: "+id);
+				Log.d("DataCache", "Expired: "+id);
 				return null;
 			}
 			try {
 				T s;
 				s = (T) (new ObjectInputStream(new FileInputStream(cacheFile))).readObject();
-				Log.d("StatusCache", "HIT: "+id);
+				Log.d("DataCache", "HIT: "+id);
 				m_cache.put(id, s);
 				trim();
 				return s;
@@ -97,14 +97,26 @@ public class DataCache<K, T extends Serializable> {
 			}
 		try {
 			(new ObjectOutputStream(new FileOutputStream(cacheFile))).writeObject(data);
-			Log.d("StatusCache", "Cached "+key);
+			Log.d("DataCache", "Cached "+key);
 			return true;
 		} catch (FileNotFoundException e) {
-			Log.e("StatusCache", "Failed to cache "+key+": "+e.getMessage());
+			Log.e("DataCache", "Failed to cache "+key+": "+e.getMessage());
 			return false;
 		} catch (IOException e) {
-			Log.e("StatusCache", "Failed to cache "+key+": "+e.getMessage());
+			Log.e("DataCache", "Failed to cache "+key+": "+e.getMessage());
 			return false;
 		}
+	}
+	
+	public K biggestKey() {
+		K biggest = null;
+		for(K key : m_cache.keySet()) {
+			if (biggest == null)
+				biggest = key;
+			if (key.compareTo(biggest) < 0)
+				biggest = key;
+		}
+		
+		return biggest;
 	}
 }

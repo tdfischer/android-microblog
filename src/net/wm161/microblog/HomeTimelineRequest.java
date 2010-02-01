@@ -2,12 +2,10 @@ package net.wm161.microblog;
 
 import java.net.MalformedURLException;
 
-import android.app.Activity;
+public abstract class HomeTimelineRequest extends StatusListRequest {
 
-public class HomeTimelineRequest extends StatusListRequest {
-
-	public HomeTimelineRequest(Account account, Activity activity, StatusListAdapter statusListAdapter) {
-		super(account, activity, statusListAdapter);
+	public HomeTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.Status> cache) {
+		super(account, progress, cache);
 	}
 
 	@Override

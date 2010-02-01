@@ -115,7 +115,8 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 			ImageView avatarView = (ImageView) dentView.findViewById(R.id.avatar);
 			TextView name = (TextView) dentView.findViewById(R.id.name);
 		
-			DataCache<Long, Avatar> avatarCache = m_app.getAvatarCache(m_account);
+			DataCache<Long, Avatar> avatarCache = m_app.getCache().getAvatarCache(m_account);
+			
 			Avatar avatar = avatarCache.get(status.getUser().getId());
 			if (avatar == null) {
 				avatar = status.getUser().getAvatar();
@@ -138,17 +139,24 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 	}
 
 	public void addStatus(Status status) {
-		if (!m_statuses.contains(status)) {
-			m_statuses.add(status);
+		for(int i = 0;i < m_statuses.size();i++) {
+			if (m_statuses.get(i).id() == status.id())
+				return;
 			if (status.id() > m_last)
 				m_last = status.id();
-			Collections.sort(m_statuses);
-			notifyDataSetChanged();
+			if (m_statuses.get(i).id() < status.id()) {
+				m_statuses.add(i, status);
+				notifyDataSetChanged();
+				return;
+			}
 		}
+		m_statuses.add(status);
+		notifyDataSetChanged();
 	}
 
 	public void setStatuses(ArrayList<Status> statuses) {
 		m_statuses = statuses;
+		Collections.sort(m_statuses);
 		notifyDataSetInvalidated();
 	}
 

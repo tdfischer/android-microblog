@@ -28,7 +28,9 @@ public class Avatar implements Serializable {
 				m_bitmap = d.getBitmap();
 				return d;
 			} catch (IOException e) {
-				return new BitmapDrawable();
+				BitmapDrawable b = new BitmapDrawable();
+				m_bitmap = b.getBitmap();
+				return b;
 			}
 		}
 		return new BitmapDrawable(m_bitmap);

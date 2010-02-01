@@ -6,26 +6,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.util.Log;
 
 public abstract class StatusListRequest extends APIRequest {
 	DataCache<Long, net.wm161.microblog.Status> m_cache;
 	
-	public StatusListRequest(Account account, Activity activity, StatusListAdapter statusList) {
-		super(account, activity);
-		m_statusList = statusList;
-		m_cache = ((MicroblogApp)activity.getApplication()).getStatusCache(account);
+	public StatusListRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.Status> cache) {
+		super(account, progress);
+		assert(cache != null);
+		m_cache = cache;
 	}
-
-	private StatusListAdapter m_statusList;
 	
 	protected void onPostExecute(Boolean success) {
 		super.onPostExecute(success);
 	}
 
 	protected boolean getStatuses(String path) throws APIException, MalformedURLException {
-		setParameter("since_id", m_statusList.getLastId());
+		Long biggest = m_cache.biggestKey();
+		if (biggest != null)
+			setParameter("since_id", m_cache.biggestKey());
 		JSONArray data = null;
 		String strdata = getData(path);
 		try {
@@ -71,8 +70,10 @@ public abstract class StatusListRequest extends APIRequest {
 		super.onProgressUpdate(progress);
 		if (progress[0] instanceof Progress) {
 			net.wm161.microblog.Status status = ((Progress)progress[0]).m_status;
-			m_statusList.addStatus(status);
+			onNewStatus(status);
 		}
 	}
+	
+	public abstract void onNewStatus(net.wm161.microblog.Status s); 
 
 }

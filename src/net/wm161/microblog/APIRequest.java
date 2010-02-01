@@ -11,16 +11,14 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 	
 	protected Account m_account;
-	private Activity m_activity;
 	private ErrorType m_error;
+	private ProgressHandler m_progress;
 	private HashMap<String, Object> m_params;
 	private int m_status;
 	
@@ -37,11 +35,11 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 		ERROR_INTERNAL
 	}
 	
-	public APIRequest(Account account, Activity activity) {
+	public APIRequest(Account account, ProgressHandler activity) {
 		super();
 		m_account = account;
-		m_activity = activity;
 		m_error = ErrorType.ERROR_NONE;
+		m_progress = activity;
 		m_params = new HashMap<String, Object>();
 	}
 	
@@ -78,23 +76,21 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 	
 	@Override
 	protected void onPreExecute() {
-		m_activity.setProgressBarIndeterminate(true);
-		m_activity.setProgressBarVisibility(true);
+		m_progress.starting();
 	}
 	
 	@Override
 	protected void onProgressUpdate(APIProgress... progress) {
-		m_activity.setProgressBarIndeterminate(false);
-		m_activity.setProgress(progress[0].getProgress());
+		m_progress.updated(progress[0]);
 	}
 	
 	@Override
 	protected void onPostExecute(Boolean result) {
 		if (!result) {
 			Log.w("APIRequest", "Execution failed: "+getError()+" ("+getStatusCode()+")");
-			Toast.makeText(m_activity, getErrorString(getError()), Toast.LENGTH_LONG).show();
+			m_progress.error(getError(), getErrorString(getError()));
 		}
-		m_activity.setProgressBarVisibility(false);
+		m_progress.finished();
 	}
 	
 	protected String getData(String path) throws APIException {
@@ -146,8 +142,10 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 			for (Entry<String, Object> item : m_params.entrySet()) {
 				num++;
 				try {
+					Object value = item.getValue();
 					out.write(item.getKey()+"=");
-					out.write(URLEncoder.encode(item.getValue().toString()));
+					if (value != null)
+						out.write(URLEncoder.encode(value.toString()));
 					if (num != last)
 						out.write("&");
 				} catch (IOException e) {
