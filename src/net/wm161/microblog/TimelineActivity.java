@@ -155,7 +155,7 @@ public abstract class TimelineActivity extends ListActivity {
 				refresh();
 				return true;
 			}
-		});
+		}).setIcon(android.R.drawable.ic_menu_view);
 		return true;
 	}
 	
