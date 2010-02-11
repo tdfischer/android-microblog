@@ -38,13 +38,12 @@ public class Avatar implements Serializable {
 	
 	private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 		getBitmap();
-		m_bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+		if (m_bitmap != null)
+			m_bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
 	}
 
 	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 		BitmapDrawable d = new BitmapDrawable(in);
 		m_bitmap = d.getBitmap();
 	}
-
-
 }
