@@ -14,15 +14,22 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeView extends TabActivity implements OnClickListener {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == Activity.RESULT_OK)
+		if (resultCode == Activity.RESULT_OK) {
 			m_attachment = new FileAttachment(getContentResolver(), data.getData());
+			TextView attachmentName = (TextView)findViewById(R.id.attachment);
+			attachmentName.setText(m_attachment.name());
+			LinearLayout attachmentGroup = (LinearLayout)findViewById(R.id.attachmentArea);
+			attachmentGroup.setVisibility(View.VISIBLE);
+		}
 	}
 	
 	private FileAttachment m_attachment = null;
@@ -51,6 +58,17 @@ public class HomeView extends TabActivity implements OnClickListener {
 		
 		Button sendButton = (Button) findViewById(R.id.send);
 		sendButton.setOnClickListener(this);
+		
+		Button unattach = (Button) findViewById(R.id.unattach);
+		unattach.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.btn_minus));
+		unattach.setText("Remove");
+		unattach.setOnClickListener(new OnClickListener() {
+			public void onClick(View arg0) {
+				m_attachment = null;
+				LinearLayout attachmentGroup = (LinearLayout)findViewById(R.id.attachmentArea);
+				attachmentGroup.setVisibility(View.GONE);
+			}
+		});
 		
 		EditText edit = (EditText) findViewById(R.id.input);
 		edit.setOnClickListener(new OnClickListener() {
