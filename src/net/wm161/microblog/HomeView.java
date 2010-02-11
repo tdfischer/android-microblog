@@ -1,14 +1,9 @@
 package net.wm161.microblog;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.TabActivity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
