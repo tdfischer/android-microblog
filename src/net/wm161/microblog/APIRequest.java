@@ -1,15 +1,25 @@
 package net.wm161.microblog;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.entity.mime.content.InputStreamBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -32,7 +42,8 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 		ERROR_CONNECTION_BROKEN,
 		ERROR_PARSE,
 		ERROR_SERVER,
-		ERROR_INTERNAL
+		ERROR_INTERNAL,
+		ERROR_ATTACHMENT_NOT_FOUND
 	}
 	
 	public APIRequest(Account account, ProgressHandler activity) {
@@ -69,6 +80,8 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 			return "Server error: "+m_status;
 		case ERROR_INTERNAL:
 			return "Internal error. Please send a bug report.";
+		case ERROR_ATTACHMENT_NOT_FOUND:
+			return "Attachment not found.";
 		default:
 			return null;
 		}
@@ -94,91 +107,89 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 	}
 	
 	protected String getData(String path) throws APIException {
-		URL url;
+		URI uri;
 		try {
-			url = new URL(m_account.getBase()+"/"+path+".json");
-		} catch (MalformedURLException e) {
+			uri = new URI(m_account.getBase()+"/"+path+".json");
+		} catch (URISyntaxException e) {
 			setError(ErrorType.ERROR_INTERNAL);
 			throw new APIException();
 		}
 		
-		return getData(url);
+		return getData(uri);
 	}
 	
-	protected String getData(URL location) throws APIException {
+	protected String getData(URI location) throws APIException {
 		Log.d("APIRequest", "Downloading "+location);
-		HttpURLConnection connection = null;
+		DefaultHttpClient client = new DefaultHttpClient();
+		HttpPost post = new HttpPost(location);
+		
+		if (!m_params.isEmpty()) {
+			MultipartEntity params = new MultipartEntity();
+			for (Entry<String, Object> item : m_params.entrySet()) {
+				Object value = item.getValue();
+				ContentBody data;
+				if (value instanceof FileAttachment) {
+					FileAttachment attachment = (FileAttachment) value;
+					try {
+						data = new InputStreamBody(attachment.getStream(), attachment.contentType(), attachment.name());
+						Log.d("APIRequest", "Found a "+attachment.contentType()+" attachment named "+attachment.name());
+					} catch (FileNotFoundException e) {
+						setError(ErrorType.ERROR_ATTACHMENT_NOT_FOUND);
+						throw new APIException();
+					}
+				} else {
+					try {
+						data = new StringBody(value.toString());
+					} catch (UnsupportedEncodingException e) {
+						setError(ErrorType.ERROR_INTERNAL);
+						throw new APIException();
+					}
+				}
+				params.addPart(item.getKey(), data);
+			}
+			post.setEntity(params);
+		}
+		
+		UsernamePasswordCredentials creds = new UsernamePasswordCredentials(m_account.getUser(), m_account.getPassword());
+		client.getCredentialsProvider().setCredentials(AuthScope.ANY, creds);
+		
+		HttpResponse req;
 		try {
-			connection = (HttpURLConnection) location.openConnection();
-			connection.setAllowUserInteraction(true);
-		} catch (IOException e) {
+			req = client.execute(post);
+		} catch (ClientProtocolException e3) {
+			setError(ErrorType.ERROR_PARSE);
+			throw new APIException();
+		} catch (IOException e3) {
 			setError(ErrorType.ERROR_CONNECTION_FAILED);
 			throw new APIException();
 		}
-		connection.setUseCaches(true);
 		
-		String auth = m_account.getUser()+":"+m_account.getPassword();
-		String encoding = Base64.encodeBytes(auth.getBytes());
-		connection.setRequestProperty("Authorization", "Basic " + encoding);
-		connection.setDoInput(true);
-		if (!m_params.isEmpty()) {
-			try {
-				connection.setRequestMethod("POST");
-			} catch (ProtocolException e2) {
-				setError(ErrorType.ERROR_INTERNAL);
-				throw new APIException();
-			}
-			connection.setDoOutput(true);
-			connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
-			OutputStreamWriter out = null;
-			try {
-				out = new OutputStreamWriter(connection.getOutputStream());
-			} catch (IOException e1) {
-				setError(ErrorType.ERROR_CONNECTION_FAILED);
-				throw new APIException();
-			}
-			int last = m_params.size();
-			int num = 0;
-			for (Entry<String, Object> item : m_params.entrySet()) {
-				num++;
-				try {
-					Object value = item.getValue();
-					out.write(item.getKey()+"=");
-					if (value != null)
-						out.write(URLEncoder.encode(value.toString()));
-					if (num != last)
-						out.write("&");
-				} catch (IOException e) {
-					setError(ErrorType.ERROR_CONNECTION_BROKEN);
-					throw new APIException();
-				}
-			}
-			try {
-				out.flush();
-				out.close();
-			} catch (IOException e) {
-				setError(ErrorType.ERROR_CONNECTION_BROKEN);
-				throw new APIException();
-			}
+		InputStream result;
+		try {
+			result = req.getEntity().getContent();
+		} catch (IllegalStateException e1) {
+			setError(ErrorType.ERROR_INTERNAL);
+			throw new APIException();
+		} catch (IOException e1) {
+			setError(ErrorType.ERROR_CONNECTION_BROKEN);
+			throw new APIException();
 		}
+		
 		InputStreamReader in = null;
 		int status;
-		try {
-			connection.connect();
-			in = new InputStreamReader(connection.getInputStream());
-			status = connection.getResponseCode();
-			setStatusCode(status);
-		} catch (IOException e) {
-			setError(ErrorType.ERROR_CONNECTION_FAILED);
-			throw new APIException();
-		}
+		in = new InputStreamReader(result);
+		status = req.getStatusLine().getStatusCode();
+		Log.d("APIRequest", "Got status code of "+status);
+		setStatusCode(status);
 		if (status >= 300 || status < 200) {
 			setError(ErrorType.ERROR_SERVER);
 			Log.w("APIRequest", "Server code wasn't 2xx, got "+m_status);
 			throw new APIException();
 		}
 		
-		int totalSize = connection.getContentLength();
+		int totalSize = -1;
+		if (req.containsHeader("Content-length"))
+			totalSize = Integer.parseInt(req.getFirstHeader("Content-length").getValue());
 		
 		char[] buffer = new char[1024];
 		StringBuilder contents = new StringBuilder();
