@@ -119,6 +119,7 @@ public class HomeView extends TabActivity implements OnClickListener {
 		};
 		if (m_attachment != null)
 			req.setParameter("media", m_attachment);
+		req.setParameter("source", "Android Microblog");
 		req.execute();
 	}
 
