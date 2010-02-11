@@ -78,7 +78,7 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 			} catch (IOException e) {
 			}
 		}
-		Log.d("StatusCache", "MISS: "+id);
+		Log.d("DataCache", "MISS: "+id);
 		return null;
 	}
 	
