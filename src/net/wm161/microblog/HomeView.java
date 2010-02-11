@@ -1,13 +1,21 @@
 package net.wm161.microblog;
 
+import java.util.ArrayList;
+
+import android.app.Activity;
 import android.app.TabActivity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +23,14 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 public class HomeView extends TabActivity implements OnClickListener {
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK)
+			m_attachment = new FileAttachment(getContentResolver(), data.getData());
+	}
+	
+	private FileAttachment m_attachment = null;
 
 	private Account m_account;
 
@@ -52,6 +68,8 @@ public class HomeView extends TabActivity implements OnClickListener {
 			
 		});
 		setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
+		
+		
 	}
 	
 	public static void show(Context cxt, Account account) {
@@ -76,6 +94,7 @@ public class HomeView extends TabActivity implements OnClickListener {
 				}
 				findViewById(R.id.input).setEnabled(true);
 				findViewById(R.id.send).setEnabled(true);
+				m_attachment = null;
 			}
 
 			@Override
@@ -85,13 +104,26 @@ public class HomeView extends TabActivity implements OnClickListener {
 				findViewById(R.id.send).setEnabled(false);
 			}
 		};
+		if (m_attachment != null)
+			req.setParameter("media", m_attachment);
 		req.execute();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add("Accounts").setIntent(new Intent(this, AccountList.class));
+		menu.add("Accounts").setIntent(new Intent(this, AccountList.class)).setIcon(android.R.drawable.ic_menu_preferences);
+		menu.add("Attach Picture").setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+			@Override
+			public boolean onMenuItemClick(MenuItem arg0) {
+				Intent picker =  new Intent(Intent.ACTION_PICK);
+				picker.setType("image/*");
+				startActivityForResult(picker, 0);
+				return true;
+			}
+			
+		}).setIcon(android.R.drawable.ic_menu_add);
 		return true;
 	}
 
