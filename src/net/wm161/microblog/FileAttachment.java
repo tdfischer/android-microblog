@@ -23,6 +23,10 @@ public class FileAttachment {
 		return m_resolver.openInputStream(m_uri);
 	}
 	
+	public String name() {
+		return m_uri.toString();
+	}
+	
 	public String toString() {
 		return m_uri.toString();
 	}
