@@ -23,7 +23,12 @@ public class UserRequest extends APIRequest {
 		} catch (APIException e) {
 			return false;
 		}
-		m_result = new User(user);
+		try {
+			m_result = new User(user);
+		} catch (JSONException e) {
+			setError(ErrorType.ERROR_PARSE);
+			return false;
+		}
 		return true;
 	}
 	

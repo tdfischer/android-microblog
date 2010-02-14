@@ -31,52 +31,16 @@ public class User implements Serializable {
 	private int m_sidebarBackground;
 	
 	
-	public User(JSONObject user) {
-		
-		try {
-			m_id = user.getLong("id");
-		} catch (JSONException e2) {
-		}
-		
-		try {
-			m_name = user.getString("name");
-		} catch (JSONException e2) {
-		}
-		
-		try {
-			m_screenName = user.getString("screen_name");
-		} catch (JSONException e2) {
-		}
-		
-		try {
-			m_location = user.getString("location");
-		} catch (JSONException e2) {
-		}
-		
-		try {
-			m_description = user.getString("description");
-		} catch (JSONException e2) {
-		}
-		
-		try {
-			m_url = user.getString("url");
-		} catch (JSONException e5) {
-		}
-		
-		try {
-			m_subscribers = user.getInt("followers_count");
-		} catch (JSONException e4) {
-		}
-		
-		try {
-			m_subscriptions = user.getInt("friends_count");
-		} catch (JSONException e3) {
-		}
-		
-		try {
-			m_statuses = user.getInt("statuses_count");
-		} catch (JSONException e2) {
-		}
+	public User(JSONObject user) throws JSONException {
+		m_id = user.getLong("id");
+		m_name = user.getString("name");
+		m_screenName = user.getString("screen_name");
+		m_location = user.getString("location");
+		m_description = user.getString("description");
+		m_url = user.getString("url");
+		m_subscribers = user.getInt("followers_count");
+		m_subscriptions = user.getInt("friends_count");
+		m_statuses = user.getInt("statuses_count");
 		
 		try {
 			m_avatar = new Avatar(new URL(user.getString("profile_image_url"))); 
@@ -92,10 +56,7 @@ public class User implements Serializable {
 			m_backgroundColor = android.R.color.background_dark;
 		}
 		
-		try {
-			m_backgroundImage = user.getString("profile_background_image_url");
-		} catch (Exception e) {
-		}
+		m_backgroundImage = user.getString("profile_background_image_url");
 		
 
 		try {
@@ -107,6 +68,7 @@ public class User implements Serializable {
 			m_sidebarBackground = android.R.color.background_light;
 		}
 		
+		//FIXME: Why?
 		m_backgroundColor = android.R.color.background_dark;
 	}
 

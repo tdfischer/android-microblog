@@ -139,6 +139,8 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 	}
 
 	public void addStatus(Status status) {
+		if (status.getUser() == null)
+			return;
 		for(int i = 0;i < m_statuses.size();i++) {
 			if (m_statuses.get(i).id() == status.id())
 				return;
