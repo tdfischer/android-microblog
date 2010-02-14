@@ -41,11 +41,11 @@ public class ViewUser extends TimelineActivity {
 					
 					userBox.setBackgroundDrawable(user.getSidebarBackground());
 					
-					setTitle(m_account.getName()+" - User "+user.getName());
+					setTitle(m_account.getName()+" - User "+user.getScreenName());
 					TextView screenName = (TextView) findViewById(R.id.screenname);
 					screenName.setText(user.getScreenName());
 					TextView name = (TextView) findViewById(R.id.name);
-					name.setText(user.getName());
+					name.setText(user.getScreenName());
 					TextView location = (TextView) findViewById(R.id.location);
 					location.setText(user.getLocation());
 					TextView subscriptions = (TextView) findViewById(R.id.subscriptions);

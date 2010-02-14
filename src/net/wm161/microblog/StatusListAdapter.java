@@ -124,7 +124,7 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 			}
 			avatarView.setImageDrawable(avatar.getBitmap());
 			m_account.addLinks(text);
-			name.setText(status.getUser().getName());
+			name.setText(status.getUser().getScreenName());
 		} else {
 			LinearLayout user = (LinearLayout) dentView.findViewById(R.id.user);
 			user.setVisibility(View.GONE);

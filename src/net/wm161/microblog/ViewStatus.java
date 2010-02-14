@@ -41,7 +41,7 @@ public class ViewStatus extends Activity {
 					ImageView avatar = (ImageView) findViewById(R.id.avatar);
 					avatar.setImageDrawable(status().getUser().getAvatar().getBitmap());
 					TextView user = (TextView) findViewById(R.id.name);
-					user.setText(status().getUser().getName());
+					user.setText(status().getUser().getScreenName());
 					TextView text = (TextView) findViewById(R.id.text);
 					text.setText(status().text());
 					TextView stamp = (TextView) findViewById(R.id.stamp);
