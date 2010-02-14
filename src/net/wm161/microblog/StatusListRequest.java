@@ -42,8 +42,11 @@ public abstract class StatusListRequest extends APIRequest {
 				Float progress = 5000+(5000)*(i.floatValue()/(float)data.length());
 				JSONObject dent = data.getJSONObject(i);
 				long id = dent.getLong("id");
-				net.wm161.microblog.Status status;
-				status = m_cache.get(id);
+				net.wm161.microblog.Status status = null;
+				try {
+					status = m_cache.get(id);
+				} catch (ClassCastException e) {
+				}
 				if (status == null) {
 					status = new net.wm161.microblog.Status(dent);
 					m_cache.put(id, status);

@@ -50,6 +50,7 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 		}
 	}
 	
+
 	@SuppressWarnings("unchecked")
 	public T get(K id) {
 		if (m_cache.containsKey(id))
@@ -76,6 +77,10 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 			} catch (FileNotFoundException e) {
 			} catch (ClassNotFoundException e) {
 			} catch (IOException e) {
+			} catch (ClassCastException e) {
+				cacheFile.delete();
+				Log.d("DataCache", "CORRUPT: "+id);
+				return null;
 			}
 		}
 		Log.d("DataCache", "MISS: "+id);

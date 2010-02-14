@@ -18,7 +18,11 @@ public class StatusRequest extends APIRequest {
 	@Override
 	protected Boolean doInBackground(Void... params) {
 		try {
-			m_status = m_cache.get(m_id);
+			try {
+				m_status = m_cache.get(m_id);
+			} catch (ClassCastException e) {
+				m_status = null;
+			}
 			if (m_status == null) {
 				m_status = new net.wm161.microblog.Status(new JSONObject(getData("/statuses/show/"+m_id)));
 				m_cache.put(m_id, m_status);

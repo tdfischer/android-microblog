@@ -117,7 +117,12 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 		
 			DataCache<Long, Avatar> avatarCache = m_app.getCache().getAvatarCache(m_account);
 			
-			Avatar avatar = avatarCache.get(status.getUser().getId());
+			Avatar avatar = null;
+			//FIXME: Why does this need to be done here, and not in get()?
+			try {
+				avatar = avatarCache.get(status.getUser().getId());
+			} catch (ClassCastException e) {
+			}
 			if (avatar == null) {
 				avatar = status.getUser().getAvatar();
 				avatarCache.put(status.getUser().getId(), avatar);
