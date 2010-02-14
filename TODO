@@ -1,8 +1,15 @@
-This file lists milestones and features to be completed by specific releases.
+This file lists milestones, bugfixes, and features to be completed by specific releases.
+
+  - Symbol
+ /   - State
+|   /
++ Completed
+- In progress
+  TODO
 
 0.1
-	Image uploading
-	Display screennames instead of full names
+	- Image uploading
+	+ Display screennames instead of full names
 
 0.2
 	Move all the files around to create a separate library for others to use
