@@ -10,16 +10,27 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import org.apache.http.HttpException;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.AuthState;
+import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.ExecutionContext;
+import org.apache.http.protocol.HttpContext;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -31,6 +42,7 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 	private ProgressHandler m_progress;
 	private HashMap<String, Object> m_params;
 	private int m_status;
+	private Exception m_exception;
 	
 	public class APIException extends Exception {
 		private static final long serialVersionUID = -4526739499995112944L;
@@ -52,6 +64,7 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 		m_error = ErrorType.ERROR_NONE;
 		m_progress = activity;
 		m_params = new HashMap<String, Object>();
+		m_exception = null;
 	}
 	
 	public void setParameter(String key, Object param) {
@@ -118,10 +131,33 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 		return getData(uri);
 	}
 	
+	HttpRequestInterceptor preemptiveAuth = new HttpRequestInterceptor() {
+
+		@Override
+		public void process(HttpRequest request, HttpContext context) throws HttpException, IOException {
+			AuthState authState = (AuthState) context.getAttribute(ClientContext.TARGET_AUTH_STATE);
+	        CredentialsProvider credsProvider = (CredentialsProvider) context.getAttribute(
+	                ClientContext.CREDS_PROVIDER);
+	        HttpHost targetHost = (HttpHost) context.getAttribute(ExecutionContext.HTTP_TARGET_HOST);
+	        
+	        if (authState.getAuthScheme() == null) {
+	            AuthScope authScope = new AuthScope(targetHost.getHostName(), targetHost.getPort());
+	            Credentials creds = credsProvider.getCredentials(authScope);
+	            if (creds != null) {
+	                authState.setAuthScheme(new BasicScheme());
+	                authState.setCredentials(creds);
+	            }
+	        }
+		}
+	};
+	
 	protected String getData(URI location) throws APIException {
 		Log.d("APIRequest", "Downloading "+location);
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(location);
+		client.addRequestInterceptor(preemptiveAuth, 0);
+		
+		client.getParams().setBooleanParameter("http.protocol.expect-continue", false); 
 		
 		if (!m_params.isEmpty()) {
 			MultipartEntity params = new MultipartEntity();
@@ -157,7 +193,7 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 		try {
 			req = client.execute(post);
 		} catch (ClientProtocolException e3) {
-			setError(ErrorType.ERROR_PARSE);
+			setError(ErrorType.ERROR_CONNECTION_BROKEN);
 			throw new APIException();
 		} catch (IOException e3) {
 			setError(ErrorType.ERROR_CONNECTION_FAILED);

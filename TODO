@@ -8,7 +8,7 @@ This file lists milestones, bugfixes, and features to be completed by specific r
   TODO
 
 0.1
-	- Image uploading
+	+ Image uploading
 	+ Display screennames instead of full names
 
 0.2
