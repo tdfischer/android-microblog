@@ -14,6 +14,8 @@ This file lists milestones, bugfixes, and features to be completed by specific r
 0.2
 	Move all the files around to create a separate library for others to use
 	Geo tagging
+	Delete accounts
+	Fancy-pants welcome screen
 
 0.3
 	Background update checking
