@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,7 +62,7 @@ public class HomeView extends TabActivity implements OnClickListener {
 		sendButton.setOnClickListener(this);
 		
 		Button unattach = (Button) findViewById(R.id.unattach);
-		unattach.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.btn_minus));
+		//unattach.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.btn_minus));
 		unattach.setText("Remove");
 		unattach.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
@@ -81,8 +83,6 @@ public class HomeView extends TabActivity implements OnClickListener {
 			
 		});
 		setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
-		
-		
 	}
 	
 	public static void show(Context cxt, Account account) {
@@ -104,10 +104,12 @@ public class HomeView extends TabActivity implements OnClickListener {
 					EditText input = (EditText) findViewById(R.id.input);
 					input.setText("");
 					Toast.makeText(HomeView.this, "Update sent.", Toast.LENGTH_SHORT).show();
+					m_attachment = null;
+					LinearLayout attachmentGroup = (LinearLayout)findViewById(R.id.attachmentArea);
+					attachmentGroup.setVisibility(View.GONE);
 				}
 				findViewById(R.id.input).setEnabled(true);
 				findViewById(R.id.send).setEnabled(true);
-				m_attachment = null;
 			}
 
 			@Override
@@ -155,10 +157,27 @@ public class HomeView extends TabActivity implements OnClickListener {
 
 	@Override
 	protected void onNewIntent(Intent intent) {
+		Log.d("HomeView", "New intent!");
 		super.onNewIntent(intent);
-		String text = intent.getStringExtra(Intent.EXTRA_TEXT);
-		EditText edit = (EditText) findViewById(R.id.input);
-		edit.setText(text);
+		if (intent.getAction().equals(Intent.ACTION_SEND)) {
+			if (intent.hasExtra(Intent.EXTRA_TEXT)) {
+				String text = intent.getStringExtra(Intent.EXTRA_TEXT);
+				EditText edit = (EditText) findViewById(R.id.input);
+				edit.setText(text);
+			}
+			for(String s : intent.getExtras().keySet()) {
+				Log.d("HomeView", "Got extra "+s);
+			}
+			if (intent.hasExtra(Intent.EXTRA_STREAM)) {
+				Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+				Log.d("HomeView", "Sending image "+uri);
+				m_attachment = new FileAttachment(getContentResolver(), uri);
+				TextView attachmentName = (TextView)findViewById(R.id.attachment);
+				attachmentName.setText(m_attachment.name());
+				LinearLayout attachmentGroup = (LinearLayout)findViewById(R.id.attachmentArea);
+				attachmentGroup.setVisibility(View.VISIBLE);
+			}
+		}
 	}
 
 }
