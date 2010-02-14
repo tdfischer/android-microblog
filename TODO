@@ -16,6 +16,7 @@ This file lists milestones, bugfixes, and features to be completed by specific r
 	Geo tagging
 	Delete accounts
 	Fancy-pants welcome screen
+	Display attachments inline with the update list
 
 0.3
 	Background update checking
@@ -27,3 +28,5 @@ Unknown Future
 	Update your settings/theme
 	Better theme integration
 	An icon using the android style guide
+	Map showing nearby statuses, alerts for nearby updates
+	Create a separate activity as part of the task of sharing stuff
