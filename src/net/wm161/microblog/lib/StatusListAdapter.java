@@ -7,9 +7,6 @@ import java.util.EnumSet;
 
 import net.wm161.microblog.MicroblogApp;
 import net.wm161.microblog.R;
-import net.wm161.microblog.R.id;
-import net.wm161.microblog.R.layout;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

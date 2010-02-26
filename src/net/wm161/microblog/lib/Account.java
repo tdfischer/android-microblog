@@ -4,7 +4,6 @@ import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.util.regex.Pattern;
 
-import android.text.util.Linkify;
 import android.widget.TextView;
 
 public abstract class Account extends Authenticator {
@@ -32,8 +31,7 @@ public abstract class Account extends Authenticator {
 	}
 
 	public void addLinks(TextView view) {
-		Pattern p = Pattern.compile("@(\\^S+) *$");
-		//Linkify.addLinks(view, p, "microblog://" + m_guid + "/user/");
+		Pattern.compile("@(\\^S+) *$");
 	}
 	
 

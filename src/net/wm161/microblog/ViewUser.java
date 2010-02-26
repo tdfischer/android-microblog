@@ -8,7 +8,6 @@ import net.wm161.microblog.lib.StatusListAdapter;
 import net.wm161.microblog.lib.User;
 import net.wm161.microblog.lib.UserRequest;
 import net.wm161.microblog.lib.UserTimelineRequest;
-import net.wm161.microblog.lib.StatusListAdapter.Options;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

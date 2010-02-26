@@ -44,8 +44,6 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 	private ProgressHandler m_progress;
 	private HashMap<String, Object> m_params;
 	private int m_status;
-	private Exception m_exception;
-	
 	public class APIException extends Exception {
 		private static final long serialVersionUID = -4526739499995112944L;
 	}
@@ -66,7 +64,6 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 		m_error = ErrorType.ERROR_NONE;
 		m_progress = activity;
 		m_params = new HashMap<String, Object>();
-		m_exception = null;
 	}
 	
 	public void setParameter(String key, Object param) {

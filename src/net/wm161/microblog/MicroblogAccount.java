@@ -1,7 +1,5 @@
 package net.wm161.microblog;
 
-import java.net.PasswordAuthentication;
-
 import net.wm161.microblog.lib.Account;
 
 
