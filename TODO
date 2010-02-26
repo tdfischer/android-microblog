@@ -30,3 +30,4 @@ Unknown Future
 	An icon using the android style guide
 	Map showing nearby statuses, alerts for nearby updates
 	Create a separate activity as part of the task of sharing stuff
+	Support different microblogging 'backends' like facebook, twitter, statusnet through plugins
