@@ -1,4 +1,4 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,6 +9,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+
 
 import org.apache.http.HttpException;
 import org.apache.http.HttpHost;

@@ -1,6 +1,8 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
 import java.net.MalformedURLException;
+
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,9 +11,9 @@ import org.json.JSONObject;
 import android.util.Log;
 
 public abstract class StatusListRequest extends APIRequest {
-	DataCache<Long, net.wm161.microblog.Status> m_cache;
+	DataCache<Long, net.wm161.microblog.lib.Status> m_cache;
 	
-	public StatusListRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.Status> cache) {
+	public StatusListRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.lib.Status> cache) {
 		super(account, progress);
 		assert(cache != null);
 		m_cache = cache;
@@ -42,13 +44,13 @@ public abstract class StatusListRequest extends APIRequest {
 				Float progress = 5000+(5000)*(i.floatValue()/(float)data.length());
 				JSONObject dent = data.getJSONObject(i);
 				long id = dent.getLong("id");
-				net.wm161.microblog.Status status = null;
+				net.wm161.microblog.lib.Status status = null;
 				try {
 					status = m_cache.get(id);
 				} catch (ClassCastException e) {
 				}
 				if (status == null) {
-					status = new net.wm161.microblog.Status(dent);
+					status = new net.wm161.microblog.lib.Status(dent);
 					m_cache.put(id, status);
 				}
 				publishProgress(new Progress(progress.intValue(), status));
@@ -60,9 +62,9 @@ public abstract class StatusListRequest extends APIRequest {
 	}
 	
 	private class Progress extends APIProgress {
-		private net.wm161.microblog.Status m_status;
+		private net.wm161.microblog.lib.Status m_status;
 
-		public Progress(Integer progress, net.wm161.microblog.Status status) {
+		public Progress(Integer progress, net.wm161.microblog.lib.Status status) {
 			super(progress);
 			m_status = status;
 		}
@@ -72,11 +74,11 @@ public abstract class StatusListRequest extends APIRequest {
 	protected void onProgressUpdate(APIProgress... progress) {
 		super.onProgressUpdate(progress);
 		if (progress[0] instanceof Progress) {
-			net.wm161.microblog.Status status = ((Progress)progress[0]).m_status;
+			net.wm161.microblog.lib.Status status = ((Progress)progress[0]).m_status;
 			onNewStatus(status);
 		}
 	}
 	
-	public abstract void onNewStatus(net.wm161.microblog.Status s); 
+	public abstract void onNewStatus(net.wm161.microblog.lib.Status s); 
 
 }

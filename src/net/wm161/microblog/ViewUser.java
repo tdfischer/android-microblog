@@ -2,7 +2,13 @@ package net.wm161.microblog;
 
 import java.util.EnumSet;
 
-import net.wm161.microblog.StatusListAdapter.Options;
+import net.wm161.microblog.lib.APIRequest;
+import net.wm161.microblog.lib.ActivityProgressHandler;
+import net.wm161.microblog.lib.StatusListAdapter;
+import net.wm161.microblog.lib.User;
+import net.wm161.microblog.lib.UserRequest;
+import net.wm161.microblog.lib.UserTimelineRequest;
+import net.wm161.microblog.lib.StatusListAdapter.Options;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -62,7 +68,7 @@ public class ViewUser extends TimelineActivity {
 					TextView url = (TextView) findViewById(R.id.url);
 					if (user.getUrl() != null)
 						url.setText(user.getUrl().toString());
-					EnumSet<Options> options = EnumSet.of(StatusListAdapter.Options.DEFAULT, StatusListAdapter.Options.NO_USER);
+					EnumSet<StatusListAdapter.Options> options = EnumSet.of(StatusListAdapter.Options.DEFAULT, StatusListAdapter.Options.NO_USER);
 					getStatusList().setOptions(options);
 					setListAdapter(getStatusList());
 					//setEmptyView(getLayoutInflater().inflate(R.layout.loading, null));
@@ -78,7 +84,7 @@ public class ViewUser extends TimelineActivity {
 		APIRequest timelineReq = new UserTimelineRequest(getAccount(), new ActivityProgressHandler(this), getAccount().getStatusCache(), m_user) {
 
 			@Override
-			public void onNewStatus(net.wm161.microblog.Status s) {
+			public void onNewStatus(net.wm161.microblog.lib.Status s) {
 				getStatusList().addStatus(s);
 			}
 

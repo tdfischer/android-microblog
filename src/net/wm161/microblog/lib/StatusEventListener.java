@@ -1,5 +1,6 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
+import net.wm161.microblog.ViewStatus;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;

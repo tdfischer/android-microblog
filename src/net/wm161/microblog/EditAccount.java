@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class EditAccount extends Activity implements OnClickListener {
 
-	private Account m_account;
+	private MicroblogAccount m_account;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

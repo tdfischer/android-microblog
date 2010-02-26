@@ -1,9 +1,14 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
+
+import net.wm161.microblog.MicroblogApp;
+import net.wm161.microblog.R;
+import net.wm161.microblog.R.id;
+import net.wm161.microblog.R.layout;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -23,7 +28,7 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 	private MicroblogApp m_app;
 	private long m_last = 0L;
 	
-	enum Options {
+	public enum Options {
 		DEFAULT,
 		NO_USER
 	}

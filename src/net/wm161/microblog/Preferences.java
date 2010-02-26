@@ -2,6 +2,9 @@ package net.wm161.microblog;
 
 import java.util.UUID;
 
+import net.wm161.microblog.lib.Account;
+
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -31,26 +34,26 @@ public class Preferences {
 			}
 		}
 		
-		public Account[] getAccounts() {
+		public MicroblogAccount[] getAccounts() {
 			String accountGUIDs = m_prefs.getString("accounts", null);
 			if (accountGUIDs == null)
-				return new Account[] {};
+				return new MicroblogAccount[] {};
 			String[] guids = accountGUIDs.split(",");
-			Account[] accounts = new Account[guids.length];
+			MicroblogAccount[] accounts = new MicroblogAccount[guids.length];
 			for(int i = 0;i<guids.length;i++) {
-				accounts[i] = new Account(m_app, guids[i]);
+				accounts[i] = new MicroblogAccount(m_app, guids[i]);
 			}
 			return accounts;
 		}
 
-		public Account getAccount(String guid) {
-			for(Account acct : getAccounts())
+		public MicroblogAccount getAccount(String guid) {
+			for(MicroblogAccount acct : getAccounts())
 				if (acct.getGuid().equals(guid))
 					return acct;
 			return null;
 		}
 
-		public Account getNewAccount() {
+		public MicroblogAccount getNewAccount() {
 			String accountGUIDs = m_prefs.getString("accounts", null);
 			String newID = UUID.randomUUID().toString();
 			if (accountGUIDs == null) {

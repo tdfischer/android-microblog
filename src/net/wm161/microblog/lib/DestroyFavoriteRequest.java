@@ -1,11 +1,12 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
 
-public class CreateFavoriteRequest extends APIRequest {
+
+public class DestroyFavoriteRequest extends APIRequest {
 
 	private Object m_id;
 
-	public CreateFavoriteRequest(Account account, ProgressHandler progress, long id) {
+	public DestroyFavoriteRequest(Account account, ProgressHandler progress, long id) {
 		super(account, progress);
 		m_id = id;
 	}
@@ -14,11 +15,10 @@ public class CreateFavoriteRequest extends APIRequest {
 	protected Boolean doInBackground(Void... params) {
 		try {
 			setParameter("id", m_id);
-			getData("/favorites/create");
+			getData("/favorites/destroy");
 		} catch (APIException e) {
 			return false;
 		}
 		return true;
 	}
-
 }

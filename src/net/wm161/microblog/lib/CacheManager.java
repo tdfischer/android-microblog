@@ -1,6 +1,8 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
 import java.util.HashMap;
+
+
 
 import android.content.Context;
 

@@ -1,5 +1,6 @@
 package net.wm161.microblog;
 
+import net.wm161.microblog.lib.Account;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class AccountList extends ListActivity implements OnItemClickListener, OnClickListener {
 
-	private ArrayAdapter<Account> m_accounts;
+	private ArrayAdapter<MicroblogAccount> m_accounts;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,8 @@ public class AccountList extends ListActivity implements OnItemClickListener, On
 	}
 	
 	public void refresh() {
-		Account[] accounts = ((MicroblogApp)getApplication()).getPreferences().getAccounts();
-		m_accounts = new ArrayAdapter<Account>(this, R.layout.account,R.id.name, accounts);
+		MicroblogAccount[] accounts = ((MicroblogApp)getApplication()).getPreferences().getAccounts();
+		m_accounts = new ArrayAdapter<MicroblogAccount>(this, R.layout.account,R.id.name, accounts);
 		setListAdapter(m_accounts);
 	}
 

@@ -1,5 +1,6 @@
 package net.wm161.microblog;
 
+import net.wm161.microblog.lib.CacheManager;
 import android.app.Application;
 
 public class MicroblogApp extends Application {

@@ -1,5 +1,9 @@
 package net.wm161.microblog;
 
+import net.wm161.microblog.lib.Account;
+import net.wm161.microblog.lib.ActivityProgressHandler;
+import net.wm161.microblog.lib.FileAttachment;
+import net.wm161.microblog.lib.UpdateRequest;
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Context;

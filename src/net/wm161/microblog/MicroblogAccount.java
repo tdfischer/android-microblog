@@ -1,49 +1,41 @@
 package net.wm161.microblog;
 
-import java.net.Authenticator;
 import java.net.PasswordAuthentication;
-import java.util.regex.Pattern;
 
-import android.text.util.Linkify;
-import android.widget.TextView;
+import net.wm161.microblog.lib.Account;
+
+
 
 /**
  * Accounts manage authentication, identify 'sources' of data, and manage
  * account-specific caches.
  */
-public class Account extends Authenticator {
+public class MicroblogAccount extends Account {
 	private Preferences m_prefs;
-	private String m_guid;
+	String m_guid;
 
-	public Account(MicroblogApp app, String guid) {
+	public MicroblogAccount(MicroblogApp app, String guid) {
+		super(app.getCache());
 		m_guid = guid;
 		m_prefs = app.getPreferences();
-		m_statusCache = app.getCache().getStatusCache(this);
 	}
 
-	private DataCache<Long, Status> m_statusCache;
-
-	public DataCache<Long, Status> getStatusCache() {
-		return m_statusCache;
-	}
-
+	@Override
 	public String getUser() {
 		return m_prefs.m_prefs.getString(m_guid + ".user", null);
 	}
 
-	public void addLinks(TextView view) {
-		Pattern p = Pattern.compile("@(\\^S+) *$");
-		Linkify.addLinks(view, p, "microblog://" + m_guid + "/user/");
-	}
-
+	@Override
 	public String getPassword() {
 		return m_prefs.m_prefs.getString(m_guid + ".password", null);
 	}
 
+	@Override
 	public String getBase() {
 		return m_prefs.m_prefs.getString(m_guid + ".baseurl", null);
 	}
 
+	@Override
 	public String getName() {
 		return m_prefs.m_prefs.getString(m_guid + ".name", null);
 	}
@@ -65,17 +57,13 @@ public class Account extends Authenticator {
 		m_prefs.m_prefs.edit().putString(m_guid + ".name", name).commit();
 	}
 
+	@Override
 	public String getGuid() {
 		return m_guid;
 	}
 
+	@Override
 	public String toString() {
 		return getName();
-	}
-
-	@Override
-	protected PasswordAuthentication getPasswordAuthentication() {
-		return new PasswordAuthentication(getUser(), getPassword()
-				.toCharArray());
 	}
 }

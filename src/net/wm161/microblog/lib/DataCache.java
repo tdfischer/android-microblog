@@ -1,4 +1,4 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +13,8 @@ import java.io.StreamCorruptedException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+
+
 
 import android.content.Context;
 import android.util.Log;

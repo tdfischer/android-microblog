@@ -1,6 +1,8 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
 import java.net.MalformedURLException;
+
+
 
 import android.util.Log;
 
@@ -8,12 +10,12 @@ public abstract class UserTimelineRequest extends StatusListRequest {
 	
 	private String m_user;
 		
-	public UserTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.Status> cache, String user) {
+	public UserTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.lib.Status> cache, String user) {
 		super(account, progress, cache);
 		m_user = user;
 	}
 	
-	public UserTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.Status> cache, User user) {
+	public UserTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.lib.Status> cache, User user) {
 		super(account, progress, cache);
 		m_user = String.valueOf(user.getId());
 	}

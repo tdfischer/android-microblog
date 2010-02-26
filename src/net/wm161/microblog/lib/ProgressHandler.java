@@ -1,6 +1,7 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
-import net.wm161.microblog.APIRequest.ErrorType;
+import net.wm161.microblog.lib.APIRequest.ErrorType;
+
 
 public interface ProgressHandler {
 	public void updated(APIProgress progress);

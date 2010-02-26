@@ -1,4 +1,4 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
 public class APIProgress {
 	private Integer m_progress;

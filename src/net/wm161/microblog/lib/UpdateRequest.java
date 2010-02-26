@@ -1,4 +1,6 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
+
+
 
 
 public class UpdateRequest extends APIRequest {

@@ -1,8 +1,8 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
+import net.wm161.microblog.lib.APIRequest.ErrorType;
 import android.app.Activity;
 import android.widget.Toast;
-import net.wm161.microblog.APIRequest.ErrorType;
 
 public class ActivityProgressHandler implements ProgressHandler {
 

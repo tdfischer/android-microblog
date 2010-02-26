@@ -2,6 +2,13 @@ package net.wm161.microblog;
 
 import java.util.Date;
 
+import net.wm161.microblog.lib.APIRequest;
+import net.wm161.microblog.lib.Account;
+import net.wm161.microblog.lib.ActivityProgressHandler;
+import net.wm161.microblog.lib.CreateFavoriteRequest;
+import net.wm161.microblog.lib.DestroyFavoriteRequest;
+import net.wm161.microblog.lib.StatusRequest;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +26,7 @@ import android.widget.Toast;
 public class ViewStatus extends Activity {
 
 	private Account m_account;
-	private net.wm161.microblog.Status m_status = null;
+	private net.wm161.microblog.lib.Status m_status = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

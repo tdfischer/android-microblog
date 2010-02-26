@@ -1,8 +1,9 @@
-package net.wm161.microblog;
+package net.wm161.microblog.lib;
 
 import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
