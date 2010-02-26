@@ -1,12 +1,15 @@
-package net.wm161.microblog.lib;
+package net.wm161.microblog;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 
-import net.wm161.microblog.MicroblogApp;
 import net.wm161.microblog.R;
+import net.wm161.microblog.lib.Account;
+import net.wm161.microblog.lib.Avatar;
+import net.wm161.microblog.lib.DataCache;
+import net.wm161.microblog.lib.Status;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

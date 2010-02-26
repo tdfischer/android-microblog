@@ -4,7 +4,6 @@ import java.util.EnumSet;
 
 import net.wm161.microblog.lib.APIRequest;
 import net.wm161.microblog.lib.ActivityProgressHandler;
-import net.wm161.microblog.lib.StatusListAdapter;
 import net.wm161.microblog.lib.User;
 import net.wm161.microblog.lib.UserRequest;
 import net.wm161.microblog.lib.UserTimelineRequest;

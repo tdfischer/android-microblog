@@ -2,8 +2,6 @@ package net.wm161.microblog;
 
 import net.wm161.microblog.lib.Account;
 import net.wm161.microblog.lib.Status;
-import net.wm161.microblog.lib.StatusEventListener;
-import net.wm161.microblog.lib.StatusListAdapter;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
