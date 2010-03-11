@@ -12,7 +12,8 @@ This file lists milestones, bugfixes, and features to be completed by specific r
 	+ Display screennames instead of full names
 
 0.2
-	Move all the files around to create a separate library for others to use
+	+ Move all the files around to create a separate library for others to use
+	- Support different microblogging 'backends' like facebook, twitter, statusnet through plugins
 	Geo tagging
 	Delete accounts
 	Fancy-pants welcome screen
@@ -30,4 +31,3 @@ Unknown Future
 	An icon using the android style guide
 	Map showing nearby statuses, alerts for nearby updates
 	Create a separate activity as part of the task of sharing stuff
-	Support different microblogging 'backends' like facebook, twitter, statusnet through plugins
