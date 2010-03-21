@@ -36,4 +36,5 @@ public abstract class API {
 	public abstract int getIcon();
 	public abstract APIConfiguration configuration();
 	public abstract String getName();
+	public abstract String getDescription();
 }

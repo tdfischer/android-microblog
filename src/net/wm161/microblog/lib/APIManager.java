@@ -16,7 +16,8 @@ public class APIManager {
 	}
 	
 	public static String[] getAPIs() {
-		return (String[]) m_apis.keySet().toArray();
+		String[] ret = new String[m_apis.size()];
+		return m_apis.keySet().toArray(ret);
 	}
 	
 	public static void registerAPI(APIRegistration api) {

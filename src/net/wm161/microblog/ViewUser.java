@@ -2,6 +2,7 @@ package net.wm161.microblog;
 
 import java.util.EnumSet;
 
+import net.wm161.microblog.lib.ActivityProgressHandler;
 import net.wm161.microblog.lib.OnNewUserHandler;
 import net.wm161.microblog.lib.User;
 import net.wm161.microblog.lib.UserRequest;
@@ -27,6 +28,7 @@ public class ViewUser extends TimelineActivity {
 		ViewStub stub = (ViewStub) findViewById(R.id.load_stub);
 		stub.inflate();
 		UserRequest req = new UserRequest(getAPI(), user);
+		req.setProgressHandler(new ActivityProgressHandler(this));
 
 		req.setOnNewUserHandler(new OnNewUserHandler() {
 

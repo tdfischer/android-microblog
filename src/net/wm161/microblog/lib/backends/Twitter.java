@@ -24,7 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Twitter extends API {
-	StatusnetConfig m_config = new StatusnetConfig();
+	TwitterConfig m_config = new TwitterConfig();
 	
 	public static void register() {
 		APIManager.registerAPI(new APIRegistration("twitter") {
@@ -43,7 +43,7 @@ public class Twitter extends API {
 
 	@Override
 	public int getIcon() {
-		return R.drawable.logo;
+		return R.drawable.twittericon;
 	}
 
 	@Override
@@ -150,6 +150,11 @@ public class Twitter extends API {
 		} catch (APIException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public String getDescription() {
+		return "Twitter is a social networking and microblogging service that enables users to send and read messages known as tweets.";
 	}
 
 }

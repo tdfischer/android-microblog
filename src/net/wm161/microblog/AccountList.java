@@ -20,7 +20,9 @@ public class AccountList extends ListActivity implements OnItemClickListener, On
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle("Microblog - Accounts");
+		Intent picker = new Intent(this, AccountTypePicker.class);
+		startActivity(picker);
+		/*setTitle("Microblog - Accounts");
 		setContentView(R.layout.accounts);
 		getListView().setEmptyView(findViewById(R.id.empty));
 		Account[] accounts = ((MicroblogApp)getApplication()).getPreferences().getAccounts();
@@ -30,7 +32,7 @@ public class AccountList extends ListActivity implements OnItemClickListener, On
 		Button addButton = (Button)findViewById(R.id.add_account);
 		addButton.setOnClickListener(this);
 		getListView().setOnItemClickListener(this);
-		registerForContextMenu(getListView());
+		registerForContextMenu(getListView());*/
 	}
 	
 	public void refresh() {

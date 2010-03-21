@@ -8,10 +8,11 @@
 <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/username" android:inputType="textShortMessage"></EditText>
 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Password"></TextView>
 <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/password" android:inputType="textPassword"></EditText>
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="API Path"></TextView>
 
 
-<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/baseurl" android:text="https://identi.ca/api" android:inputType="textUri|textShortMessage"></EditText>
-<Button android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="Save" android:id="@+id/save"></Button>
+
+
+<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/content" android:orientation="vertical"></LinearLayout><Button android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="Save" android:id="@+id/save"></Button>
+
 </LinearLayout>
 </ScrollView>

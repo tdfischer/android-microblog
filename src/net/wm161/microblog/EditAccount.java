@@ -19,9 +19,9 @@ public class EditAccount extends Activity implements OnClickListener {
 		Preferences preferences = ((MicroblogApp)getApplication()).getPreferences();
 		m_account = preferences.getAccount(i.getStringExtra("account"));
 		if (m_account != null) {
-			EditText input = (EditText) findViewById(R.id.baseurl);
+			//EditText input = (EditText) findViewById(R.id.baseurl);
 			//input.setText(m_account.getBase());
-			input = (EditText) findViewById(R.id.name);
+			EditText input = (EditText) findViewById(R.id.name);
 			input.setText(m_account.getName());
 			input = (EditText) findViewById(R.id.username);
 			input.setText(m_account.getUser());
@@ -37,9 +37,9 @@ public class EditAccount extends Activity implements OnClickListener {
 		Preferences prefs = ((MicroblogApp)getApplication()).getPreferences();
 		if (m_account == null)
 			m_account = prefs.getNewAccount();
-		EditText input = (EditText) findViewById(R.id.baseurl);
+		//EditText input = (EditText) findViewById(R.id.baseurl);
 		//m_account.setBase(input.getText().toString());
-		input = (EditText) findViewById(R.id.name);
+		EditText input = (EditText) findViewById(R.id.name);
 		m_account.setName(input.getText().toString());
 		input = (EditText) findViewById(R.id.password);
 		m_account.setPassword(input.getText().toString());

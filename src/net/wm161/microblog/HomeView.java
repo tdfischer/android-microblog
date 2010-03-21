@@ -175,23 +175,25 @@ public class HomeView extends TabActivity implements OnClickListener {
 	protected void onNewIntent(Intent intent) {
 		Log.d("HomeView", "New intent!");
 		super.onNewIntent(intent);
-		if (intent.getAction().equals(Intent.ACTION_SEND)) {
-			if (intent.hasExtra(Intent.EXTRA_TEXT)) {
-				String text = intent.getStringExtra(Intent.EXTRA_TEXT);
-				EditText edit = (EditText) findViewById(R.id.input);
-				edit.setText(text);
-			}
-			for(String s : intent.getExtras().keySet()) {
-				Log.d("HomeView", "Got extra "+s);
-			}
-			if (intent.hasExtra(Intent.EXTRA_STREAM)) {
-				Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-				Log.d("HomeView", "Sending image "+uri);
-				m_attachment = new Attachment(getContentResolver(), uri);
-				TextView attachmentName = (TextView)findViewById(R.id.attachment);
-				attachmentName.setText(m_attachment.name());
-				LinearLayout attachmentGroup = (LinearLayout)findViewById(R.id.attachmentArea);
-				attachmentGroup.setVisibility(View.VISIBLE);
+		if (intent.getAction() != null) {
+			if (intent.getAction().equals(Intent.ACTION_SEND)) {
+				if (intent.hasExtra(Intent.EXTRA_TEXT)) {
+					String text = intent.getStringExtra(Intent.EXTRA_TEXT);
+					EditText edit = (EditText) findViewById(R.id.input);
+					edit.setText(text);
+				}
+				for(String s : intent.getExtras().keySet()) {
+					Log.d("HomeView", "Got extra "+s);
+				}
+				if (intent.hasExtra(Intent.EXTRA_STREAM)) {
+					Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+					Log.d("HomeView", "Sending image "+uri);
+					m_attachment = new Attachment(getContentResolver(), uri);
+					TextView attachmentName = (TextView)findViewById(R.id.attachment);
+					attachmentName.setText(m_attachment.name());
+					LinearLayout attachmentGroup = (LinearLayout)findViewById(R.id.attachmentArea);
+					attachmentGroup.setVisibility(View.VISIBLE);
+				}
 			}
 		}
 	}
