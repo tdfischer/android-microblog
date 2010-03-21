@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:orientation="vertical" android:gravity="center" android:layout_gravity="center" android:layout_height="fill_parent">
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pick an account type" android:textSize="32sp" android:gravity="top" android:layout_gravity="top"></TextView>
+
+<Gallery android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/types"></Gallery>
+</LinearLayout>

@@ -1,26 +1,17 @@
 package net.wm161.microblog.lib;
 
-
-
-
 public class CreateFavoriteRequest extends APIRequest {
 
-	private Object m_id;
+	private net.wm161.microblog.lib.Status m_status;
 
-	public CreateFavoriteRequest(Account account, ProgressHandler progress, long id) {
-		super(account, progress);
-		m_id = id;
+	public CreateFavoriteRequest(API api, net.wm161.microblog.lib.Status status) {
+		super(api);
+		m_status = status;
 	}
 
 	@Override
-	protected Boolean doInBackground(Void... params) {
-		try {
-			setParameter("id", m_id);
-			getData("/favorites/create");
-		} catch (APIException e) {
-			return false;
-		}
-		return true;
+	protected Boolean doInBackground(Void... arg0) {
+		return m_api.favorite(m_status, this);
 	}
 
 }

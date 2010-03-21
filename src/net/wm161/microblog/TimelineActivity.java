@@ -1,11 +1,16 @@
 package net.wm161.microblog;
 
-import net.wm161.microblog.lib.Account;
+import net.wm161.microblog.lib.API;
+import net.wm161.microblog.lib.APIManager;
+import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.Status;
+import net.wm161.microblog.lib.Timeline;
+import net.wm161.microblog.lib.backends.Twitter;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,23 +24,28 @@ import android.widget.ListView;
 
 public abstract class TimelineActivity extends ListActivity {
 
-	private StatusListAdapter m_statusList;
-	private Account m_account;
+	private TimelineAdapter m_statusList;
+	private MicroblogAccount m_account;
+	protected Timeline m_timeline;
 	
-	public StatusListAdapter getStatusList() {
+	public TimelineAdapter getStatusList() {
 		return m_statusList;
 	}
+	
+	public API getAPI() {
+		//TODO: Different APIs
+		APIManager.getAPI(m_account.getAPI());
+		API api = new Twitter();
+		api.setAccount(m_account);
+		return api;
+	}
 
-	public void setStatusList(StatusListAdapter statusList) {
+	public void setStatusList(TimelineAdapter statusList) {
 		m_statusList = statusList;
         getListView().setAdapter(m_statusList);
 	}
 
-	public Account getAccount() {
-		return m_account;
-	}
-
-	public void setAccount(Account account) {
+	public void setAccount(MicroblogAccount account) {
 		m_account = account;
 	}
 
@@ -56,7 +66,9 @@ public abstract class TimelineActivity extends ListActivity {
 		dents.setOnItemClickListener(m_events);
 		registerForContextMenu(dents);
         dents.setEmptyView(getLayoutInflater().inflate(R.layout.loading, null));
-        setStatusList(new StatusListAdapter(m_account, this));
+        
+        m_timeline = new Timeline();
+        setStatusList(new TimelineAdapter(m_timeline, this));
 	}
 	
 	@Override

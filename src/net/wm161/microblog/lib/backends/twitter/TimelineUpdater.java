@@ -1,8 +1,16 @@
-package net.wm161.microblog.lib;
+package net.wm161.microblog.lib.backends.twitter;
 
 import java.net.MalformedURLException;
 
-
+import net.wm161.microblog.lib.APIException;
+import net.wm161.microblog.lib.APIProgress;
+import net.wm161.microblog.lib.APIRequest;
+import net.wm161.microblog.lib.DataCache;
+import net.wm161.microblog.lib.Timeline;
+import net.wm161.microblog.lib.TimelineUpdateRequest;
+import net.wm161.microblog.lib.API.TimelineType;
+import net.wm161.microblog.lib.APIRequest.ErrorType;
+import net.wm161.microblog.lib.backends.Twitter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,25 +18,34 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public abstract class StatusListRequest extends APIRequest {
+public class TimelineUpdater extends HTTPAPIRequest {
 	DataCache<Long, net.wm161.microblog.lib.Status> m_cache;
+	private TimelineType m_type;
+	private Timeline m_timeline;
 	
-	public StatusListRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.lib.Status> cache) {
-		super(account, progress);
-		assert(cache != null);
-		m_cache = cache;
+	public TimelineUpdater(Twitter api, APIRequest req, TimelineType type, Timeline timeline) {
+		super(api, req);
+		m_type = type;
+		m_timeline = timeline;
+		m_cache = api.getAccount().getStatusCache();
 	}
 	
-	protected void onPostExecute(Boolean success) {
-		super.onPostExecute(success);
+	protected String getPath() {
+		switch(m_type) {
+			case Home:
+				return "statuses/friends_timeline";
+			case Public:
+				return "statuses/public_timeline";
+		}
+		throw new UnsupportedOperationException("Unknown timeline type: "+m_type.toString());
 	}
 
-	protected boolean getStatuses(String path) throws APIException, MalformedURLException {
+	public boolean update() throws APIException, MalformedURLException {
 		Long biggest = m_cache.biggestKey();
 		if (biggest != null)
 			setParameter("since_id", m_cache.biggestKey());
 		JSONArray data = null;
-		String strdata = getData(path);
+		String strdata = getData(getPath());
 		try {
 			data = new JSONArray(strdata);
 		} catch (JSONException e) {
@@ -50,7 +67,7 @@ public abstract class StatusListRequest extends APIRequest {
 				} catch (ClassCastException e) {
 				}
 				if (status == null) {
-					status = new net.wm161.microblog.lib.Status(dent);
+					status = new JSONStatus(dent);
 					m_cache.put(id, status);
 				}
 				publishProgress(new Progress(progress.intValue(), status));
@@ -71,14 +88,11 @@ public abstract class StatusListRequest extends APIRequest {
 	}
 
 	@Override
-	protected void onProgressUpdate(APIProgress... progress) {
-		super.onProgressUpdate(progress);
-		if (progress[0] instanceof Progress) {
-			net.wm161.microblog.lib.Status status = ((Progress)progress[0]).m_status;
-			onNewStatus(status);
+	protected void publishProgress(APIProgress progress) {
+		super.publishProgress(progress);
+		if (progress instanceof Progress) {
+			net.wm161.microblog.lib.Status status = ((Progress)progress).m_status;
+			m_timeline.add(status);
 		}
 	}
-	
-	public abstract void onNewStatus(net.wm161.microblog.lib.Status s); 
-
 }

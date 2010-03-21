@@ -18,7 +18,7 @@ public class ActivityProgressHandler implements ProgressHandler {
 	}
 
 	@Override
-	public void finished() {
+	public void finished(Boolean success) {
 		m_activity.setProgressBarVisibility(false);
 	}
 

@@ -10,11 +10,11 @@ public abstract class Account extends Authenticator {
 
 	protected DataCache<Long, Status> m_statusCache;
 
-	public abstract String toString();
+	public String toString() {
+		return getName();
+	}
 
 	public abstract String getName();
-
-	public abstract String getBase();
 
 	public abstract String getPassword();
 
@@ -26,14 +26,12 @@ public abstract class Account extends Authenticator {
 	}
 
 	public DataCache<Long, Status> getStatusCache() {
-		//TODO: Is this /really/ the account's job?
 		return m_statusCache;
 	}
 
 	public void addLinks(TextView view) {
 		Pattern.compile("@(\\^S+) *$");
 	}
-	
 
 	@Override
 	protected PasswordAuthentication getPasswordAuthentication() {

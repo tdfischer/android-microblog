@@ -8,7 +8,7 @@ public interface ProgressHandler {
 
 	public void error(ErrorType errorType, String errorString);
 
-	public void finished();
+	public void finished(Boolean success);
 
 	public void starting();
 }

@@ -17,6 +17,15 @@ public class MicroblogAccount extends Account {
 		m_guid = guid;
 		m_prefs = app.getPreferences();
 	}
+	
+	public String getAPI() {
+		//return m_prefs.m_prefs.getString(m_guid + ".api", null);
+		return "twitter";
+	}
+	
+	public String getGuid() {
+		return m_guid;
+	}
 
 	@Override
 	public String getUser() {
@@ -26,11 +35,6 @@ public class MicroblogAccount extends Account {
 	@Override
 	public String getPassword() {
 		return m_prefs.m_prefs.getString(m_guid + ".password", null);
-	}
-
-	@Override
-	public String getBase() {
-		return m_prefs.m_prefs.getString(m_guid + ".baseurl", null);
 	}
 
 	@Override
@@ -47,21 +51,7 @@ public class MicroblogAccount extends Account {
 				.commit();
 	}
 
-	public void setBase(String baseurl) {
-		m_prefs.m_prefs.edit().putString(m_guid + ".baseurl", baseurl).commit();
-	}
-
 	public void setName(String name) {
 		m_prefs.m_prefs.edit().putString(m_guid + ".name", name).commit();
-	}
-
-	@Override
-	public String getGuid() {
-		return m_guid;
-	}
-
-	@Override
-	public String toString() {
-		return getName();
 	}
 }

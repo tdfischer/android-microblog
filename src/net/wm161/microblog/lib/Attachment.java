@@ -1,16 +1,17 @@
 package net.wm161.microblog.lib;
 
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import android.content.ContentResolver;
 import android.net.Uri;
 
-public class FileAttachment {
+public class Attachment {
 	private ContentResolver m_resolver;
 	private Uri m_uri;
 	
-	public FileAttachment(ContentResolver resolver, Uri uri) {
+	public Attachment(ContentResolver resolver, Uri uri) {
 		m_uri = uri;
 		m_resolver = resolver;
 	}
@@ -23,11 +24,12 @@ public class FileAttachment {
 		return m_resolver.openInputStream(m_uri);
 	}
 	
-	public String name() {
+	public String toString() {
 		return m_uri.toString();
 	}
 	
-	public String toString() {
+
+	public String name() {
 		return m_uri.toString();
 	}
 }

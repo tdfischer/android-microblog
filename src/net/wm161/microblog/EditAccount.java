@@ -20,7 +20,7 @@ public class EditAccount extends Activity implements OnClickListener {
 		m_account = preferences.getAccount(i.getStringExtra("account"));
 		if (m_account != null) {
 			EditText input = (EditText) findViewById(R.id.baseurl);
-			input.setText(m_account.getBase());
+			//input.setText(m_account.getBase());
 			input = (EditText) findViewById(R.id.name);
 			input.setText(m_account.getName());
 			input = (EditText) findViewById(R.id.username);
@@ -38,7 +38,7 @@ public class EditAccount extends Activity implements OnClickListener {
 		if (m_account == null)
 			m_account = prefs.getNewAccount();
 		EditText input = (EditText) findViewById(R.id.baseurl);
-		m_account.setBase(input.getText().toString());
+		//m_account.setBase(input.getText().toString());
 		input = (EditText) findViewById(R.id.name);
 		m_account.setName(input.getText().toString());
 		input = (EditText) findViewById(R.id.password);

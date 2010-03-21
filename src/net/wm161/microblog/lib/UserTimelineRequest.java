@@ -1,34 +1,19 @@
 package net.wm161.microblog.lib;
 
-import java.net.MalformedURLException;
 
+public class UserTimelineRequest extends TimelineUpdateRequest {
 
+	private User m_user;
 
-import android.util.Log;
-
-public abstract class UserTimelineRequest extends StatusListRequest {
-	
-	private String m_user;
-		
-	public UserTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.lib.Status> cache, String user) {
-		super(account, progress, cache);
+	public UserTimelineRequest(API api, User user, Timeline timeline) {
+		super(api, timeline);
 		m_user = user;
 	}
-	
-	public UserTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.lib.Status> cache, User user) {
-		super(account, progress, cache);
-		m_user = String.valueOf(user.getId());
-	}
-	
+
 	@Override
-	protected Boolean doInBackground(Void... params) {
+	protected Boolean doInBackground(Void... arg0) {
 		try {
-			if (getStatuses("statuses/user_timeline/"+m_user))
-				return true;
-			return false;
-		} catch (MalformedURLException e) {
-			Log.e("UserTimelineRequest", "Malformed URL!");
-			return false;
+			return m_api.updateUserTimeline(m_user, this, m_timeline);
 		} catch (APIException e) {
 			return false;
 		}

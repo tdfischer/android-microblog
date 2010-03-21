@@ -3,40 +3,49 @@ package net.wm161.microblog.lib;
 import java.io.Serializable;
 import java.util.Date;
 
+public class Status implements Comparable<Status>, Serializable {
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class Status implements Comparable<Status>, Serializable, Parcelable {
-	private static final long serialVersionUID = 1772677324524066760L;
+	private static final long serialVersionUID = 6085797208394403618L;
 	private User m_user;
 	private String m_text;
 	private long m_id;
 	private Date m_date;
 	private boolean m_favorited;
+	private Attachment m_attachment = null;
+	private String m_source;
 	
-
-    public static final Parcelable.Creator<Status> CREATOR = new Parcelable.Creator<Status>() {
-        public Status createFromParcel(Parcel in) {
-            return new Status(in);
-        }
-
-        public Status[] newArray(int size) {
-            return new Status[size];
-        }
-    };
-	
-	public Status(JSONObject status) throws JSONException {
-		m_user = new User(status.getJSONObject("user"));
-		m_text = status.getString("text");
-		m_id = status.getLong("id");
-		m_date = new Date(status.getString("created_at"));
-		m_favorited = status.getString("favorited").equalsIgnoreCase("true");
+	public Status() {
+		super();
 	}
 	
+	public String getText() {
+		return m_text;
+	}
+
+	public void setText(String text) {
+		m_text = text;
+	}
+
+	public long getId() {
+		return m_id;
+	}
+
+	public void setId(long id) {
+		m_id = id;
+	}
+
+	public void setUser(User user) {
+		m_user = user;
+	}
+
+	public void setDate(Date date) {
+		m_date = date;
+	}
+
+	public void setFavorited(boolean favorited) {
+		m_favorited = favorited;
+	}
+
 	public boolean isFavorited() {
 		return m_favorited;
 	}
@@ -44,17 +53,37 @@ public class Status implements Comparable<Status>, Serializable, Parcelable {
 	public User getUser() {
 		return m_user;
 	}
-	
+
 	public String text() {
 		return m_text;
 	}
-	
+
 	public long id() {
 		return m_id;
 	}
-	
+
 	public Date getDate() {
 		return m_date;
+	}
+
+	public void setAttachment(Attachment attachment) {
+		m_attachment = attachment;
+	}
+	
+	public boolean hasAttachment() {
+		return m_attachment != null;
+	}
+
+	public Attachment getAttachment() {
+		return m_attachment;
+	}
+
+	public void setSource(String source) {
+		m_source = source;
+	}
+
+	public String getSource() {
+		return m_source;
 	}
 
 	@Override
@@ -75,39 +104,4 @@ public class Status implements Comparable<Status>, Serializable, Parcelable {
 		return false;
 	}
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-	
-	public Status(Parcel in) {
-		m_id = in.readLong();
-		m_date = new Date(in.readLong());
-		if (in.readByte() == (byte)1)
-			m_favorited = true;
-		else
-			m_favorited = false;
-		m_text = in.readString();
-		//m_user = in.readLong();
-	}
-	
-	/*private User m_user;
-	private String m_text;
-	private long m_id;
-	private Date m_date;
-	private boolean m_favorited;*/
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
-		dest.writeLong(m_id);
-		dest.writeLong(m_date.getTime());
-		if (m_favorited)
-			dest.writeByte((byte)1);
-		else
-			dest.writeByte((byte)0);
-		dest.writeString(m_text);
-		dest.writeLong(m_user.getId());
-	}
-	
 }

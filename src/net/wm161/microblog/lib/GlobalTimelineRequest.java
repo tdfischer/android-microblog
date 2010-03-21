@@ -1,23 +1,15 @@
 package net.wm161.microblog.lib;
 
-import java.net.MalformedURLException;
+public class GlobalTimelineRequest extends TimelineUpdateRequest {
 
-
-
-public abstract class GlobalTimelineRequest extends StatusListRequest {
-
-	public GlobalTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.lib.Status> cache) {
-		super(account, progress, cache);
+	public GlobalTimelineRequest(API api, Timeline timeline) {
+		super(api, timeline);
 	}
 
 	@Override
-	protected Boolean doInBackground(Void... params) {
+	protected Boolean doInBackground(Void... arg0) {
 		try {
-			if (getStatuses("statuses/public_timeline"))
-				return true;
-			return false;
-		} catch (MalformedURLException e) {
-			return false;
+			return m_api.updateGlobalTimeline(this, m_timeline);
 		} catch (APIException e) {
 			return false;
 		}

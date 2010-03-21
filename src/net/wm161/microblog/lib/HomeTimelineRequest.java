@@ -1,23 +1,15 @@
 package net.wm161.microblog.lib;
 
-import java.net.MalformedURLException;
+public class HomeTimelineRequest extends TimelineUpdateRequest {
 
-
-
-public abstract class HomeTimelineRequest extends StatusListRequest {
-
-	public HomeTimelineRequest(Account account, ProgressHandler progress, DataCache<Long, net.wm161.microblog.lib.Status> cache) {
-		super(account, progress, cache);
+	public HomeTimelineRequest(API api, Timeline timeline) {
+		super(api, timeline);
 	}
 
 	@Override
-	protected Boolean doInBackground(Void... params) {
+	protected Boolean doInBackground(Void... arg0) {
 		try {
-			if (getStatuses("statuses/friends_timeline"))
-				return true;
-			return false;
-		} catch (MalformedURLException e) {
-			return false;
+			return m_api.updateHomeTimeline(this, m_timeline);
 		} catch (APIException e) {
 			return false;
 		}

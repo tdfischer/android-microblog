@@ -1,16 +1,16 @@
 package net.wm161.microblog;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 
-import net.wm161.microblog.R;
 import net.wm161.microblog.lib.Account;
 import net.wm161.microblog.lib.Avatar;
 import net.wm161.microblog.lib.DataCache;
+import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.Status;
+import net.wm161.microblog.lib.Timeline;
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,32 +21,41 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 
-public class StatusListAdapter extends BaseAdapter implements ListAdapter {
-	private ArrayList<Status> m_statuses;
-	private Account m_account;
+public class TimelineAdapter extends BaseAdapter implements ListAdapter {
+	private Timeline m_timeline;
 	private EnumSet<Options> m_options;
 	private MicroblogApp m_app;
-	private long m_last = 0L;
-	
 	public enum Options {
 		DEFAULT,
 		NO_USER
 	}
+	
+	private Handler m_handler = new Handler();
+    private Runnable m_refresher = new Runnable() {
 
-	public StatusListAdapter(Account account, Context cxt) {
-		m_statuses = new ArrayList<Status>();
-		m_account = account;
+		@Override
+		public void run() {
+			notifyDataSetChanged();
+		}
+    	
+    };
+
+	public TimelineAdapter(Timeline timeline, Context cxt) {
+		m_timeline = timeline;
+		m_timeline.setOnNewStatusHandler(new OnNewStatusHandler() {
+			
+			@Override
+			public void onNewStatus(Status s) {
+				m_handler.post(m_refresher);
+			}
+		});
 		m_options = EnumSet.of(Options.DEFAULT);
 		m_app = (MicroblogApp) cxt.getApplicationContext();
 	}
 	
-	public long getLastId() {
-		return m_last;
-	}
-	
 	@Override
 	public int getCount() {
-		return m_statuses.size();
+		return m_timeline.size();
 	}
 	
 	@Override
@@ -71,17 +80,17 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 	
 	@Override
 	public boolean isEmpty() {
-		return m_statuses.isEmpty();
+		return m_timeline.isEmpty();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return m_statuses.get(position);
+		return m_timeline.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		return m_statuses.get(position).id();
+		return m_timeline.get(position).id();
 	}	
 
 	@Override
@@ -93,7 +102,7 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 		} else {
 			dentView = convertView;
 		}
-		Status status = m_statuses.get(position);
+		Status status = m_timeline.get(position);
 		
 		TextView text = (TextView) dentView.findViewById(R.id.text);
 		TextView stamp = (TextView) dentView.findViewById(R.id.timestamp);
@@ -120,7 +129,8 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 			ImageView avatarView = (ImageView) dentView.findViewById(R.id.avatar);
 			TextView name = (TextView) dentView.findViewById(R.id.name);
 		
-			DataCache<Long, Avatar> avatarCache = m_app.getCache().getAvatarCache(m_account);
+			//FIXME
+			DataCache<Long, Avatar> avatarCache = m_app.getCache().getAvatarCache(m_app.getPreferences().getDefaultAccount());
 			
 			Avatar avatar = null;
 			//FIXME: Why does this need to be done here, and not in get()?
@@ -133,7 +143,7 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 				avatarCache.put(status.getUser().getId(), avatar);
 			}
 			avatarView.setImageDrawable(avatar.getBitmap());
-			m_account.addLinks(text);
+			//m_timeline.addLinks(text);
 			name.setText(status.getUser().getScreenName());
 		} else {
 			LinearLayout user = (LinearLayout) dentView.findViewById(R.id.user);
@@ -144,36 +154,13 @@ public class StatusListAdapter extends BaseAdapter implements ListAdapter {
 	}
 
 	public void clear() {
-		m_statuses.clear();
-		notifyDataSetInvalidated();
-	}
-
-	public void addStatus(Status status) {
-		if (status.getUser() == null)
-			return;
-		for(int i = 0;i < m_statuses.size();i++) {
-			if (m_statuses.get(i).id() == status.id())
-				return;
-			if (status.id() > m_last)
-				m_last = status.id();
-			if (m_statuses.get(i).id() < status.id()) {
-				m_statuses.add(i, status);
-				notifyDataSetChanged();
-				return;
-			}
-		}
-		m_statuses.add(status);
-		notifyDataSetChanged();
-	}
-
-	public void setStatuses(ArrayList<Status> statuses) {
-		m_statuses = statuses;
-		Collections.sort(m_statuses);
+		m_timeline.clear();
 		notifyDataSetInvalidated();
 	}
 
 	public Account getAccount() {
-		return m_account;
+		//FIXME
+		return m_app.getPreferences().getDefaultAccount();
 	}
 
 	public void setOptions(EnumSet<Options> options) {
