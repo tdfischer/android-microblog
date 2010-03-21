@@ -16,6 +16,7 @@ import net.wm161.microblog.lib.User;
 import net.wm161.microblog.lib.APIRequest.ErrorType;
 import net.wm161.microblog.lib.backends.twitter.HTTPAPIRequest;
 import net.wm161.microblog.lib.backends.twitter.JSONStatus;
+import net.wm161.microblog.lib.backends.twitter.JSONUser;
 import net.wm161.microblog.lib.backends.twitter.TimelineUpdater;
 import net.wm161.microblog.lib.backends.twitter.UserTimelineUpdater;
 
@@ -54,7 +55,7 @@ public class Twitter extends API {
 	public User getUser(String user, APIRequest request) {
 		HTTPAPIRequest req = new HTTPAPIRequest(this, request);
 		try {
-			return new User(new JSONObject(req.getData("/users/show/"+user)));
+			return new JSONUser(new JSONObject(req.getData("/users/show/"+user)));
 		} catch (JSONException e) {
 			request.setError(ErrorType.ERROR_PARSE);
 			return null;
