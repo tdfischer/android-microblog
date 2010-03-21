@@ -7,7 +7,6 @@ import net.wm161.microblog.lib.APIProgress;
 import net.wm161.microblog.lib.APIRequest;
 import net.wm161.microblog.lib.DataCache;
 import net.wm161.microblog.lib.Timeline;
-import net.wm161.microblog.lib.TimelineUpdateRequest;
 import net.wm161.microblog.lib.API.TimelineType;
 import net.wm161.microblog.lib.APIRequest.ErrorType;
 import net.wm161.microblog.lib.backends.Twitter;

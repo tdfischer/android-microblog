@@ -19,5 +19,5 @@ public class JSONStatus extends Status {
 		setDate(new Date(status.getString("created_at")));
 		setFavorited(status.getString("favorited").equalsIgnoreCase("true"));
 	}
-	
+
 }

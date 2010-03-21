@@ -17,7 +17,7 @@ import net.wm161.microblog.lib.APIRequest.ErrorType;
 import net.wm161.microblog.lib.backends.twitter.HTTPAPIRequest;
 import net.wm161.microblog.lib.backends.twitter.JSONStatus;
 import net.wm161.microblog.lib.backends.twitter.TimelineUpdater;
-import net.wm161.microblog.lib.backends.twitter.UserTimelineRequester;
+import net.wm161.microblog.lib.backends.twitter.UserTimelineUpdater;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,7 +85,7 @@ public class Twitter extends API {
 
 	@Override
 	public boolean updateUserTimeline(User user, APIRequest request, Timeline timeline) throws APIException {
-		UserTimelineRequester req = new UserTimelineRequester(this, request, user, timeline);
+		UserTimelineUpdater req = new UserTimelineUpdater(this, request, user, timeline);
 		try {
 			return req.update();
 		} catch (MalformedURLException e) {

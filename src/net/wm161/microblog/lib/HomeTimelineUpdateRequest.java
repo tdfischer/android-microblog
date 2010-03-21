@@ -1,8 +1,8 @@
 package net.wm161.microblog.lib;
 
-public class HomeTimelineRequest extends TimelineUpdateRequest {
+public class HomeTimelineUpdateRequest extends TimelineUpdateRequest {
 
-	public HomeTimelineRequest(API api, Timeline timeline) {
+	public HomeTimelineUpdateRequest(API api, Timeline timeline) {
 		super(api, timeline);
 	}
 

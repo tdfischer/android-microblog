@@ -2,7 +2,6 @@ package net.wm161.microblog;
 
 import java.util.EnumSet;
 
-import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.OnNewUserHandler;
 import net.wm161.microblog.lib.User;
 import net.wm161.microblog.lib.UserRequest;

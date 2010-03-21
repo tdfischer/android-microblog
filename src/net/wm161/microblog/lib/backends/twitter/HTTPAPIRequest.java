@@ -95,8 +95,8 @@ public class HTTPAPIRequest {
 		APIConfiguration conf = m_api.configuration();
 		String server = (String) conf.value("server");
 		String apiPath = (String) conf.value("path");
-		//Boolean https = (Boolean) conf.value("https");
-		String scheme = (false) ? "https" : "http";
+		Boolean https = (Boolean) conf.value("https");
+		String scheme = (https) ? "https" : "http";
 		
 		URI location = URI.create(scheme+"://"+server+"/"+apiPath+"/"+path+".json");
 		return getData(location);

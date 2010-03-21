@@ -2,7 +2,6 @@ package net.wm161.microblog;
 
 import net.wm161.microblog.lib.API;
 import net.wm161.microblog.lib.APIManager;
-import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.Status;
 import net.wm161.microblog.lib.Timeline;
 import net.wm161.microblog.lib.backends.Twitter;
@@ -10,7 +9,6 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;

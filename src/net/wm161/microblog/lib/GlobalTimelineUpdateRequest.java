@@ -1,8 +1,8 @@
 package net.wm161.microblog.lib;
 
-public class GlobalTimelineRequest extends TimelineUpdateRequest {
+public class GlobalTimelineUpdateRequest extends TimelineUpdateRequest {
 
-	public GlobalTimelineRequest(API api, Timeline timeline) {
+	public GlobalTimelineUpdateRequest(API api, Timeline timeline) {
 		super(api, timeline);
 	}
 
