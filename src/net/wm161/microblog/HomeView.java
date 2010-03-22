@@ -1,15 +1,28 @@
 package net.wm161.microblog;
 
+import java.io.IOException;
+import java.util.List;
+
 import net.wm161.microblog.lib.API;
 import net.wm161.microblog.lib.Account;
 import net.wm161.microblog.lib.ActivityProgressHandler;
 import net.wm161.microblog.lib.Attachment;
+import net.wm161.microblog.lib.OnNewUserHandler;
 import net.wm161.microblog.lib.PublishUpdateRequest;
 import net.wm161.microblog.lib.Status;
+import net.wm161.microblog.lib.User;
+import net.wm161.microblog.lib.UserRequest;
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.location.Address;
+import android.location.Criteria;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,12 +35,13 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeView extends TabActivity implements OnClickListener {
+public class HomeView extends TabActivity implements OnClickListener, LocationListener {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -44,6 +58,8 @@ public class HomeView extends TabActivity implements OnClickListener {
 
 	private MicroblogAccount m_account;
 
+	private Location m_location;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,9 +73,23 @@ public class HomeView extends TabActivity implements OnClickListener {
 			startActivity(newAccount);
 			finish();
 		} else {
+			//TODO: Multiple accounts
 			//Intent i = getIntent();
 			//m_account = preferences.getAccount(i.getStringExtra("account"));
 			m_account = (MicroblogAccount) preferences.getDefaultAccount();
+			
+			Resources res = getResources();
+			
+			UserRequest req = new UserRequest(m_account.getAPIInstance(), m_account.getUser());
+			req.setOnNewUserHandler(new OnNewUserHandler() {
+				
+				@Override
+				public void onNewUser(User user) {
+					ImageView icon = (ImageView) getTabWidget().getChildTabViewAt(0).findViewById(android.R.id.icon);
+					icon.setImageDrawable(user.getAvatar().getBitmap());
+				}
+			});
+			req.execute();
 			
 			Intent home = new Intent(this, HomeTimeline.class);
 			home.putExtra("account", m_account.getGuid());
@@ -67,12 +97,17 @@ public class HomeView extends TabActivity implements OnClickListener {
 			
 			Intent timeline = new Intent(this, GlobalTimeline.class);
 			timeline.putExtra("account", m_account.getGuid());
-			tabs.addTab(tabs.newTabSpec("global").setContent(timeline).setIndicator("Global Timeline"));
+			tabs.addTab(tabs.newTabSpec("global").setContent(timeline).setIndicator("Global Timeline", res.getDrawable(m_account.getAPIInstance().getIcon())));
+			
+			Intent replies = new Intent(this, ReplyTimeline.class);
+			replies.putExtra("account", m_account.getGuid());
+			tabs.addTab(tabs.newTabSpec("replies").setContent(replies).setIndicator("Replies", res.getDrawable(android.R.drawable.sym_call_incoming)));
 			
 			Button sendButton = (Button) findViewById(R.id.send);
 			sendButton.setOnClickListener(this);
 			
 			Button unattach = (Button) findViewById(R.id.unattach);
+			//TODO: Fix this to get a better image for 'unattach' 
 			//unattach.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.btn_minus));
 			unattach.setText("Remove");
 			unattach.setOnClickListener(new OnClickListener() {
@@ -95,6 +130,16 @@ public class HomeView extends TabActivity implements OnClickListener {
 			});
 			setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
 		}
+		
+		LocationManager locations = (LocationManager) getSystemService(LOCATION_SERVICE);
+		Criteria criteria = new Criteria();
+		criteria.setSpeedRequired(false);
+		criteria.setAltitudeRequired(false);
+		criteria.setBearingRequired(false);
+		criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+		String provider = locations.getBestProvider(criteria, true);
+		locations.requestLocationUpdates(provider, 60000, 20, this);
+		updateLocation(locations.getLastKnownLocation(provider));
 	}
 	
 	public static void show(Context cxt, Account account) {
@@ -110,6 +155,7 @@ public class HomeView extends TabActivity implements OnClickListener {
 		status.setText(statusEdit.getText().toString());
 		if (m_attachment != null)
 			status.setAttachment(m_attachment);
+		status.setLocation(m_location);
 		status.setSource("Android Microblog");
 		
 		API api = m_account.getAPIInstance();
@@ -196,6 +242,44 @@ public class HomeView extends TabActivity implements OnClickListener {
 				}
 			}
 		}
+	}
+	
+	private void updateLocation(Location location) {
+		m_location = location;
+		Geocoder encoder = new Geocoder(this, getResources().getConfiguration().locale);
+		Address addr = null;
+		try {
+			List<Address> addresses = encoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+			if (addresses.size() > 0)
+				addr = addresses.get(0);
+		} catch (IOException e) {
+			return;
+		}
+		TextView locationText = (TextView) findViewById(R.id.location);
+		locationText.setText(addr.getAddressLine(0));
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		updateLocation(location);
+	}
+
+	@Override
+	public void onProviderDisabled(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

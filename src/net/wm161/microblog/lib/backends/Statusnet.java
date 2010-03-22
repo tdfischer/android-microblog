@@ -105,13 +105,27 @@ public class Statusnet extends API {
 	}
 	
 	@Override
+	public Boolean updateReplyTimeline(APIRequest request, Timeline timeline) throws APIException {
+		TimelineUpdater req = new TimelineUpdater(this, request, TimelineType.Replies, timeline);
+		try {
+			return req.update();
+		} catch (MalformedURLException e) {
+			throw new APIException();
+		}
+	}
+	
+	@Override
 	public boolean sendUpdate(Status update, APIRequest request) {
 		HTTPAPIRequest req = new HTTPAPIRequest(this, request);
 		req.setParameter("status", update.getText());
 		if (update.hasAttachment())
 			req.setParameter("media", update.getAttachment());
 		req.setParameter("source", update.getSource());
-		req.setParameter("status", update);
+		req.setParameter("status", update.getText());
+		if (update.getLocation() != null) {
+			req.setParameter("lat", update.getLocation().getLatitude());
+			req.setParameter("long", update.getLocation().getLongitude());
+		}
 		try {
 			req.getData("statuses/update");
 			return true;

@@ -3,6 +3,8 @@ package net.wm161.microblog.lib;
 import java.io.Serializable;
 import java.util.Date;
 
+import android.location.Location;
+
 public class Status implements Comparable<Status>, Serializable {
 
 	private static final long serialVersionUID = 6085797208394403618L;
@@ -13,6 +15,8 @@ public class Status implements Comparable<Status>, Serializable {
 	private boolean m_favorited;
 	private Attachment m_attachment = null;
 	private String m_source;
+	//FIXME: Locations aren't serializable, thus can't be cached.
+	private Location m_location = null;
 	
 	public Status() {
 		super();
@@ -102,6 +106,14 @@ public class Status implements Comparable<Status>, Serializable {
 				return true;
 		}
 		return false;
+	}
+
+	public void setLocation(Location location) {
+		m_location = location;
+	}
+
+	public Location getLocation() {
+		return m_location;
 	}
 
 }

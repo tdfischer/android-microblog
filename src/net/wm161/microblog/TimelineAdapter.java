@@ -1,7 +1,9 @@
 package net.wm161.microblog;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.List;
 
 import net.wm161.microblog.lib.Account;
 import net.wm161.microblog.lib.Avatar;
@@ -11,7 +13,11 @@ import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.Status;
 import net.wm161.microblog.lib.Timeline;
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,7 +112,7 @@ public class TimelineAdapter extends BaseAdapter implements ListAdapter {
 		Status status = m_timeline.get(position);
 		
 		TextView text = (TextView) dentView.findViewById(R.id.text);
-		TextView stamp = (TextView) dentView.findViewById(R.id.timestamp);
+		TextView details = (TextView) dentView.findViewById(R.id.details);
 		text.setText(status.text());
 		
 		String timestamp;
@@ -124,7 +130,26 @@ public class TimelineAdapter extends BaseAdapter implements ListAdapter {
 			timestamp = minutes+" minutes ago";
 		else
 			timestamp = seconds+" seconds ago";
-		stamp.setText(timestamp);
+		
+		//FIXME: Move to a different thread
+		String location = "";
+		Location loc = status.getLocation();
+		if (status.getLocation() != null ) {
+			Geocoder decoder = new Geocoder(m_app, m_app.getResources().getConfiguration().locale);
+			Log.d("TimelineAdapter", "Looking up location for "+loc.getLatitude()+","+loc.getLongitude());
+			List<Address> locations = null;
+			try {
+				locations = decoder.getFromLocation(loc.getLatitude(), loc.getLongitude(), 1);
+			} catch (IOException e) {
+				Log.d("TimelineAdapter", "Couldn't geocode location");
+			}
+			if (locations != null && locations.size() > 0) {
+				location = ", from "+locations.get(0).getLocality()+", "+locations.get(0).getCountryName();
+				Log.d("TimelineAdapter", "Got location: "+locations.get(0).getLocality());
+			}
+		}
+		
+		details.setText(timestamp+location);
 		
 		if (!m_options.contains(Options.NO_USER)) {
 			ImageView avatarView = (ImageView) dentView.findViewById(R.id.avatar);

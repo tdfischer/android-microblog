@@ -4,8 +4,12 @@ import java.util.Date;
 
 import net.wm161.microblog.lib.Status;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.location.Location;
+import android.util.Log;
 
 public class JSONStatus extends Status {
 
@@ -17,6 +21,17 @@ public class JSONStatus extends Status {
 		setId(status.getLong("id"));
 		setDate(new Date(status.getString("created_at")));
 		setFavorited(status.getString("favorited").equalsIgnoreCase("true"));
+		if (!status.isNull("geo")) {
+			Log.d("JSONStatus", "Found geo data for "+id());
+			JSONObject geo = status.getJSONObject("geo");
+			if (geo.getString("type").equals("Point")) {
+				Location loc = new Location("");
+				//TODO: Make sure this gets re-reversed once the twitter api gets fixed
+				JSONArray coordinates = geo.getJSONArray("coordinates");
+				loc.setLatitude(coordinates.getDouble(0));
+				loc.setLongitude(coordinates.getDouble(1));
+				setLocation(loc);
+			}
+		}
 	}
-
 }
