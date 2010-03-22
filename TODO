@@ -21,6 +21,7 @@ This file lists milestones, bugfixes, and features to be completed by specific r
 	+ View @replies and direct messages
 
 0.3
+	Translations
 	List friends, followers, followees
 	Create a separate activity as part of the task of sharing stuff
 	Fix that whole mess about APIExceptions
