@@ -13,23 +13,29 @@ This file lists milestones, bugfixes, and features to be completed by specific r
 
 0.2
 	+ Move all the files around to create a separate library for others to use
-	- Support different microblogging 'backends' like facebook, twitter, statusnet through plugins
+	+ Support different microblogging 'backends' like facebook, twitter, statusnet through plugins
+	+ Fancy-pants welcome screen
 	Geo tagging
 	Delete accounts
-	- Fancy-pants welcome screen
 	Display attachments inline with the update list
+	View @replies and direct messages
 
 0.3
+	List friends, followers, followees
+	Create a separate activity as part of the task of sharing stuff
+
+0.4
+	Searching
+
+0.5
 	Background update checking
 
 Unknown Future
+	Facebook timeline plugin
 	Alternate forms of authentication other than username+password,
 	  such as oauth
-	List friends, followers, followees
-	Searching
 	Groups
 	Update your settings/theme
 	Better theme integration
 	An icon using the android style guide
 	Map showing nearby statuses, alerts for nearby updates
-	Create a separate activity as part of the task of sharing stuff
