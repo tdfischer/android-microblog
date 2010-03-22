@@ -4,7 +4,7 @@ import net.wm161.microblog.lib.APIRequest;
 import net.wm161.microblog.lib.Timeline;
 import net.wm161.microblog.lib.User;
 import net.wm161.microblog.lib.API.TimelineType;
-import net.wm161.microblog.lib.backends.Twitter;
+import net.wm161.microblog.lib.backends.Statusnet;
 
 public class UserTimelineUpdater extends TimelineUpdater {
 	
@@ -13,8 +13,8 @@ public class UserTimelineUpdater extends TimelineUpdater {
 		return "statuses/user_timleine/"+m_user.getId();
 	}
 
-	public UserTimelineUpdater(Twitter api, APIRequest req, User user, Timeline timeline) {
-		super(api, req, TimelineType.User, timeline);
+	public UserTimelineUpdater(Statusnet statusnet, APIRequest req, User user, Timeline timeline) {
+		super(statusnet, req, TimelineType.User, timeline);
 		m_user = user;
 	}
 

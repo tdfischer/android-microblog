@@ -5,11 +5,12 @@ import java.net.MalformedURLException;
 import net.wm161.microblog.lib.APIException;
 import net.wm161.microblog.lib.APIProgress;
 import net.wm161.microblog.lib.APIRequest;
+import net.wm161.microblog.lib.CacheManager;
 import net.wm161.microblog.lib.DataCache;
 import net.wm161.microblog.lib.Timeline;
 import net.wm161.microblog.lib.API.TimelineType;
 import net.wm161.microblog.lib.APIRequest.ErrorType;
-import net.wm161.microblog.lib.backends.Twitter;
+import net.wm161.microblog.lib.backends.Statusnet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,11 +23,11 @@ public class TimelineUpdater extends HTTPAPIRequest {
 	private TimelineType m_type;
 	private Timeline m_timeline;
 	
-	public TimelineUpdater(Twitter api, APIRequest req, TimelineType type, Timeline timeline) {
-		super(api, req);
+	public TimelineUpdater(Statusnet statusnet, APIRequest req, TimelineType type, Timeline timeline) {
+		super(statusnet, req);
 		m_type = type;
 		m_timeline = timeline;
-		m_cache = api.getAccount().getStatusCache();
+		m_cache = statusnet.getAccount().getCache(CacheManager.CacheType.Status);
 	}
 	
 	protected String getPath() {

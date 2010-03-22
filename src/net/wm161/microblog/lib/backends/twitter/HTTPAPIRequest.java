@@ -15,7 +15,7 @@ import net.wm161.microblog.lib.APIProgress;
 import net.wm161.microblog.lib.APIRequest;
 import net.wm161.microblog.lib.Attachment;
 import net.wm161.microblog.lib.APIRequest.ErrorType;
-import net.wm161.microblog.lib.backends.Twitter;
+import net.wm161.microblog.lib.backends.Statusnet;
 
 import org.apache.http.HttpException;
 import org.apache.http.HttpHost;
@@ -43,12 +43,12 @@ import android.util.Log;
 
 public class HTTPAPIRequest {
 	
-	protected Twitter m_api;
+	protected Statusnet m_api;
 	private HashMap<String, Object> m_params;
 	private int m_status;
 	private APIRequest m_request;
 
-	public HTTPAPIRequest(Twitter api, APIRequest req) {
+	public HTTPAPIRequest(Statusnet api, APIRequest req) {
 		super();
 		m_api = api;
 		m_request = req;
@@ -103,7 +103,7 @@ public class HTTPAPIRequest {
 	}
 	
 	protected String getData(URI location) throws APIException {
-		Log.d("APIRequest", "Downloading "+location);
+		Log.d("HTTPAPIRequest", "Downloading "+location);
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(location);
 		client.addRequestInterceptor(preemptiveAuth, 0);
@@ -119,7 +119,7 @@ public class HTTPAPIRequest {
 					Attachment attachment = (Attachment) value;
 					try {
 						data = new InputStreamBody(attachment.getStream(), attachment.contentType(), attachment.name());
-						Log.d("APIRequest", "Found a "+attachment.contentType()+" attachment named "+attachment.name());
+						Log.d("HTTPAPIRequest", "Found a "+attachment.contentType()+" attachment named "+attachment.name());
 					} catch (FileNotFoundException e) {
 						getRequest().setError(ErrorType.ERROR_ATTACHMENT_NOT_FOUND);
 						throw new APIException();
@@ -166,11 +166,11 @@ public class HTTPAPIRequest {
 		int status;
 		in = new InputStreamReader(result);
 		status = req.getStatusLine().getStatusCode();
-		Log.d("APIRequest", "Got status code of "+status);
+		Log.d("HTTPAPIRequest", "Got status code of "+status);
 		setStatusCode(status);
 		if (status >= 300 || status < 200) {
 			getRequest().setError(ErrorType.ERROR_SERVER);
-			Log.w("APIRequest", "Server code wasn't 2xx, got "+m_status);
+			Log.w("HTTPAPIRequest", "Server code wasn't 2xx, got "+m_status);
 			throw new APIException();
 		}
 		
