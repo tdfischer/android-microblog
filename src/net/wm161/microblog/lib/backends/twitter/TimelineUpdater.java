@@ -36,6 +36,8 @@ public class TimelineUpdater extends HTTPAPIRequest {
 				return "statuses/friends_timeline";
 			case Public:
 				return "statuses/public_timeline";
+			case Replies:
+				return "statuses/mentions";
 		}
 		throw new UnsupportedOperationException("Unknown timeline type: "+m_type.toString());
 	}
@@ -54,6 +56,7 @@ public class TimelineUpdater extends HTTPAPIRequest {
 			setError(ErrorType.ERROR_PARSE);
 			throw new APIException();
 		}
+		//TODO: Investigate if we still need this clear commented out
 		//m_statuses.clear();
 		Integer i;
 		for(i=0;i<data.length();i++) {

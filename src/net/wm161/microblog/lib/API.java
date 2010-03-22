@@ -13,7 +13,8 @@ public abstract class API {
 	public enum TimelineType {
 		Home,
 		Public,
-		User
+		User,
+		Replies
 	}
 	private Account m_account;
 	
@@ -29,6 +30,7 @@ public abstract class API {
 	public abstract boolean updateGlobalTimeline(APIRequest request, Timeline timeline) throws APIException;
 	public abstract boolean updateHomeTimeline(APIRequest request, Timeline timeline) throws APIException;
 	public abstract boolean updateUserTimeline(User user, APIRequest request, Timeline timeline) throws APIException;
+	public abstract Boolean updateReplyTimeline(APIRequest replyTimelineUpdateRequest, Timeline timeline) throws APIException;
 	public abstract User getUser(String user, APIRequest request);
 	public abstract net.wm161.microblog.lib.Status getStatus(long status, APIRequest request);
 	public abstract boolean sendUpdate(net.wm161.microblog.lib.Status status, APIRequest request);
