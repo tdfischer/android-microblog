@@ -5,6 +5,7 @@ import java.util.EnumSet;
 
 import net.wm161.microblog.lib.Account;
 import net.wm161.microblog.lib.Avatar;
+import net.wm161.microblog.lib.CacheManager;
 import net.wm161.microblog.lib.DataCache;
 import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.Status;
@@ -129,8 +130,8 @@ public class TimelineAdapter extends BaseAdapter implements ListAdapter {
 			ImageView avatarView = (ImageView) dentView.findViewById(R.id.avatar);
 			TextView name = (TextView) dentView.findViewById(R.id.name);
 		
-			//FIXME
-			DataCache<Long, Avatar> avatarCache = m_app.getCache().getAvatarCache(m_app.getPreferences().getDefaultAccount());
+			//FIXME: More than just the default account
+			DataCache<Long, Avatar> avatarCache = m_app.getCacheManager().getCache(m_app.getPreferences().getDefaultAccount(), CacheManager.CacheType.Avatar);
 			
 			Avatar avatar = null;
 			//FIXME: Why does this need to be done here, and not in get()?
@@ -159,7 +160,7 @@ public class TimelineAdapter extends BaseAdapter implements ListAdapter {
 	}
 
 	public Account getAccount() {
-		//FIXME
+		//FIXME: More than just the default
 		return m_app.getPreferences().getDefaultAccount();
 	}
 
