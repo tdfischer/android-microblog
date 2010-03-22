@@ -5,15 +5,11 @@ import net.wm161.microblog.lib.APIManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Gallery;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
@@ -30,9 +26,13 @@ public class AccountTypePicker extends Activity {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				String api = (String) view.getTag();
-				API apiInstance = APIManager.getAPI(api);
-				((TextView)findViewById(R.id.name)).setText(apiInstance.getName());
+				if (view == null) {
+					onNothingSelected(parent);
+				} else {
+					String api = (String) view.getTag();
+					API apiInstance = APIManager.getAPI(api);
+					((TextView)findViewById(R.id.name)).setText(apiInstance.getName());
+				}
 			}
 
 			@Override
@@ -50,8 +50,18 @@ public class AccountTypePicker extends Activity {
 				String api = (String) g.getSelectedView().getTag();
 				Intent configure = new Intent(AccountTypePicker.this, ConfigureAccount.class);
 				configure.putExtra("api", api);
-				startActivity(configure);
+				startActivityForResult(configure, 0);
 			}
 		});
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == Activity.RESULT_OK) {
+			String guid = data.getStringExtra("account");
+			MicroblogAccount account = new MicroblogAccount((MicroblogApp)getApplication(), guid);
+			HomeView.show(this, account);
+		}
 	}
 }

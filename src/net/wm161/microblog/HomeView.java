@@ -1,13 +1,11 @@
 package net.wm161.microblog;
 
 import net.wm161.microblog.lib.API;
-import net.wm161.microblog.lib.APIManager;
 import net.wm161.microblog.lib.Account;
 import net.wm161.microblog.lib.ActivityProgressHandler;
 import net.wm161.microblog.lib.Attachment;
 import net.wm161.microblog.lib.PublishUpdateRequest;
 import net.wm161.microblog.lib.Status;
-import net.wm161.microblog.lib.backends.Twitter;
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Context;
@@ -53,44 +51,50 @@ public class HomeView extends TabActivity implements OnClickListener {
         requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.home);
 		TabHost tabs = getTabHost();
-		//Intent i = getIntent();
 		Preferences preferences = ((MicroblogApp)getApplication()).getPreferences();
-		//m_account = preferences.getAccount(i.getStringExtra("account"));
-		m_account = (MicroblogAccount) preferences.getDefaultAccount();
-		
-		Intent home = new Intent(this, HomeTimeline.class);
-		home.putExtra("account", m_account.getGuid());
-		tabs.addTab(tabs.newTabSpec("user").setContent(home).setIndicator("Home"));
-		
-		Intent timeline = new Intent(this, GlobalTimeline.class);
-		timeline.putExtra("account", m_account.getGuid());
-		tabs.addTab(tabs.newTabSpec("global").setContent(timeline).setIndicator("Global Timeline"));
-		
-		Button sendButton = (Button) findViewById(R.id.send);
-		sendButton.setOnClickListener(this);
-		
-		Button unattach = (Button) findViewById(R.id.unattach);
-		//unattach.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.btn_minus));
-		unattach.setText("Remove");
-		unattach.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				m_attachment = null;
-				LinearLayout attachmentGroup = (LinearLayout)findViewById(R.id.attachmentArea);
-				attachmentGroup.setVisibility(View.GONE);
-			}
-		});
-		
-		EditText edit = (EditText) findViewById(R.id.input);
-		edit.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				takeKeyEvents(true);
-				arg0.requestFocus();
-			}
+		if (preferences.getAccounts().length == 0) {
+			Intent newAccount = new Intent(this, AccountTypePicker.class);
+			startActivity(newAccount);
+			finish();
+		} else {
+			//Intent i = getIntent();
+			//m_account = preferences.getAccount(i.getStringExtra("account"));
+			m_account = (MicroblogAccount) preferences.getDefaultAccount();
 			
-		});
-		setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
+			Intent home = new Intent(this, HomeTimeline.class);
+			home.putExtra("account", m_account.getGuid());
+			tabs.addTab(tabs.newTabSpec("user").setContent(home).setIndicator("Home"));
+			
+			Intent timeline = new Intent(this, GlobalTimeline.class);
+			timeline.putExtra("account", m_account.getGuid());
+			tabs.addTab(tabs.newTabSpec("global").setContent(timeline).setIndicator("Global Timeline"));
+			
+			Button sendButton = (Button) findViewById(R.id.send);
+			sendButton.setOnClickListener(this);
+			
+			Button unattach = (Button) findViewById(R.id.unattach);
+			//unattach.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.btn_minus));
+			unattach.setText("Remove");
+			unattach.setOnClickListener(new OnClickListener() {
+				public void onClick(View arg0) {
+					m_attachment = null;
+					LinearLayout attachmentGroup = (LinearLayout)findViewById(R.id.attachmentArea);
+					attachmentGroup.setVisibility(View.GONE);
+				}
+			});
+			
+			EditText edit = (EditText) findViewById(R.id.input);
+			edit.setOnClickListener(new OnClickListener() {
+	
+				@Override
+				public void onClick(View arg0) {
+					takeKeyEvents(true);
+					arg0.requestFocus();
+				}
+				
+			});
+			setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
+		}
 	}
 	
 	public static void show(Context cxt, Account account) {
@@ -108,11 +112,7 @@ public class HomeView extends TabActivity implements OnClickListener {
 			status.setAttachment(m_attachment);
 		status.setSource("Android Microblog");
 		
-		//TODO: Different APIs
-		//FIXME: Copied from TimelineActivity.java
-		APIManager.getAPI(m_account.getAPI());
-		API api = new Twitter();
-		api.setAccount(m_account);
+		API api = m_account.getAPIInstance();
 		PublishUpdateRequest req = new PublishUpdateRequest(api, status);
 		req.setProgressHandler(new ActivityProgressHandler(this) {
 

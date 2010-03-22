@@ -20,19 +20,13 @@ public class AccountList extends ListActivity implements OnItemClickListener, On
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Intent picker = new Intent(this, AccountTypePicker.class);
-		startActivity(picker);
-		/*setTitle("Microblog - Accounts");
+		setTitle("Microblog - Accounts");
 		setContentView(R.layout.accounts);
 		getListView().setEmptyView(findViewById(R.id.empty));
-		Account[] accounts = ((MicroblogApp)getApplication()).getPreferences().getAccounts();
-		if (accounts.length == 1) {
-			HomeView.show(this, accounts[0]);
-		}
 		Button addButton = (Button)findViewById(R.id.add_account);
 		addButton.setOnClickListener(this);
 		getListView().setOnItemClickListener(this);
-		registerForContextMenu(getListView());*/
+		registerForContextMenu(getListView());
 	}
 	
 	public void refresh() {
@@ -52,7 +46,7 @@ public class AccountList extends ListActivity implements OnItemClickListener, On
 	}
 	
 	public void onNewAccount() {
-		Intent i = new Intent(this, EditAccount.class);
+		Intent i = new Intent(this, AccountTypePicker.class);
 		startActivity(i);
 	}
 
@@ -68,7 +62,7 @@ public class AccountList extends ListActivity implements OnItemClickListener, On
 		super.onCreateContextMenu(menu, v, menuInfo);
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 		Account account = m_accounts.getItem(info.position);
-		Intent editIntent = new Intent(this, EditAccount.class);
+		Intent editIntent = new Intent(this, ConfigureAccount.class);
 		editIntent.putExtra("account", account.getGuid());
 		menu.add("Edit").setIntent(editIntent);
 	}
