@@ -12,6 +12,7 @@ import net.wm161.microblog.lib.DataCache;
 import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.Status;
 import net.wm161.microblog.lib.Timeline;
+import net.wm161.microblog.lib.CacheManager.CacheType;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -122,8 +123,10 @@ public class TimelineAdapter extends BaseAdapter implements ListAdapter {
 		int hours = now.getHours() - statusDate.getHours();
 		int minutes = now.getMinutes() - statusDate.getMinutes();
 		int seconds = now.getSeconds() - statusDate.getSeconds();
-		if (days > 0)
+		if (days > 5)
 			timestamp = now.toLocaleString();
+		else if (days > 0)
+			timestamp = days+" days ago";
 		else if (hours > 0)
 			timestamp = hours+" hours ago";
 		else if (minutes > 0)
@@ -131,25 +134,20 @@ public class TimelineAdapter extends BaseAdapter implements ListAdapter {
 		else
 			timestamp = seconds+" seconds ago";
 		
-		//FIXME: Move to a different thread
-		String location = "";
-		Location loc = status.getLocation();
-		if (status.getLocation() != null ) {
-			Geocoder decoder = new Geocoder(m_app, m_app.getResources().getConfiguration().locale);
-			Log.d("TimelineAdapter", "Looking up location for "+loc.getLatitude()+","+loc.getLongitude());
-			List<Address> locations = null;
-			try {
-				locations = decoder.getFromLocation(loc.getLatitude(), loc.getLongitude(), 1);
-			} catch (IOException e) {
-				Log.d("TimelineAdapter", "Couldn't geocode location");
-			}
-			if (locations != null && locations.size() > 0) {
-				location = ", from "+locations.get(0).getLocality()+", "+locations.get(0).getCountryName();
-				Log.d("TimelineAdapter", "Got location: "+locations.get(0).getLocality());
+
+		if (status.getLocation() == null) {
+			details.setText(timestamp);
+		} else {
+			DataCache<Double, String> geocache = m_app.getCacheManager().getCache(m_app.getPreferences().getDefaultAccount(), CacheType.Geocode);
+			String location;
+			if ((location = geocache.get(status.getLocation().getLatitude()+2*status.getLocation().getLongitude())) == null) {
+				details.setText(timestamp);
+				GeocodeTask task = new GeocodeTask(m_app, status.getLocation(), details);
+				task.execute();
+			} else {
+				details.setText(timestamp+", from "+location);
 			}
 		}
-		
-		details.setText(timestamp+location);
 		
 		if (!m_options.contains(Options.NO_USER)) {
 			ImageView avatarView = (ImageView) dentView.findViewById(R.id.avatar);

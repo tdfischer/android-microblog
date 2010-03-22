@@ -13,7 +13,8 @@ import android.util.Log;
 public class CacheManager {
 	public enum CacheType {
 		Avatar,
-		Status
+		Status,
+		Geocode
 	};
 	private HashMap<Account, HashMap<CacheType, DataCache<? extends Comparable<?>, ? extends Serializable>>> m_caches;
 	private Context m_cxt;
