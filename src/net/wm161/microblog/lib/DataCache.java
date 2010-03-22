@@ -1,6 +1,7 @@
 package net.wm161.microblog.lib;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -51,6 +52,22 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 				it.remove();
 			else
 				break;
+		}
+	}
+	
+	public void clear() {
+		m_cache.clear();
+		File cache = m_cxt.getCacheDir();
+		FileFilter filter = new FileFilter() {
+			
+			@Override
+			public boolean accept(File arg0) {
+				return (arg0.getName().startsWith(m_account.getGuid()+m_name));
+			}
+		};
+		for(File file: cache.listFiles(filter)) {
+			Log.d("DataCache", "Deleting cache "+file.getAbsolutePath());
+			file.delete();
 		}
 	}
 	
