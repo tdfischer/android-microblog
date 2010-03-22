@@ -22,15 +22,17 @@ import android.util.Log;
 public class DataCache<K extends Comparable<K>, T extends Serializable> {
 	private Account m_account;
 	private Context m_cxt;
+	private String m_name;
 	private LinkedHashMap<K, T> m_cache;
 	public static final int CACHE_LIMIT = 360000;
 	public static final int CACHE_MIN_SIZE = 40;
 	public static final int CACHE_MAX_SIZE = 200;
 
-	public DataCache(Account account, Context cxt) {
+	public DataCache(Account account, Context cxt, String name) {
 		m_account = account;
 		m_cxt = cxt;
 		m_cache = new LinkedHashMap<K, T>();
+		m_name = name;
 	}
 	
 	public void shrink() {
@@ -58,7 +60,7 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 		if (m_cache.containsKey(id))
 			return m_cache.get(id);
 		File cache = m_cxt.getCacheDir();
-		File cacheFile = new File(cache.toString()+File.separator+m_account.getGuid()+id);
+		File cacheFile = new File(cache.toString()+File.separator+m_account.getGuid()+m_name+id);
 		Date now;
 		if (cacheFile.exists()) {
 			now = new Date();
@@ -95,7 +97,7 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 		File cache = m_cxt.getCacheDir();
 		if (!cache.exists())
 			cache.mkdir();
-		File cacheFile = new File(cache.toString()+File.separator+m_account.getGuid()+key);
+		File cacheFile = new File(cache.toString()+File.separator+m_account.getGuid()+m_name+key);
 		if (!cacheFile.exists())
 			try {
 				cacheFile.createNewFile();

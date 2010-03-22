@@ -1,5 +1,6 @@
 package net.wm161.microblog.lib;
 
+import java.io.Serializable;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.util.regex.Pattern;
@@ -8,7 +9,7 @@ import android.widget.TextView;
 
 public abstract class Account extends Authenticator {
 
-	protected DataCache<Long, Status> m_statusCache;
+	private CacheManager m_cache;
 
 	public String toString() {
 		return getName();
@@ -22,11 +23,11 @@ public abstract class Account extends Authenticator {
 
 	public Account(CacheManager cache) {
 		super();
-		m_statusCache = cache.getStatusCache(this);
+		m_cache = cache;
 	}
-
-	public DataCache<Long, Status> getStatusCache() {
-		return m_statusCache;
+	
+	public <K extends Comparable<K>, V extends Serializable> DataCache<K, V> getCache(CacheManager.CacheType type) {
+		return m_cache.getCache(this, type);
 	}
 
 	public void addLinks(TextView view) {
