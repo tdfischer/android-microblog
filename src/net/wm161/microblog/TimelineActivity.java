@@ -1,10 +1,8 @@
 package net.wm161.microblog;
 
 import net.wm161.microblog.lib.API;
-import net.wm161.microblog.lib.APIManager;
 import net.wm161.microblog.lib.Status;
 import net.wm161.microblog.lib.Timeline;
-import net.wm161.microblog.lib.backends.Twitter;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,10 +29,7 @@ public abstract class TimelineActivity extends ListActivity {
 	}
 	
 	public API getAPI() {
-		//TODO: Different APIs
-		APIManager.getAPI(m_account.getAPI());
-		API api = new Twitter();
-		api.setAccount(m_account);
+		API api = m_account.getAPIInstance();
 		return api;
 	}
 

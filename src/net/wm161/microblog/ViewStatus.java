@@ -2,7 +2,7 @@ package net.wm161.microblog;
 
 import java.util.Date;
 
-import net.wm161.microblog.lib.APIManager;
+import net.wm161.microblog.lib.API;
 import net.wm161.microblog.lib.APIRequest;
 import net.wm161.microblog.lib.ActivityProgressHandler;
 import net.wm161.microblog.lib.CreateFavoriteRequest;
@@ -10,7 +10,6 @@ import net.wm161.microblog.lib.DestroyFavoriteRequest;
 import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.Status;
 import net.wm161.microblog.lib.StatusRequest;
-import net.wm161.microblog.lib.backends.Twitter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +28,7 @@ public class ViewStatus extends Activity {
 
 	private MicroblogAccount m_account;
 	private net.wm161.microblog.lib.Status m_status = null;
-	private Twitter m_api;
+	private API m_api;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +39,7 @@ public class ViewStatus extends Activity {
         requestWindowFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.loading);
         
-		//FIXME: Copied from TimelineActivity
-		APIManager.getAPI(m_account.getAPI());
-		m_api = new Twitter();
-		m_api.setAccount(m_account);
+		m_api = m_account.getAPIInstance();
         
         StatusRequest req = new StatusRequest(m_api, getIntent().getLongExtra("status", 0));
         req.setProgressHandler(new ActivityProgressHandler(this));
