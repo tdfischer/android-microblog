@@ -15,10 +15,10 @@ This file lists milestones, bugfixes, and features to be completed by specific r
 	+ Move all the files around to create a separate library for others to use
 	+ Support different microblogging 'backends' like facebook, twitter, statusnet through plugins
 	+ Fancy-pants welcome screen
-	Geo tagging
+	- Geo tagging
 	Delete accounts
 	Display attachments inline with the update list
-	View @replies and direct messages
+	+ View @replies and direct messages
 
 0.3
 	List friends, followers, followees
