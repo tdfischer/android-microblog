@@ -23,6 +23,7 @@ This file lists milestones, bugfixes, and features to be completed by specific r
 0.3
 	List friends, followers, followees
 	Create a separate activity as part of the task of sharing stuff
+	Fix that whole mess about APIExceptions
 
 0.4
 	Searching
