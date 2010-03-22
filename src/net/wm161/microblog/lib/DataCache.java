@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.io.Serializable;
 import java.io.StreamCorruptedException;
+import java.lang.ref.SoftReference;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -24,7 +25,7 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 	private Account m_account;
 	private Context m_cxt;
 	private String m_name;
-	private LinkedHashMap<K, T> m_cache;
+	private LinkedHashMap<K, SoftReference<T>> m_cache;
 	public static final int CACHE_LIMIT = 360000;
 	public static final int CACHE_MIN_SIZE = 40;
 	public static final int CACHE_MAX_SIZE = 200;
@@ -32,13 +33,13 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 	public DataCache(Account account, Context cxt, String name) {
 		m_account = account;
 		m_cxt = cxt;
-		m_cache = new LinkedHashMap<K, T>();
+		m_cache = new LinkedHashMap<K, SoftReference<T>>();
 		m_name = name;
 	}
 	
 	public void shrink() {
 		Log.w("DataCache", "Shrinking down because of memory. We've got "+m_cache.size()+" items.");
-		for (Iterator<T> it = m_cache.values().iterator();it.hasNext();) {
+		for (Iterator<SoftReference<T>> it = m_cache.values().iterator();it.hasNext();) {
 			if (m_cache.size() > CACHE_MIN_SIZE)
 				it.remove();
 			else
@@ -47,7 +48,7 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 	}
 	
 	public void trim() {
-		for (Iterator<T> it = m_cache.values().iterator();it.hasNext();) {
+		for (Iterator<SoftReference<T>> it = m_cache.values().iterator();it.hasNext();) {
 			if (m_cache.size() > CACHE_MAX_SIZE)
 				it.remove();
 			else
@@ -75,7 +76,10 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 	@SuppressWarnings("unchecked")
 	public T get(K id) {
 		if (m_cache.containsKey(id))
-			return m_cache.get(id);
+			if (m_cache.get(id).get() != null)
+				return m_cache.get(id).get();
+			else
+				m_cache.remove(id);
 		File cache = m_cxt.getCacheDir();
 		File cacheFile = new File(cache.toString()+File.separator+m_account.getGuid()+m_name+id);
 		Date now;
@@ -90,7 +94,7 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 				T s;
 				s = (T) (new ObjectInputStream(new FileInputStream(cacheFile))).readObject();
 				Log.d("DataCache", "HIT: "+id);
-				m_cache.put(id, s);
+				m_cache.put(id, new SoftReference<T>(s));
 				trim();
 				return s;
 			} catch (OptionalDataException e) {
@@ -109,7 +113,7 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 	}
 	
 	public boolean put(K key, T data) {
-		m_cache.put(key, data);
+		m_cache.put(key, new SoftReference<T>(data));
 		trim();
 		File cache = m_cxt.getCacheDir();
 		if (!cache.exists())
