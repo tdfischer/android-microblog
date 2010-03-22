@@ -2,8 +2,9 @@ package net.wm161.microblog.lib;
 
 import java.util.EnumSet;
 
-
 public abstract class API {
+	
+	public static final int VERSION = 1;
 		
 	public enum Feature {
 		Timeline,
@@ -36,5 +37,5 @@ public abstract class API {
 	public abstract int getIcon();
 	public abstract APIConfiguration configuration();
 	public abstract String getName();
-	public abstract String getDescription();
+	public abstract int getVersion();
 }
