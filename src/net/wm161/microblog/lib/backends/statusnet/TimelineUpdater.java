@@ -1,4 +1,4 @@
-package net.wm161.microblog.lib.backends.twitter;
+package net.wm161.microblog.lib.backends.statusnet;
 
 import java.net.MalformedURLException;
 
@@ -10,7 +10,6 @@ import net.wm161.microblog.lib.DataCache;
 import net.wm161.microblog.lib.Timeline;
 import net.wm161.microblog.lib.API.TimelineType;
 import net.wm161.microblog.lib.APIRequest.ErrorType;
-import net.wm161.microblog.lib.backends.Statusnet;
 
 import org.json.JSONArray;
 import org.json.JSONException;

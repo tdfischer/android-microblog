@@ -1,10 +1,9 @@
-package net.wm161.microblog.lib.backends.twitter;
+package net.wm161.microblog.lib.backends.statusnet;
 
 import net.wm161.microblog.lib.APIRequest;
 import net.wm161.microblog.lib.Timeline;
 import net.wm161.microblog.lib.User;
 import net.wm161.microblog.lib.API.TimelineType;
-import net.wm161.microblog.lib.backends.Statusnet;
 
 public class UserTimelineUpdater extends TimelineUpdater {
 	

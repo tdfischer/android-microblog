@@ -1,4 +1,4 @@
-package net.wm161.microblog.lib.backends.twitter;
+package net.wm161.microblog.lib.backends.statusnet;
 
 import java.net.URL;
 

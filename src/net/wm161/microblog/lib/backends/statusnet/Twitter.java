@@ -1,4 +1,4 @@
-package net.wm161.microblog.lib.backends;
+package net.wm161.microblog.lib.backends.statusnet;
 
 import net.wm161.microblog.R;
 import net.wm161.microblog.lib.API;

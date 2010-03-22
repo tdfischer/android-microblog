@@ -1,4 +1,4 @@
-package net.wm161.microblog.lib.backends.twitter;
+package net.wm161.microblog.lib.backends.statusnet;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,7 +15,6 @@ import net.wm161.microblog.lib.APIProgress;
 import net.wm161.microblog.lib.APIRequest;
 import net.wm161.microblog.lib.Attachment;
 import net.wm161.microblog.lib.APIRequest.ErrorType;
-import net.wm161.microblog.lib.backends.Statusnet;
 
 import org.apache.http.HttpException;
 import org.apache.http.HttpHost;

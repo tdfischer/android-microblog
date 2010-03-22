@@ -1,4 +1,4 @@
-package net.wm161.microblog.lib.backends;
+package net.wm161.microblog.lib.backends.statusnet;
 
 
 public class TwitterConfig extends StatusnetConfig {

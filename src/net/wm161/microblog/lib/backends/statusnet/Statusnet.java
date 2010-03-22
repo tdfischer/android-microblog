@@ -1,4 +1,4 @@
-package net.wm161.microblog.lib.backends;
+package net.wm161.microblog.lib.backends.statusnet;
 
 import java.net.MalformedURLException;
 import java.util.EnumSet;
@@ -14,11 +14,6 @@ import net.wm161.microblog.lib.Status;
 import net.wm161.microblog.lib.Timeline;
 import net.wm161.microblog.lib.User;
 import net.wm161.microblog.lib.APIRequest.ErrorType;
-import net.wm161.microblog.lib.backends.twitter.HTTPAPIRequest;
-import net.wm161.microblog.lib.backends.twitter.JSONStatus;
-import net.wm161.microblog.lib.backends.twitter.JSONUser;
-import net.wm161.microblog.lib.backends.twitter.TimelineUpdater;
-import net.wm161.microblog.lib.backends.twitter.UserTimelineUpdater;
 
 import org.json.JSONException;
 import org.json.JSONObject;
