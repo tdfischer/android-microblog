@@ -4,7 +4,7 @@
 
 <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical">
 
-<ViewStub android:layout="@layout/user_item" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/user_area" android:inflatedId="@+id/user_area"></ViewStub><ViewStub android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/load_stub" android:inflatedId="@android:id/empty" android:layout="@layout/loading" android:layout_gravity="center"></ViewStub><LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone" android:id="@+id/dent_area" android:orientation="vertical"><ListView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@android:id/list">
+<ViewStub android:layout="@layout/user_item" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/user_area" android:inflatedId="@+id/user_area"></ViewStub><ViewStub android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/load_stub" android:inflatedId="@android:id/empty" android:layout="@layout/loading" android:layout_gravity="center"></ViewStub><LinearLayout android:layout_height="wrap_content" android:visibility="gone" android:id="@+id/dent_area" android:orientation="vertical" android:layout_width="fill_parent"><ListView android:layout_height="wrap_content" android:id="@android:id/list" android:layout_width="fill_parent">
 </ListView>
 </LinearLayout>
 
