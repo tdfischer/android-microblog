@@ -22,6 +22,27 @@ public class Status implements Comparable<Status>, Serializable {
 		super();
 	}
 	
+	public String getTimestamp() {
+		String timestamp;
+		Date statusDate = getDate();
+		Date now = new Date();
+		int days = now.getDay() - statusDate.getDay();
+		int hours = now.getHours() - statusDate.getHours();
+		int minutes = now.getMinutes() - statusDate.getMinutes();
+		int seconds = now.getSeconds() - statusDate.getSeconds();
+		if (days > 5)
+			timestamp = now.toLocaleString();
+		else if (days > 0)
+			timestamp = days+" days ago";
+		else if (hours > 0)
+			timestamp = hours+" hours ago";
+		else if (minutes > 0)
+			timestamp = minutes+" minutes ago";
+		else
+			timestamp = seconds+" seconds ago";
+		return timestamp;
+	}
+	
 	public String getText() {
 		return m_text;
 	}

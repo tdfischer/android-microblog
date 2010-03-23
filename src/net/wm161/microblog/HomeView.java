@@ -130,16 +130,6 @@ public class HomeView extends TabActivity implements OnClickListener, LocationLi
 			});
 			setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
 		}
-		
-		LocationManager locations = (LocationManager) getSystemService(LOCATION_SERVICE);
-		Criteria criteria = new Criteria();
-		criteria.setSpeedRequired(false);
-		criteria.setAltitudeRequired(false);
-		criteria.setBearingRequired(false);
-		criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-		String provider = locations.getBestProvider(criteria, true);
-		locations.requestLocationUpdates(provider, 60000, 20, this);
-		updateLocation(locations.getLastKnownLocation(provider));
 	}
 	
 	public static void show(Context cxt, Account account) {
@@ -256,7 +246,7 @@ public class HomeView extends TabActivity implements OnClickListener, LocationLi
 			return;
 		}
 		TextView locationText = (TextView) findViewById(R.id.location);
-		locationText.setText(addr.getAddressLine(0));
+		locationText.setText(addr.getLocality());
 	}
 
 	@Override
@@ -280,6 +270,27 @@ public class HomeView extends TabActivity implements OnClickListener, LocationLi
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		LocationManager locations = (LocationManager) getSystemService(LOCATION_SERVICE);
+		locations.removeUpdates(this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		LocationManager locations = (LocationManager) getSystemService(LOCATION_SERVICE);
+		Criteria criteria = new Criteria();
+		criteria.setSpeedRequired(false);
+		criteria.setAltitudeRequired(false);
+		criteria.setBearingRequired(false);
+		criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+		String provider = locations.getBestProvider(criteria, true);
+		locations.requestLocationUpdates(provider, 60000, 20, this);
+		updateLocation(locations.getLastKnownLocation(provider));
 	}
 
 }

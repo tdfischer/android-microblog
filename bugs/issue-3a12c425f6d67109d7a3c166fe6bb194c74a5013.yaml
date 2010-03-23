@@ -5,8 +5,8 @@ type: :feature
 component: Microblog
 release: "0.2"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-03-22 23:58:06.362335 Z
 references: []
 
@@ -19,4 +19,8 @@ log_events:
 - - 2010-03-23 01:53:41.583594 Z
   - Trever Fischer <tdfischer@fedoraproject.org>
   - changed status from unstarted to in_progress
+  - ""
+- - 2010-03-23 03:23:19.563631 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
   - ""

@@ -1,9 +1,6 @@
 package net.wm161.microblog;
 
-import java.io.IOException;
-import java.util.Date;
 import java.util.EnumSet;
-import java.util.List;
 
 import net.wm161.microblog.lib.Account;
 import net.wm161.microblog.lib.Avatar;
@@ -14,11 +11,7 @@ import net.wm161.microblog.lib.Status;
 import net.wm161.microblog.lib.Timeline;
 import net.wm161.microblog.lib.CacheManager.CacheType;
 import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,37 +108,17 @@ public class TimelineAdapter extends BaseAdapter implements ListAdapter {
 		TextView text = (TextView) dentView.findViewById(R.id.text);
 		TextView details = (TextView) dentView.findViewById(R.id.details);
 		text.setText(status.text());
-		
-		String timestamp;
-		Date statusDate = status.getDate();
-		Date now = new Date();
-		int days = now.getDay() - statusDate.getDay();
-		int hours = now.getHours() - statusDate.getHours();
-		int minutes = now.getMinutes() - statusDate.getMinutes();
-		int seconds = now.getSeconds() - statusDate.getSeconds();
-		if (days > 5)
-			timestamp = now.toLocaleString();
-		else if (days > 0)
-			timestamp = days+" days ago";
-		else if (hours > 0)
-			timestamp = hours+" hours ago";
-		else if (minutes > 0)
-			timestamp = minutes+" minutes ago";
-		else
-			timestamp = seconds+" seconds ago";
-		
-
 		if (status.getLocation() == null) {
-			details.setText(timestamp);
+			details.setText(status.getTimestamp());
 		} else {
 			DataCache<Double, String> geocache = m_app.getCacheManager().getCache(m_app.getPreferences().getDefaultAccount(), CacheType.Geocode);
 			String location;
 			if ((location = geocache.get(status.getLocation().getLatitude()+2*status.getLocation().getLongitude())) == null) {
-				details.setText(timestamp);
-				GeocodeTask task = new GeocodeTask(m_app, status.getLocation(), details);
+				details.setText(status.getTimestamp());
+				GeocodeTask task = new GeocodeTask(m_app, status, details);
 				task.execute();
 			} else {
-				details.setText(timestamp+", from "+location);
+				details.setText(status.getTimestamp()+", from "+location);
 			}
 		}
 		

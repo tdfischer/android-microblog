@@ -6,10 +6,12 @@ import net.wm161.microblog.lib.API;
 import net.wm161.microblog.lib.APIRequest;
 import net.wm161.microblog.lib.ActivityProgressHandler;
 import net.wm161.microblog.lib.CreateFavoriteRequest;
+import net.wm161.microblog.lib.DataCache;
 import net.wm161.microblog.lib.DestroyFavoriteRequest;
 import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.Status;
 import net.wm161.microblog.lib.StatusRequest;
+import net.wm161.microblog.lib.CacheManager.CacheType;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,23 +57,22 @@ public class ViewStatus extends Activity {
 				user.setText(status.getUser().getScreenName());
 				TextView text = (TextView) findViewById(R.id.text);
 				text.setText(status.text());
-				TextView stamp = (TextView) findViewById(R.id.stamp);
-				String timestamp;
-				Date statusDate = status.getDate();
-				Date now = new Date();
-				int days = now.getDay() - statusDate.getDay();
-				int hours = now.getHours() - statusDate.getHours();
-				int minutes = now.getMinutes() - statusDate.getMinutes();
-				int seconds = now.getSeconds() - statusDate.getSeconds();
-				if (days > 0)
-					timestamp = now.toLocaleString();
-				else if (hours > 0)
-					timestamp = hours+" hours ago";
-				else if (minutes > 0)
-					timestamp = minutes+" minutes ago";
-				else
-					timestamp = seconds+" seconds ago";
-				stamp.setText(timestamp);
+				TextView details = (TextView) findViewById(R.id.details);
+				
+				if (status.getLocation() == null) {
+					details.setText(status.getTimestamp());
+				} else {
+					DataCache<Double, String> geocache = ((MicroblogApp)getApplication()).getCacheManager().getCache(((MicroblogApp)getApplication()).getPreferences().getDefaultAccount(), CacheType.Geocode);
+					String location;
+					if ((location = geocache.get(status.getLocation().getLatitude()+2*status.getLocation().getLongitude())) == null) {
+						details.setText(status.getTimestamp());
+						GeocodeTask task = new GeocodeTask(((MicroblogApp)getApplication()), status, details);
+						task.execute();
+					} else {
+						details.setText(status.getTimestamp()+", from "+location);
+					}
+				}
+				
 				LinearLayout userBox = (LinearLayout) findViewById(R.id.user);
 				userBox.setOnClickListener(new OnClickListener() {
 
