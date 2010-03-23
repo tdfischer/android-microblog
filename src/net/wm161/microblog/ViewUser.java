@@ -1,7 +1,5 @@
 package net.wm161.microblog;
 
-import java.util.EnumSet;
-
 import net.wm161.microblog.lib.ActivityProgressHandler;
 import net.wm161.microblog.lib.OnNewUserHandler;
 import net.wm161.microblog.lib.User;
@@ -67,10 +65,11 @@ public class ViewUser extends TimelineActivity {
 				TextView url = (TextView) findViewById(R.id.url);
 				if (user.getUrl() != null)
 					url.setText(user.getUrl().toString());
-				EnumSet<TimelineAdapter.Options> options = EnumSet.of(TimelineAdapter.Options.DEFAULT, TimelineAdapter.Options.NO_USER);
-				getStatusList().setOptions(options);
-				setListAdapter(getStatusList());
+				//EnumSet<TimelineAdapter.Options> options = EnumSet.of(TimelineAdapter.Options.DEFAULT, TimelineAdapter.Options.NO_USER);
+				//getStatusList().setOptions(options);
+				//setListAdapter(getStatusList());
 				//setEmptyView(getLayoutInflater().inflate(R.layout.loading, null));
+				findViewById(android.R.id.empty).setVisibility(View.GONE);
 			}
 		});
 		req.execute();
@@ -79,6 +78,7 @@ public class ViewUser extends TimelineActivity {
 	public void refresh() {
 		if (m_user != null) {
 			UserTimelineRequest timelineReq = new UserTimelineRequest(getAPI(), m_user, m_timeline);
+			timelineReq.setProgressHandler(new ActivityProgressHandler(this));
 			timelineReq.execute();
 		}
 	}
