@@ -14,6 +14,7 @@ public class CacheManager {
 	public enum CacheType {
 		Avatar,
 		Status,
+		//FIXME: This isn't really library-specific.
 		Geocode
 	};
 	private HashMap<Account, HashMap<CacheType, DataCache<? extends Comparable<?>, ? extends Serializable>>> m_caches;
