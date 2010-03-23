@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Test preference upgrade with data from 0.1
+desc: Preference::upgrade() hasn't been tested against a good, old config. It needs it before release.
+type: :task
+component: library
+release: "0.2"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 02:00:36.667666 Z
+references: []
+
+id: 390a3967119290bebfae45afedd0dbe618b2eb9a
+log_events: 
+- - 2010-03-23 02:00:37.915587 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

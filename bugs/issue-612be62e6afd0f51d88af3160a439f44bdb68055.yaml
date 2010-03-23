@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Rename the layout files to reasonible names
+desc: They're pretty haphazardly named right now.
+type: :task
+component: Microblog
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 02:12:17.255676 Z
+references: []
+
+id: 612be62e6afd0f51d88af3160a439f44bdb68055
+log_events: 
+- - 2010-03-23 02:12:17.999604 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

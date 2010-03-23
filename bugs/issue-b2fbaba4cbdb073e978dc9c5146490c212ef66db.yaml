@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add GPL header to source files
+desc: ""
+type: :task
+component: Microblog
+release: "0.2"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 02:08:56.113689 Z
+references: []
+
+id: b2fbaba4cbdb073e978dc9c5146490c212ef66db
+log_events: 
+- - 2010-03-23 02:08:56.833596 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

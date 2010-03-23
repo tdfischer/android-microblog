@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: APIDOX
+desc: The library at least needs it. Future tdfischer hates it when past tdfischer's code is a mess.
+type: :task
+component: Microblog
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 02:11:05.092682 Z
+references: []
+
+id: b471e741d7f609819ad7cf2211130eb43928bd22
+log_events: 
+- - 2010-03-23 02:11:05.924597 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
