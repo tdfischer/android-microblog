@@ -10,10 +10,10 @@
 
 </LinearLayout>
 
-<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="3sp"><TextView android:text="TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/stamp" android:layout_gravity="bottom|left" android:textSize="10sp" android:textColor="@color/status_fg"></TextView></LinearLayout>
+<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="3sp"><TextView android:text="TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|left" android:textSize="10sp" android:textColor="@color/status_fg" android:id="@+id/details"></TextView></LinearLayout>
 </LinearLayout><LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_gravity="bottom|right"><ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|center" android:src="@drawable/status_arrow"></ImageView>
 
-<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/user" android:orientation="vertical" android:clickable="true" android:focusable="true"><ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/avatar" android:src="@drawable/avatar"></ImageView><TextView android:text="TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/name"></TextView></LinearLayout>
+<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/user" android:orientation="vertical" android:clickable="true" android:focusable="true" style="@android:style/Widget.ImageWell"><ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/avatar" android:src="@drawable/avatar"></ImageView><TextView android:text="TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/name"></TextView></LinearLayout>
 </LinearLayout>
 
 </LinearLayout>
