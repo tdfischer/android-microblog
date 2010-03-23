@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Fancy-pants welcome screen
+desc: Make a nice looking welcome screen for first-time users
+type: :feature
+component: app
+release: "0.2"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :closed
+disposition: :fixed
+creation_time: 2010-03-23 01:51:25.140675 Z
+references: []
+
+id: 59b3440987f4dd64c0fbd0fc0843e0588cc393eb
+log_events: 
+- - 2010-03-23 01:51:26.092523 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
+- - 2010-03-23 01:51:38.914582 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - ""

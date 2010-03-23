@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Create a separate activity as part of the task of sharing stuff
+desc: Move handling the 'share' intent into a separate activity, so we don't have to load up the home screen every time.
+type: :task
+component: app
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:12:04.014399 Z
+references: []
+
+id: 9716333a4dc978b0a26503023e6e55249b736c29
+log_events: 
+- - 2010-03-23 00:12:05.349279 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

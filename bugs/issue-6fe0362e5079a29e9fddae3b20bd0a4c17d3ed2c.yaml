@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Background update checking
+desc: Check for updates in the background
+type: :feature
+component: app
+release: "0.5"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:13:09.982390 Z
+references: []
+
+id: 6fe0362e5079a29e9fddae3b20bd0a4c17d3ed2c
+log_events: 
+- - 2010-03-23 00:13:10.957300 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

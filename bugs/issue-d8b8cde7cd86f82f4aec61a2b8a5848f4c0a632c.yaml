@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Display attachments inline with the update list
+desc: Display statusnet attachments inline somehow, or at least on the status' screen
+type: :feature
+component: app
+release: "0.2"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:08:07.059381 Z
+references: []
+
+id: d8b8cde7cd86f82f4aec61a2b8a5848f4c0a632c
+log_events: 
+- - 2010-03-23 00:08:08.058300 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

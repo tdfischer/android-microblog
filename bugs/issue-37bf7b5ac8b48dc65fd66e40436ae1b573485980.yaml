@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Support different microblogging backends like facebook, twitter, and statusnet through plugins
+desc: ""
+type: :feature
+component: Microblog
+release: "0.2"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :closed
+disposition: :fixed
+creation_time: 2010-03-23 01:50:40.536597 Z
+references: []
+
+id: 37bf7b5ac8b48dc65fd66e40436ae1b573485980
+log_events: 
+- - 2010-03-23 01:50:41.616504 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
+- - 2010-03-23 01:50:48.088535 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - ""

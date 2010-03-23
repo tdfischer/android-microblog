@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: List friends, followers, followees, etc
+desc: Add a screen to display the list of a person's followed people, followers, and groups
+type: :feature
+component: app
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:09:55.540452 Z
+references: []
+
+id: 1e0881b1787c22dcad953f723b741274dac3dc68
+log_events: 
+- - 2010-03-23 00:09:56.387287 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

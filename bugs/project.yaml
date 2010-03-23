@@ -1,0 +1,64 @@
+--- !ditz.rubyforge.org,2008-03-06/project 
+name: Microblog
+version: "0.5"
+components: 
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: Microblog
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: library
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: twitter-plugin
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: statusnet-plugin
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: app
+releases: 
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "0.1"
+  status: :released
+  release_time: 2010-02-22 09:03:16.00000 Z
+  log_events: 
+  - - 2010-03-23 01:42:54.228584 Z
+    - Trever Fischer <tdfischer@fedoraproject.org>
+    - created
+    - ""
+  - - 2010-02-22 09:03:16.00000 Z
+    - Trever Fischer <tdfischer@fedoraproject.org>
+    - released
+    - ""
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "0.2"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2010-03-22 23:56:41.673275 Z
+    - Trever Fischer <tdfischer@fedoraproject.org>
+    - created
+    - ""
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "0.3"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2010-03-22 23:56:49.637294 Z
+    - Trever Fischer <tdfischer@fedoraproject.org>
+    - created
+    - ""
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "0.4"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2010-03-22 23:56:53.132233 Z
+    - Trever Fischer <tdfischer@fedoraproject.org>
+    - created
+    - ""
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "0.5"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2010-03-22 23:56:55.739254 Z
+    - Trever Fischer <tdfischer@fedoraproject.org>
+    - created
+    - ""

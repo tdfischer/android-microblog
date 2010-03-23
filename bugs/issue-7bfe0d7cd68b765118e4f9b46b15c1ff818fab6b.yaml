@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Alternate forms of account authentication
+desc: Required for facebook backend. Support more than just username/password
+type: :feature
+component: library
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 01:57:59.613648 Z
+references: []
+
+id: 7bfe0d7cd68b765118e4f9b46b15c1ff818fab6b
+log_events: 
+- - 2010-03-23 01:58:00.364582 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

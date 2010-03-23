@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Groups
+desc: Add support for group joining, searching, leaving, editing, etc
+type: :feature
+component: library
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:16:07.358359 Z
+references: []
+
+id: 13b422b067f7a7d0359d4733a579b0ab1589d13d
+log_events: 
+- - 2010-03-23 00:16:07.654214 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

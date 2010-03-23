@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Translatable strings
+desc: Move all strings into strings.xml to allow for translations
+type: :feature
+component: Microblog
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:08:55.312311 Z
+references: []
+
+id: fe1907c9024cab6de44f1774503605570a0a380e
+log_events: 
+- - 2010-03-23 00:08:56.702477 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

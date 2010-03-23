@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Update your settings/theme
+desc: Update your statusnet/twitter settings/theme/avatar/whatever
+type: :feature
+component: statusnet-plugin
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 01:56:17.145633 Z
+references: []
+
+id: b852dbb49e324c941179b8377f15fc8a4e728d4e
+log_events: 
+- - 2010-03-23 01:56:18.097555 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

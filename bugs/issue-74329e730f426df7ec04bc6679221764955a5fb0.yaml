@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Facebook plugin
+desc: Add a plugin that works with facebook's news feed API
+type: :feature
+component: Microblog
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:14:17.781327 Z
+references: []
+
+id: 74329e730f426df7ec04bc6679221764955a5fb0
+log_events: 
+- - 2010-03-23 00:14:18.413288 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

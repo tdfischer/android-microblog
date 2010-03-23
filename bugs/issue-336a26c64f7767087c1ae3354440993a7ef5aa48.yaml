@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Delete accounts
+desc: Add support for deleting accounts
+type: :feature
+component: app
+release: "0.2"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:07:11.153437 Z
+references: []
+
+id: 336a26c64f7767087c1ae3354440993a7ef5aa48
+log_events: 
+- - 2010-03-23 00:07:12.504281 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

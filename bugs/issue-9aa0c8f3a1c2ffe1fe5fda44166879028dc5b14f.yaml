@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: View @replies and direct messages
+desc: Add a timeline to the home view to view @replies and DMs
+type: :feature
+component: app
+release: "0.2"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :closed
+disposition: :fixed
+creation_time: 2010-03-23 01:52:29.413615 Z
+references: []
+
+id: 9aa0c8f3a1c2ffe1fe5fda44166879028dc5b14f
+log_events: 
+- - 2010-03-23 01:52:30.429531 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
+- - 2010-03-23 01:52:35.757590 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - ""

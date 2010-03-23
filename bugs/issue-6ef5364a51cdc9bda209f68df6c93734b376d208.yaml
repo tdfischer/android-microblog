@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Move the files around to create a separate library
+desc: Split up the app into an application and a generic library
+type: :task
+component: Microblog
+release: "0.2"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :closed
+disposition: :fixed
+creation_time: 2010-03-23 01:48:46.424667 Z
+references: []
+
+id: 6ef5364a51cdc9bda209f68df6c93734b376d208
+log_events: 
+- - 2010-03-23 01:48:47.671592 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
+- - 2010-03-23 01:49:03.413529 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - ""

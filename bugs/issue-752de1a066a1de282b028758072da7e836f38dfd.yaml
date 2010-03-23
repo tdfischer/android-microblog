@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: An icon using the android style guide
+desc: Make a new icon following the android style guidelines.
+type: :task
+component: app
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:15:08.808340 Z
+references: []
+
+id: 752de1a066a1de282b028758072da7e836f38dfd
+log_events: 
+- - 2010-03-23 00:15:09.727232 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

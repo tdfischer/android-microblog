@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Searching
+desc: Add support for searching for statuses to the API
+type: :feature
+component: library
+release: "0.4"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:12:41.591426 Z
+references: []
+
+id: ee3b00eb393a3adfb8ea2c653debc03e63b8ca00
+log_events: 
+- - 2010-03-23 00:12:45.421274 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Map for nearby statuses
+desc: Add a map for showing the location of updates
+type: :feature
+component: app
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:15:38.734317 Z
+references: []
+
+id: 04abcdb49246ef15d7d8fcbb8c1364d7d2634c2d
+log_events: 
+- - 2010-03-23 00:15:39.414291 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

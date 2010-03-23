@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Better theme integration
+desc: Better integration with user styles like sidebar background, text foreground, etc
+type: :feature
+component: app
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 01:56:57.049654 Z
+references: []
+
+id: 351f04279c5489bc4a2333e1d61c40380d235bda
+log_events: 
+- - 2010-03-23 01:56:58.321580 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

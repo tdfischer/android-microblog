@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Fix that whole mess about APIExceptions
+desc: APIExceptions and setError() are two different ways to report errors in the API. Fix it to just use APIExceptions.
+type: :task
+component: Microblog
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 00:10:57.003429 Z
+references: []
+
+id: 4ddbe7b957d5caba43f78729774d7e334aadbf74
+log_events: 
+- - 2010-03-23 00:10:58.338268 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
