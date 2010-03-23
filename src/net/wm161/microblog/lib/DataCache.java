@@ -87,13 +87,11 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 			now = new Date();
 			if (now.getTime()-cacheFile.lastModified() > CACHE_LIMIT) {
 				cacheFile.delete();
-				Log.d("DataCache", "Expired: "+id);
 				return null;
 			}
 			try {
 				T s;
 				s = (T) (new ObjectInputStream(new FileInputStream(cacheFile))).readObject();
-				Log.d("DataCache", "HIT: "+id);
 				m_cache.put(id, new SoftReference<T>(s));
 				trim();
 				return s;
@@ -104,11 +102,10 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 			} catch (IOException e) {
 			} catch (ClassCastException e) {
 				cacheFile.delete();
-				Log.d("DataCache", "CORRUPT: "+id);
+				Log.w("DataCache", "CORRUPT: "+id);
 				return null;
 			}
 		}
-		Log.d("DataCache", "MISS: "+id);
 		return null;
 	}
 	
@@ -127,7 +124,6 @@ public class DataCache<K extends Comparable<K>, T extends Serializable> {
 			}
 		try {
 			(new ObjectOutputStream(new FileOutputStream(cacheFile))).writeObject(data);
-			Log.d("DataCache", "Cached "+key);
 			return true;
 		} catch (FileNotFoundException e) {
 			Log.e("DataCache", "Failed to cache "+key+": "+e.getMessage());

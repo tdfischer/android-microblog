@@ -33,16 +33,13 @@ public class Timeline implements Set<Status>, List<Status> {
 
 	@Override
 	public boolean add(Status status) {
-		Log.d("Timeline", "Heard about new status "+status.id());
 		for(int i = 0;i < m_statuses.size();i++) {
 			if (m_statuses.get(i).id() == status.id()) {
-				Log.d("Timeline", "Status dropped. Its already in there at "+i);
 				return false;
 			}
 			if (status.id() > m_last)
 				m_last = status.id();
 			if (m_statuses.get(i).id() < status.id()) {
-				Log.d("Timeline", "New status added: " + status.id());
 				m_statuses.add(i, status);
 				if (m_handler != null)
 					m_handler.onNewStatus(status);

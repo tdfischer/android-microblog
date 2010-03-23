@@ -106,11 +106,9 @@ public class ConfigureAccount extends Activity {
 			Object defaultValue = conf.defaultValue(key);
 			if (defaultValue instanceof Boolean) {
 				CheckBox box = (CheckBox) item;
-				Log.d("ConfigureAccount", key+": "+box.isChecked());
 				account.setAPIValue(key, box.isChecked());
 			} else if (defaultValue instanceof String) {
 				EditText edit = (EditText) item;
-				Log.d("ConfigureAccount", key+": "+edit.getText().toString());
 				account.setAPIValue(key, edit.getText().toString());
 			}
 		}

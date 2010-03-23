@@ -22,7 +22,6 @@ public class JSONStatus extends Status {
 		setDate(new Date(status.getString("created_at")));
 		setFavorited(status.getString("favorited").equalsIgnoreCase("true"));
 		if (!status.isNull("geo")) {
-			Log.d("JSONStatus", "Found geo data for "+id());
 			JSONObject geo = status.getJSONObject("geo");
 			if (geo.getString("type").equals("Point")) {
 				Location loc = new Location("");

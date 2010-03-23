@@ -22,7 +22,6 @@ public class StatusEventListener implements OnItemClickListener {
 		Intent viewIntent = new Intent(m_activity, ViewStatus.class);
 		viewIntent.putExtra("account", m_account.getGuid());
 		viewIntent.putExtra("status", id);
-		Log.d("GlobalTimeline", "Starting "+viewIntent);
 		m_activity.startActivity(viewIntent);
 	}
 

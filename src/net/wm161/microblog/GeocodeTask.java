@@ -32,12 +32,10 @@ public class GeocodeTask extends AsyncTask<Void, Void, String> {
 			if (location != null)
 				return location;
 			Geocoder decoder = new Geocoder(m_cxt, m_cxt.getResources().getConfiguration().locale);
-			Log.d("TimelineAdapter", "Looking up location for "+m_status.getLocation().getLatitude()+","+m_status.getLocation().getLongitude());
 			List<Address> locations = null;
 			try {
 				locations = decoder.getFromLocation(m_status.getLocation().getLatitude(), m_status.getLocation().getLongitude(), 1);
 			} catch (IOException e) {
-				Log.d("TimelineAdapter", "Couldn't geocode location");
 			}
 			if (locations != null && locations.size() > 0) {
 				location = locations.get(0).getLocality()+", "+locations.get(0).getCountryName();
