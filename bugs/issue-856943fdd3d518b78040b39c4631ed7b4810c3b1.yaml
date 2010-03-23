@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Load more statuses when scrolling to the end of a timeline
+desc: ""
+type: :feature
+component: app
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 04:53:21.820573 Z
+references: []
+
+id: 856943fdd3d518b78040b39c4631ed7b4810c3b1
+log_events: 
+- - 2010-03-23 04:53:22.739490 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
