@@ -9,7 +9,7 @@ public class UserTimelineUpdater extends TimelineUpdater {
 	
 	@Override
 	protected String getPath() {
-		return "statuses/user_timleine/"+m_user.getId();
+		return "statuses/user_timeline/"+m_user.getId();
 	}
 
 	public UserTimelineUpdater(Statusnet statusnet, APIRequest req, User user, Timeline timeline) {
