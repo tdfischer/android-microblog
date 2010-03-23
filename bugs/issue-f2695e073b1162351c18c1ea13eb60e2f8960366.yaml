@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Handle screen configuration changes
+desc: Handling screen configuration changes, such as orientation, will speed things up as the layout doesn't have to be re-inflated and rebuilt every time.
+type: :bugfix
+component: app
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-23 04:28:00.685535 Z
+references: []
+
+id: f2695e073b1162351c18c1ea13eb60e2f8960366
+log_events: 
+- - 2010-03-23 04:28:01.581470 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
