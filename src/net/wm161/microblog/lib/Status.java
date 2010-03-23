@@ -7,7 +7,7 @@ import android.location.Location;
 
 public class Status implements Comparable<Status>, Serializable {
 
-	private static final long serialVersionUID = 6085797208394403618L;
+	private static final long serialVersionUID = -8916839596710394496L;
 	private User m_user;
 	private String m_text;
 	private long m_id;
@@ -15,8 +15,9 @@ public class Status implements Comparable<Status>, Serializable {
 	private boolean m_favorited;
 	private Attachment m_attachment = null;
 	private String m_source;
-	//FIXME: Locations aren't serializable, thus can't be cached.
-	private Location m_location = null;
+	private double m_latitude;
+	private double m_longitude;
+	private boolean m_hasLocation = false;
 	
 	public Status() {
 		super();
@@ -130,11 +131,21 @@ public class Status implements Comparable<Status>, Serializable {
 	}
 
 	public void setLocation(Location location) {
-		m_location = location;
+		if (m_hasLocation = (location != null)) {
+			m_latitude = location.getLatitude();
+			m_longitude = location.getLongitude();
+		}
 	}
 
 	public Location getLocation() {
-		return m_location;
+		if (m_hasLocation) {
+			Location ret = new Location("");
+			ret.setLongitude(m_longitude);
+			ret.setLatitude(m_latitude);
+			return ret;
+		} else {
+			return null;
+		}
 	}
 
 }
