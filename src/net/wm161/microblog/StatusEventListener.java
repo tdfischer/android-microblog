@@ -3,7 +3,6 @@ package net.wm161.microblog;
 import net.wm161.microblog.lib.Account;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;

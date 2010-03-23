@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
 
-import android.util.Log;
-
 public class Timeline implements Set<Status>, List<Status> {
 
 	private ArrayList<Status> m_statuses;

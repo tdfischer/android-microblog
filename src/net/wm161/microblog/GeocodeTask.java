@@ -9,7 +9,6 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.TextView;
 
 public class GeocodeTask extends AsyncTask<Void, Void, String> {

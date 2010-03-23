@@ -9,7 +9,6 @@ import net.wm161.microblog.lib.DataCache;
 import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.Status;
 import net.wm161.microblog.lib.Timeline;
-import net.wm161.microblog.lib.CacheManager.CacheType;
 import android.content.Context;
 import android.os.Handler;
 import android.view.LayoutInflater;

@@ -1,7 +1,5 @@
 package net.wm161.microblog;
 
-import java.util.Date;
-
 import net.wm161.microblog.lib.API;
 import net.wm161.microblog.lib.APIRequest;
 import net.wm161.microblog.lib.ActivityProgressHandler;
