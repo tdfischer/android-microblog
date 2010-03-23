@@ -42,13 +42,14 @@ public class GeocodeTask extends AsyncTask<Void, Void, String> {
 				geocache.put(m_status.getLocation().getLatitude()+2*m_status.getLocation().getLongitude(), location);
 				return location;
 			}
+			geocache.put(m_status.getLocation().getLatitude()+2*m_status.getLocation().getLongitude(), "");
 		}
 		return null;
 	}
 	
 	@Override
 	protected void onPostExecute(String result) {
-		if (result != null)
+		if (result != null && result.length()>0)
 			m_text.setText(m_status.getTimestamp()+", from "+result);
 	}
 
