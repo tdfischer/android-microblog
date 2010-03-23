@@ -111,15 +111,8 @@ public class TimelineAdapter extends BaseAdapter implements ListAdapter {
 		if (status.getLocation() == null) {
 			details.setText(status.getTimestamp());
 		} else {
-			DataCache<Double, String> geocache = m_app.getCacheManager().getCache(m_app.getPreferences().getDefaultAccount(), CacheType.Geocode);
-			String location;
-			if ((location = geocache.get(status.getLocation().getLatitude()+2*status.getLocation().getLongitude())) == null) {
-				details.setText(status.getTimestamp());
-				GeocodeTask task = new GeocodeTask(m_app, status, details);
-				task.execute();
-			} else {
-				details.setText(status.getTimestamp()+", from "+location);
-			}
+			GeocodeTask task = new GeocodeTask(m_app, status, details);
+			task.execute();
 		}
 		
 		if (!m_options.contains(Options.NO_USER)) {

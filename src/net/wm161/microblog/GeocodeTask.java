@@ -27,6 +27,10 @@ public class GeocodeTask extends AsyncTask<Void, Void, String> {
 	@Override
 	protected String doInBackground(Void... arg0) {
 		if (m_status != null ) {
+			DataCache<Double, String> geocache = ((MicroblogApp)m_cxt.getApplicationContext()).getCacheManager().getCache(((MicroblogApp)m_cxt.getApplicationContext()).getPreferences().getDefaultAccount(), CacheType.Geocode);
+			String location = geocache.get(m_status.getLocation().getLatitude()+2*m_status.getLocation().getLongitude());
+			if (location != null)
+				return location;
 			Geocoder decoder = new Geocoder(m_cxt, m_cxt.getResources().getConfiguration().locale);
 			Log.d("TimelineAdapter", "Looking up location for "+m_status.getLocation().getLatitude()+","+m_status.getLocation().getLongitude());
 			List<Address> locations = null;
@@ -36,8 +40,7 @@ public class GeocodeTask extends AsyncTask<Void, Void, String> {
 				Log.d("TimelineAdapter", "Couldn't geocode location");
 			}
 			if (locations != null && locations.size() > 0) {
-				DataCache<Double, String> geocache = ((MicroblogApp)m_cxt.getApplicationContext()).getCacheManager().getCache(((MicroblogApp)m_cxt.getApplicationContext()).getPreferences().getDefaultAccount(), CacheType.Geocode);
-				String location = locations.get(0).getLocality()+", "+locations.get(0).getCountryName();
+				location = locations.get(0).getLocality()+", "+locations.get(0).getCountryName();
 				geocache.put(m_status.getLocation().getLatitude()+2*m_status.getLocation().getLongitude(), location);
 				return location;
 			}
