@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Tidy up the cache manager
+desc: Hashes of hashes isn't efficient, and sucks up memory. Try to simplify the caching system.
+type: :task
+component: library
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-24 03:20:46.205858 Z
+references: []
+
+id: 5008498572d06438bd8c0a4e1a08fed5157b1711
+log_events: 
+- - 2010-03-24 03:20:46.926482 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

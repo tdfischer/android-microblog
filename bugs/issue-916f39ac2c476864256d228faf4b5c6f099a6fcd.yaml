@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Cache objects in HTTPAPIRequest
+desc: For every request, we have to create a ton of objects, set them up, and then download the data. Tons of cycles could be saved here.
+type: :task
+component: statusnet-plugin
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-24 03:16:59.107752 Z
+references: []
+
+id: 916f39ac2c476864256d228faf4b5c6f099a6fcd
+log_events: 
+- - 2010-03-24 03:17:00.099633 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
