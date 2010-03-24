@@ -37,6 +37,11 @@ public class CacheManager {
 				updateVersion();
 			}
 		} catch (FileNotFoundException e) {
+			try {
+				cacheVersion.createNewFile();
+			} catch (IOException e1) {
+				Log.e("CacheManager", "Couldn't create cache file.");
+			}
 			updateVersion();
 		} catch (NoSuchElementException e) {
 			updateVersion();
@@ -50,6 +55,7 @@ public class CacheManager {
 		try {
 			writer = new FileWriter(cacheVersion);
 			writer.write(String.valueOf(CACHE_VERSION));
+			writer.close();
 			Log.i("CacheManager", "Cache updated to version "+CACHE_VERSION);
 		} catch (IOException e) {
 			Log.e("CacheManager", "Couldn't create cache version file.");
