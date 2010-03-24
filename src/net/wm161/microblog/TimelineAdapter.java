@@ -95,50 +95,14 @@ public class TimelineAdapter extends BaseAdapter implements ListAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View dentView;
-		if (convertView == null) {
-			LayoutInflater inflate = (LayoutInflater)parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			dentView = inflate.inflate(R.layout.status, null);
-		} else {
-			dentView = convertView;
-		}
+		StatusView dentView;
 		Status status = m_timeline.get(position);
-		
-		TextView text = (TextView) dentView.findViewById(R.id.text);
-		TextView details = (TextView) dentView.findViewById(R.id.details);
-		text.setText(status.text());
-		if (status.getLocation() == null) {
-			details.setText(status.getTimestamp());
+		if (convertView == null) {
+			dentView = new StatusView(m_app, status);
 		} else {
-			GeocodeTask task = new GeocodeTask(m_app, status, details);
-			task.execute();
+			dentView = (StatusView)convertView;
 		}
-		
-		if (!m_options.contains(Options.NO_USER)) {
-			ImageView avatarView = (ImageView) dentView.findViewById(R.id.avatar);
-			TextView name = (TextView) dentView.findViewById(R.id.name);
-		
-			//FIXME: More than just the default account
-			DataCache<Long, Avatar> avatarCache = m_app.getCacheManager().getCache(m_app.getPreferences().getDefaultAccount(), CacheManager.CacheType.Avatar);
-			
-			Avatar avatar = null;
-			//FIXME: Why does this need to be done here, and not in get()?
-			try {
-				avatar = avatarCache.get(status.getUser().getId());
-			} catch (ClassCastException e) {
-			}
-			if (avatar == null) {
-				avatar = status.getUser().getAvatar();
-				avatarCache.put(status.getUser().getId(), avatar);
-			}
-			avatarView.setImageDrawable(avatar.getBitmap());
-			//m_timeline.addLinks(text);
-			name.setText(status.getUser().getScreenName());
-		} else {
-			LinearLayout user = (LinearLayout) dentView.findViewById(R.id.user);
-			user.setVisibility(View.GONE);
-		}
-		
+		dentView.setStatus(status);
 		return dentView;
 	}
 
