@@ -1,6 +1,7 @@
 package net.wm161.microblog.lib;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.location.Location;
@@ -13,7 +14,7 @@ public class Status implements Comparable<Status>, Serializable {
 	private long m_id;
 	private Date m_date;
 	private boolean m_favorited;
-	private Attachment m_attachment = null;
+	private ArrayList<Attachment> m_attachments;
 	private String m_source;
 	private double m_latitude;
 	private double m_longitude;
@@ -21,6 +22,7 @@ public class Status implements Comparable<Status>, Serializable {
 	
 	public Status() {
 		super();
+		m_attachments = new ArrayList<Attachment>();
 	}
 	
 	public String getTimestamp() {
@@ -92,16 +94,21 @@ public class Status implements Comparable<Status>, Serializable {
 		return m_date;
 	}
 
-	public void setAttachment(Attachment attachment) {
-		m_attachment = attachment;
+	public void addAttachment(Attachment attachment) {
+		m_attachments.add(attachment);
 	}
 	
-	public boolean hasAttachment() {
-		return m_attachment != null;
+	public boolean hasAttachments() {
+		return !m_attachments.isEmpty();
 	}
 
-	public Attachment getAttachment() {
-		return m_attachment;
+	public Attachment getAttachment(int id) {
+		return m_attachments.get(id);
+	}
+	
+	public Attachment[] getAttachments() {
+		Attachment[] ret = new Attachment[m_attachments.size()];
+		return m_attachments.toArray(ret);
 	}
 
 	public void setSource(String source) {

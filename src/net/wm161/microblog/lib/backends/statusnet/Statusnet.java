@@ -113,8 +113,8 @@ public class Statusnet extends API {
 	public boolean sendUpdate(Status update, APIRequest request) {
 		HTTPAPIRequest req = new HTTPAPIRequest(this, request);
 		req.setParameter("status", update.getText());
-		if (update.hasAttachment())
-			req.setParameter("media", update.getAttachment());
+		if (update.hasAttachments())
+			req.setParameter("media", update.getAttachment(0));
 		req.setParameter("source", update.getSource());
 		req.setParameter("status", update.getText());
 		if (update.getLocation() != null) {

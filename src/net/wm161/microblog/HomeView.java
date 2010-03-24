@@ -7,6 +7,7 @@ import net.wm161.microblog.lib.API;
 import net.wm161.microblog.lib.Account;
 import net.wm161.microblog.lib.ActivityProgressHandler;
 import net.wm161.microblog.lib.Attachment;
+import net.wm161.microblog.lib.ContentAttachment;
 import net.wm161.microblog.lib.OnNewUserHandler;
 import net.wm161.microblog.lib.PublishUpdateRequest;
 import net.wm161.microblog.lib.Status;
@@ -46,7 +47,7 @@ public class HomeView extends TabActivity implements OnClickListener, LocationLi
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			m_attachment = new Attachment(getContentResolver(), data.getData());
+			m_attachment = new ContentAttachment(getContentResolver(), data.getData());
 			TextView attachmentName = (TextView)findViewById(R.id.attachment);
 			attachmentName.setText(m_attachment.name());
 			LinearLayout attachmentGroup = (LinearLayout)findViewById(R.id.attachmentArea);
@@ -144,7 +145,7 @@ public class HomeView extends TabActivity implements OnClickListener, LocationLi
 		Status status = new Status();
 		status.setText(statusEdit.getText().toString());
 		if (m_attachment != null)
-			status.setAttachment(m_attachment);
+			status.addAttachment(m_attachment);
 		status.setLocation(m_location);
 		status.setSource("Android Microblog");
 		
@@ -224,7 +225,7 @@ public class HomeView extends TabActivity implements OnClickListener, LocationLi
 				if (intent.hasExtra(Intent.EXTRA_STREAM)) {
 					Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
 					Log.d("HomeView", "Sending image "+uri);
-					m_attachment = new Attachment(getContentResolver(), uri);
+					m_attachment = new ContentAttachment(getContentResolver(), uri);
 					TextView attachmentName = (TextView)findViewById(R.id.attachment);
 					attachmentName.setText(m_attachment.name());
 					LinearLayout attachmentGroup = (LinearLayout)findViewById(R.id.attachmentArea);

@@ -1,35 +1,20 @@
 package net.wm161.microblog.lib;
 
-
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
-import android.content.ContentResolver;
-import android.net.Uri;
+public abstract class Attachment {
 
-public class Attachment {
-	private ContentResolver m_resolver;
-	private Uri m_uri;
-	
-	public Attachment(ContentResolver resolver, Uri uri) {
-		m_uri = uri;
-		m_resolver = resolver;
+	public Attachment() {
+		super();
 	}
-	
-	public String contentType() {
-		return m_resolver.getType(m_uri);
-	}
-	
-	public InputStream getStream() throws FileNotFoundException {
-		return m_resolver.openInputStream(m_uri);
-	}
-	
-	public String toString() {
-		return m_uri.toString();
-	}
-	
 
-	public String name() {
-		return m_uri.toString();
-	}
+	public abstract InputStream getStream() throws IOException;
+
+	public abstract String contentType();
+
+	public abstract String toString();
+
+	public abstract String name();
+
 }

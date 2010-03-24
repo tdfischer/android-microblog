@@ -122,6 +122,9 @@ public class HTTPAPIRequest {
 					} catch (FileNotFoundException e) {
 						getRequest().setError(ErrorType.ERROR_ATTACHMENT_NOT_FOUND);
 						throw new APIException();
+					} catch (IOException e) {
+						getRequest().setError(ErrorType.ERROR_ATTACHMENT_NOT_FOUND);
+						throw new APIException();
 					}
 				} else {
 					try {

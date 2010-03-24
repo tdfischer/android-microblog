@@ -1,5 +1,6 @@
 package net.wm161.microblog.lib.backends.statusnet;
 
+import java.net.MalformedURLException;
 import java.util.Date;
 
 import net.wm161.microblog.lib.Status;
@@ -20,6 +21,15 @@ public class JSONStatus extends Status {
 		setId(status.getLong("id"));
 		setDate(new Date(status.getString("created_at")));
 		setFavorited(status.getString("favorited").equalsIgnoreCase("true"));
+		if (status.has("attachments")) {
+			JSONArray attachments = status.getJSONArray("attachments");
+			for(int i = 0;i<attachments.length();i++) {
+				try {
+					addAttachment(new JSONAttachment(attachments.getJSONObject(i)));
+				} catch (MalformedURLException e) {
+				}
+			}
+		}
 		if (!status.isNull("geo")) {
 			JSONObject geo = status.getJSONObject("geo");
 			if (geo.getString("type").equals("Point")) {
