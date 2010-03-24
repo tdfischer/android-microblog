@@ -3,22 +3,15 @@ package net.wm161.microblog;
 import java.util.EnumSet;
 
 import net.wm161.microblog.lib.Account;
-import net.wm161.microblog.lib.Avatar;
-import net.wm161.microblog.lib.CacheManager;
-import net.wm161.microblog.lib.DataCache;
 import net.wm161.microblog.lib.OnNewStatusHandler;
 import net.wm161.microblog.lib.Status;
 import net.wm161.microblog.lib.Timeline;
 import android.content.Context;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
-import android.widget.TextView;
 
 
 public class TimelineAdapter extends BaseAdapter implements ListAdapter {

@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -56,7 +57,8 @@ public class ViewStatus extends Activity {
 				TextView text = (TextView) findViewById(R.id.text);
 				text.setText(status.text());
 				TextView details = (TextView) findViewById(R.id.details);
-				
+				Gallery attachments = (Gallery)findViewById(R.id.attachments);
+				attachments.setAdapter(new AttachmentAdapter(ViewStatus.this, status.getAttachments()));
 				if (status.getLocation() == null) {
 					details.setText(status.getTimestamp());
 				} else {

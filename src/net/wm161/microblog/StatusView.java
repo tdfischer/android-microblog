@@ -65,6 +65,12 @@ public class StatusView extends LinearLayout {
 		avatarView.setImageDrawable(avatar.getBitmap());
 		//m_timeline.addLinks(text);
 		name.setText(status.getUser().getScreenName());
+		
+		if (status.hasAttachments()) {
+			findViewById(R.id.has_attachment).setVisibility(View.VISIBLE);
+		} else {
+			findViewById(R.id.has_attachment).setVisibility(View.GONE);
+		}
 	}
 
 }
