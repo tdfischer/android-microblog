@@ -5,7 +5,7 @@ type: :feature
 component: app
 release: "0.2"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2010-03-23 00:08:07.059381 Z
 references: []
@@ -15,4 +15,8 @@ log_events:
 - - 2010-03-23 00:08:08.058300 Z
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
+  - ""
+- - 2010-03-24 05:29:58.490612 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - changed status from unstarted to in_progress
   - ""

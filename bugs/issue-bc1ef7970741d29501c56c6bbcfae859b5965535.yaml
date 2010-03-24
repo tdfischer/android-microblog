@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Threaded view
+desc: Add a threaded conversation view
+type: :feature
+component: app
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-24 05:29:43.845693 Z
+references: []
+
+id: bc1ef7970741d29501c56c6bbcfae859b5965535
+log_events: 
+- - 2010-03-24 05:29:44.805520 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
