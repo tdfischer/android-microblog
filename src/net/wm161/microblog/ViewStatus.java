@@ -96,7 +96,7 @@ public class ViewStatus extends Activity {
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		shareIntent.putExtra(Intent.EXTRA_TEXT, "@"+m_status.getUser().getScreenName()+" "+m_status.text());
 		shareIntent.setType("text/plain");
-		menu.add("Share").setIntent(Intent.createChooser(shareIntent, "")); 
+		menu.add("Share").setIntent(Intent.createChooser(shareIntent, "")).setIcon(android.R.drawable.ic_menu_share); 
 		menu.add("Favorite").setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
 			@Override
@@ -131,7 +131,7 @@ public class ViewStatus extends Activity {
 				return true;
 			}
 			
-		});
+		}).setIcon(android.R.drawable.btn_star);
 		return true;
 	}
 }
