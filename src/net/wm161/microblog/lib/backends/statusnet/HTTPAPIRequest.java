@@ -178,7 +178,8 @@ public class HTTPAPIRequest {
 			totalSize = Integer.parseInt(req.getFirstHeader("Content-length").getValue());
 		
 		char[] buffer = new char[1024];
-		StringBuilder contents = new StringBuilder();
+		//2^17 = 131072.
+		StringBuilder contents = new StringBuilder(131072);
 		try {
 			int size = 0;
 			while ((totalSize > 0 && size < totalSize) || totalSize == -1) {
