@@ -5,8 +5,8 @@ type: :task
 component: Microblog
 release: "0.2"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-03-23 02:08:56.113689 Z
 references: []
 
@@ -16,3 +16,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-03-31 23:56:27.163728 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - Added the GPL header stuff to all the sources
