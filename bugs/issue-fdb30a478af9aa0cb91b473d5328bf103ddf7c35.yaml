@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Javadoc
+desc: The library, plugins, and the app need documentation.
+type: :task
+component: Microblog
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-31 23:45:51.067648 Z
+references: []
+
+id: fdb30a478af9aa0cb91b473d5328bf103ddf7c35
+log_events: 
+- - 2010-03-31 23:45:52.106693 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

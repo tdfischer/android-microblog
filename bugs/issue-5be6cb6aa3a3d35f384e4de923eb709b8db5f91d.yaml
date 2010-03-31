@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: APIs should be able to push updates to API clients
+desc: Currently, an app has to poll the API for any new statuses. It would be nifty if the API could push out notices that new updates are available.
+type: :feature
+component: library
+release: "0.4"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-31 23:41:22.208678 Z
+references: []
+
+id: 5be6cb6aa3a3d35f384e4de923eb709b8db5f91d
+log_events: 
+- - 2010-03-31 23:41:23.160578 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Move the library and the API into separate background Services
+desc: Moving the library and the API into android Services would permit other coders to be able to write their own plugins easily and have them discovered via broadcast intents.
+type: :task
+component: statusnet-plugin
+release: "0.4"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-31 23:42:44.830684 Z
+references: []
+
+id: 50225ddf577b7a1c2121a6774e67a67e1ce20183
+log_events: 
+- - 2010-03-31 23:42:46.789590 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

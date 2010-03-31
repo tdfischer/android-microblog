@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Fix geocoding UI update bug
+desc: When viewing a timeline, the geolocation text of a status gets all screwy and jumps around, sometimes showing up from the wrong status.
+type: :bugfix
+component: app
+release: "0.2"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-31 23:39:49.156656 Z
+references: []
+
+id: bb37612e79334b3c3d9a173166450ba21be365d0
+log_events: 
+- - 2010-03-31 23:39:50.092587 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

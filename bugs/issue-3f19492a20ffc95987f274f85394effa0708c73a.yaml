@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Fix the home screen's tabs
+desc: The icons sometimes go under the text, and the 'replies' icon isn't related to status replies at all.
+type: :task
+component: app
+release: "0.2"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-03-31 23:38:54.684676 Z
+references: []
+
+id: 3f19492a20ffc95987f274f85394effa0708c73a
+log_events: 
+- - 2010-03-31 23:38:55.660607 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
