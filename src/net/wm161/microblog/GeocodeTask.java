@@ -58,6 +58,7 @@ public class GeocodeTask extends AsyncTask<Void, Void, String> {
 			} catch (IOException e) {
 			}
 			if (locations != null && locations.size() > 0) {
+				//FIXME: Make this translatable
 				location = locations.get(0).getLocality()+", "+locations.get(0).getCountryName();
 				geocache.put(m_status.getLocation().getLatitude()+2*m_status.getLocation().getLongitude(), location);
 				return location;
@@ -79,10 +80,11 @@ public class GeocodeTask extends AsyncTask<Void, Void, String> {
 	@Override
 	protected void onPostExecute(String result) {
 		if (!m_canceled) {
-			if (result != null && result.length()>0)
-				m_text.setText(m_status.getTimestamp()+", from "+result);
-			else
-				m_text.setText(m_status.getTimestamp());
+			if (result != null && result.length()>0) {
+				m_text.setText(m_cxt.getString(R.string._from_, m_status.getTimestamp(m_cxt), result));
+			} else {
+				m_text.setText(m_status.getTimestamp(m_cxt));
+			}
 		}
 	}
 

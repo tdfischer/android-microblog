@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="twitter">Twitter</string>
+    <string name="statusnet">StatusNet</string>
+    <string name="_seconds_ago">%s seconds ago</string>
+    <string name="_minutes_ago">%s minutes ago</string>
+    <string name="_hours_ago">%s hours ago</string>
+    <string name="_days_ago">%s days ago</string>
+    <string name="attachment_not_found_">Attachment not found.</string>
+    <string name="internal_error_please_send_a_bug_report_">Internal error. Please send a bug report.</string>
+    <string name="server_error_">Server error.</string>
+    <string name="recieved_unintelligible_gibberish_">Recieved unintelligible gibberish.</string>
+    <string name="connection_interrupted_">Connection interrupted.</string>
+    <string name="connection_failed_">Connection failed.</string>
+    <string name="no_error_">No Error.</string>
+    <string name="favorited_">Favorited!</string>
+    <string name="un_favorited_">Un-favorited.</string>
+    <string name="favorite">Favorite</string>
+    <string name="share">Share</string>
+    <string name="update">Update</string>
+    <string name="replies">Replies</string>
+    <string name="global_timeline">Global Timeline</string>
+    <string name="home">Home</string>
+    <string name="accounts">Accounts</string>
+    <string name="edit">Edit</string>
     
     <string name="app_name">Microblog</string>
 <color name="altcolor">#333</color>
@@ -13,4 +36,5 @@
 
 
 
+<string name="_from_">%s, from %s</string>
 </resources>

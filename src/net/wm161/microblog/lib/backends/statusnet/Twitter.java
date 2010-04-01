@@ -25,8 +25,8 @@ public class Twitter extends Statusnet {
 	}
 
 	@Override
-	public String getName() {
-		return "Twitter";
+	public int getName() {
+		return R.string.twitter;
 	}
 
 	@Override

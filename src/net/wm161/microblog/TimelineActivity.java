@@ -174,7 +174,7 @@ public abstract class TimelineActivity extends ListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add("Update").setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		menu.add(R.string.update).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

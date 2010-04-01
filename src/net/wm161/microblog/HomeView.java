@@ -113,15 +113,15 @@ public class HomeView extends TabActivity implements OnClickListener, LocationLi
 			
 			Intent home = new Intent(this, HomeTimeline.class);
 			home.putExtra("account", m_account.getGuid());
-			tabs.addTab(tabs.newTabSpec("user").setContent(home).setIndicator("Home"));
+			tabs.addTab(tabs.newTabSpec("user").setContent(home).setIndicator(getString(R.string.home)));
 			
 			Intent timeline = new Intent(this, GlobalTimeline.class);
 			timeline.putExtra("account", m_account.getGuid());
-			tabs.addTab(tabs.newTabSpec("global").setContent(timeline).setIndicator("Global Timeline", res.getDrawable(m_account.getAPIInstance().getIcon())));
+			tabs.addTab(tabs.newTabSpec("global").setContent(timeline).setIndicator(getString(R.string.global_timeline), res.getDrawable(m_account.getAPIInstance().getIcon())));
 			
 			Intent replies = new Intent(this, ReplyTimeline.class);
 			replies.putExtra("account", m_account.getGuid());
-			tabs.addTab(tabs.newTabSpec("replies").setContent(replies).setIndicator("Replies", res.getDrawable(android.R.drawable.sym_call_incoming)));
+			tabs.addTab(tabs.newTabSpec("replies").setContent(replies).setIndicator(getString(R.string.replies), res.getDrawable(android.R.drawable.sym_call_incoming)));
 			
 			Button sendButton = (Button) findViewById(R.id.send);
 			sendButton.setOnClickListener(this);

@@ -21,6 +21,7 @@ package net.wm161.microblog.lib;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import net.wm161.microblog.R;
 
 public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 	
@@ -52,24 +53,24 @@ public abstract class APIRequest extends AsyncTask<Void, APIProgress, Boolean> {
 		return m_error;
 	}
 	
-	public String getErrorString(ErrorType e) {
+	public int getErrorString(ErrorType e) {
 		switch (e) {
 		case ERROR_NONE:
-			return "No Error.";
+			return R.string.no_error_;
 		case ERROR_CONNECTION_FAILED:
-			return "Connection failed.";
+			return R.string.connection_failed_;
 		case ERROR_CONNECTION_BROKEN:
-			return "Connection interrupted.";
+			return R.string.connection_interrupted_;
 		case ERROR_PARSE:
-			return "Recieved unintelligible gibberish.";
+			return R.string.recieved_unintelligible_gibberish_;
 		case ERROR_SERVER:
-			return "Server error.";
+			return R.string.server_error_;
 		case ERROR_INTERNAL:
-			return "Internal error. Please send a bug report.";
+			return R.string.internal_error_please_send_a_bug_report_;
 		case ERROR_ATTACHMENT_NOT_FOUND:
-			return "Attachment not found.";
+			return R.string.attachment_not_found_;
 		default:
-			return null;
+			return -1;
 		}
 	}
 	

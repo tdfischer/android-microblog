@@ -61,8 +61,8 @@ public class Statusnet extends API {
 	}
 
 	@Override
-	public String getName() {
-		return "StatusNet";
+	public int getName() {
+		return R.string.statusnet;
 	}
 
 	@Override

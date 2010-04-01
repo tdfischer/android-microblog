@@ -25,7 +25,7 @@ import net.wm161.microblog.lib.APIRequest.ErrorType;
 public interface ProgressHandler {
 	public void updated(APIProgress progress);
 
-	public void error(ErrorType errorType, String errorString);
+	public void error(ErrorType errorType, int i);
 
 	public void finished(Boolean success);
 

@@ -79,16 +79,17 @@ public class ViewStatus extends Activity {
 				Gallery attachments = (Gallery)findViewById(R.id.attachments);
 				attachments.setAdapter(new AttachmentAdapter(ViewStatus.this, status.getAttachments()));
 				if (status.getLocation() == null) {
-					details.setText(status.getTimestamp());
+					details.setText(status.getTimestamp(ViewStatus.this));
 				} else {
 					DataCache<Double, String> geocache = ((MicroblogApp)getApplication()).getCacheManager().getCache(((MicroblogApp)getApplication()).getPreferences().getDefaultAccount(), CacheType.Geocode);
 					String location;
+					//FIXME: Replace this with the code from the timeline adapter
 					if ((location = geocache.get(status.getLocation().getLatitude()+2*status.getLocation().getLongitude())) == null) {
-						details.setText(status.getTimestamp());
+						details.setText(status.getTimestamp(ViewStatus.this));
 						GeocodeTask task = new GeocodeTask(((MicroblogApp)getApplication()), status, details);
 						task.execute();
 					} else {
-						details.setText(status.getTimestamp()+", from "+location);
+						details.setText(getString(R.string._from_, status.getTimestamp(ViewStatus.this), location));
 					}
 				}
 				
@@ -115,10 +116,11 @@ public class ViewStatus extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
+		//FIXME: This formatting should be handled by the API
 		shareIntent.putExtra(Intent.EXTRA_TEXT, "@"+m_status.getUser().getScreenName()+" "+m_status.text());
 		shareIntent.setType("text/plain");
-		menu.add("Share").setIntent(Intent.createChooser(shareIntent, "")).setIcon(android.R.drawable.ic_menu_share); 
-		menu.add("Favorite").setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		menu.add(R.string.share).setIntent(Intent.createChooser(shareIntent, "")).setIcon(android.R.drawable.ic_menu_share); 
+		menu.add(R.string.favorite).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -131,7 +133,7 @@ public class ViewStatus extends Activity {
 							public void finished(Boolean result) {
 								super.finished(result);
 								if (result) {
-									Toast.makeText(ViewStatus.this, "Un-favorited.", Toast.LENGTH_SHORT).show();
+									Toast.makeText(ViewStatus.this, R.string.un_favorited_, Toast.LENGTH_SHORT).show();
 								}
 							}
 						});
@@ -142,7 +144,7 @@ public class ViewStatus extends Activity {
 							public void finished(Boolean result) {
 								super.finished(result);
 								if (result) {
-									Toast.makeText(ViewStatus.this, "Favorited!", Toast.LENGTH_SHORT).show();
+									Toast.makeText(ViewStatus.this, R.string.favorited_, Toast.LENGTH_SHORT).show();
 								}
 							}
 						});

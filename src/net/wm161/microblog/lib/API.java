@@ -57,6 +57,6 @@ public abstract class API {
 	public abstract boolean unfavorite(net.wm161.microblog.lib.Status status, APIRequest request);
 	public abstract int getIcon();
 	public abstract APIConfiguration configuration();
-	public abstract String getName();
+	public abstract int getName();
 	public abstract int getVersion();
 }

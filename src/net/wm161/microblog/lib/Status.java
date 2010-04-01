@@ -22,7 +22,9 @@ package net.wm161.microblog.lib;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import net.wm161.microblog.R;
 
+import android.content.Context;
 import android.location.Location;
 
 public class Status implements Comparable<Status>, Serializable {
@@ -44,7 +46,7 @@ public class Status implements Comparable<Status>, Serializable {
 		m_attachments = new ArrayList<Attachment>();
 	}
 	
-	public String getTimestamp() {
+	public String getTimestamp(Context cxt) {
 		String timestamp;
 		Date statusDate = getDate();
 		Date now = new Date();
@@ -55,13 +57,13 @@ public class Status implements Comparable<Status>, Serializable {
 		if (days > 5)
 			timestamp = now.toLocaleString();
 		else if (days > 0)
-			timestamp = days+" days ago";
+			timestamp = cxt.getString(R.string._days_ago, days);
 		else if (hours > 0)
-			timestamp = hours+" hours ago";
+			timestamp = cxt.getString(R.string._hours_ago, hours);
 		else if (minutes > 0)
-			timestamp = minutes+" minutes ago";
+			timestamp = cxt.getString(R.string._minutes_ago, minutes);
 		else
-			timestamp = seconds+" seconds ago";
+			timestamp = cxt.getString(R.string._seconds_ago, seconds);
 		return timestamp;
 	}
 	

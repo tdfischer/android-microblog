@@ -32,7 +32,7 @@ public class ActivityProgressHandler implements ProgressHandler {
 	}
 	
 	@Override
-	public void error(ErrorType errorType, String errorString) {
+	public void error(ErrorType errorType, int errorString) {
 		Toast.makeText(m_activity, errorString, Toast.LENGTH_LONG).show();
 	}
 
