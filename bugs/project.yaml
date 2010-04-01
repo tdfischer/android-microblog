@@ -16,25 +16,29 @@ releases:
 - !ditz.rubyforge.org,2008-03-06/release 
   name: "0.1"
   status: :released
-  release_time: 2010-02-22 09:03:16.00000 Z
+  release_time: 2010-02-22 09:03:16 Z
   log_events: 
   - - 2010-03-23 01:42:54.228584 Z
     - Trever Fischer <tdfischer@fedoraproject.org>
     - created
     - ""
-  - - 2010-02-22 09:03:16.00000 Z
+  - - 2010-02-22 09:03:16 Z
     - Trever Fischer <tdfischer@fedoraproject.org>
     - released
     - ""
 - !ditz.rubyforge.org,2008-03-06/release 
   name: "0.2"
-  status: :unreleased
-  release_time: 
+  status: :released
+  release_time: 2010-04-01 00:45:16.832250 Z
   log_events: 
   - - 2010-03-22 23:56:41.673275 Z
     - Trever Fischer <tdfischer@fedoraproject.org>
     - created
     - ""
+  - - 2010-04-01 00:45:16.832268 Z
+    - Trever Fischer <tdfischer@fedoraproject.org>
+    - released
+    - Woo hoo! 0.2 is finally ready!
 - !ditz.rubyforge.org,2008-03-06/release 
   name: "0.3"
   status: :unreleased
