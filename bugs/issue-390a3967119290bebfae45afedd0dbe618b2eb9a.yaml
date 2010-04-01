@@ -5,8 +5,8 @@ type: :task
 component: library
 release: "0.2"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-03-23 02:00:36.667666 Z
 references: []
 
@@ -16,3 +16,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-04-01 00:41:21.747583 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - Tested successfully.

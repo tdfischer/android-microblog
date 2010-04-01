@@ -3,7 +3,7 @@ title: Test geolocation against twitter's reversal of geo coordinates
 desc: Twitter apparently has latitude and longitude switched in their API. They say it'll be fixed in version 2, but 'till then we need to reverse it *only* for twitter. statusnet seems fine.
 type: :bugfix
 component: twitter-plugin
-release: "0.2"
+release: 
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
 disposition: 
@@ -16,3 +16,9 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-04-01 00:44:32.688631 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - unassigned from release 0.2
+  - |-
+    Twitter isn't really my concern at the moment, and I actually think twitter fixed their bug a while ago.
+    It'll be tested if someone else actually cares.
