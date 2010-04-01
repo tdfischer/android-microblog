@@ -113,8 +113,8 @@ public class TimelineAdapter extends BaseAdapter implements ListAdapter {
 			dentView = new StatusView(m_app, status);
 		} else {
 			dentView = (StatusView)convertView;
+			dentView.setStatus(status);
 		}
-		dentView.setStatus(status);
 		return dentView;
 	}
 

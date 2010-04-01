@@ -35,16 +35,18 @@ public class GeocodeTask extends AsyncTask<Void, Void, String> {
 	private Context m_cxt;
 	private net.wm161.microblog.lib.Status m_status;
 	private TextView m_text;
+	private boolean m_canceled;
 
 	public GeocodeTask(Context cxt, net.wm161.microblog.lib.Status status, TextView text) {
 		m_cxt = cxt;
 		m_status = status;
 		m_text = text;
+		m_canceled = false;
 	}
 
 	@Override
 	protected String doInBackground(Void... arg0) {
-		if (m_status != null ) {
+		if (m_status != null && m_status.getLocation() != null) {
 			DataCache<Double, String> geocache = ((MicroblogApp)m_cxt.getApplicationContext()).getCacheManager().getCache(((MicroblogApp)m_cxt.getApplicationContext()).getPreferences().getDefaultAccount(), CacheType.Geocode);
 			String location = geocache.get(m_status.getLocation().getLatitude()+2*m_status.getLocation().getLongitude());
 			if (location != null)
@@ -65,10 +67,23 @@ public class GeocodeTask extends AsyncTask<Void, Void, String> {
 		return null;
 	}
 	
+	public void cancel() {
+		cancel(true);
+		m_canceled = true;
+	}
+	
+	public boolean isCanceled() {
+		return m_canceled;
+	}
+	
 	@Override
 	protected void onPostExecute(String result) {
-		if (result != null && result.length()>0)
-			m_text.setText(m_status.getTimestamp()+", from "+result);
+		if (!m_canceled) {
+			if (result != null && result.length()>0)
+				m_text.setText(m_status.getTimestamp()+", from "+result);
+			else
+				m_text.setText(m_status.getTimestamp());
+		}
 	}
 
 }

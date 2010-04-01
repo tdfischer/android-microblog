@@ -46,24 +46,20 @@ public class StatusView extends LinearLayout {
 
 	public void setStatus(Status status) {
 		if (m_geocode != null)
-			m_geocode.cancel(true);
+			m_geocode.cancel();
 		TextView text = (TextView) m_dentView.findViewById(R.id.text);
 		TextView details = (TextView) m_dentView.findViewById(R.id.details);
 		text.setText(status.text());
-		if (status.getLocation() == null) {
-			details.setText(status.getTimestamp());
-		} else {
-			m_geocode = new GeocodeTask(getContext(), status, details) {
+		m_geocode = new GeocodeTask(getContext(), status, details) {
 
-				@Override
-				protected void onPostExecute(String result) {
-					super.onPostExecute(result);
-					m_geocode = null;
-				}
-				
-			};
-			m_geocode.execute();
-		}
+			@Override
+			protected void onPostExecute(String result) {
+				super.onPostExecute(result);
+				m_geocode = null;
+			}
+			
+		};
+		m_geocode.execute();
 		
 		ImageView avatarView = (ImageView) m_dentView.findViewById(R.id.avatar);
 		TextView name = (TextView) m_dentView.findViewById(R.id.name);
