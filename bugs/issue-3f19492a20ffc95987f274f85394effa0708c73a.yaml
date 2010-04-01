@@ -3,7 +3,7 @@ title: Fix the home screen's tabs
 desc: The icons sometimes go under the text, and the 'replies' icon isn't related to status replies at all.
 type: :task
 component: app
-release: "0.2"
+release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
 disposition: 
@@ -16,3 +16,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-04-01 00:03:18.556686 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to release 0.3 from 0.2
+  - Bump it to the next release since its actually not that big of a deal.
