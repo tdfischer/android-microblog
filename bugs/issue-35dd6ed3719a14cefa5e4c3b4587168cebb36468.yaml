@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Field with user image and name can grow too big
+desc: |-
+  The field with the user image and name is too wide. If the arrow pointing
+  at the user image is at the top, the name could be so wide that it goes
+  below the arrow, touching the message box. This would mean the user column
+  can be so small that it's as wide as it is high.
+type: :bugfix
+component: app
+release: "0.3"
+reporter: Marvin Vek <laen@onedot.nl>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-02 21:12:50.466772 Z
+references: []
+
+id: 35dd6ed3719a14cefa5e4c3b4587168cebb36468
+log_events: 
+- - 2010-04-02 21:12:52.546686 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
