@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Ability to turn off location tagging
+desc: As a matter of privacy, you should be able to turn off submitting updates with location information.
+type: :bugfix
+component: app
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-06 02:18:51.534117 Z
+references: []
+
+id: db58ae17e8e88197b5bf836ffbf62ffff15b417f
+log_events: 
+- - 2010-04-06 02:18:52.638823 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
